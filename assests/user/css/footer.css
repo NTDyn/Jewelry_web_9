@@ -1,0 +1,28 @@
+.footer{
+    background-color:#d6beb0;
+}
+.logo-footer-area{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding-left: 3%;
+}
+#logo-footer{
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 50%;
+}
+
+.col-infor{
+    padding-left: 1%;
+    padding-right: 1%;
+
+}
+.img-icon-footer-area{
+    width: 20%;
+    
+}
+.img-icon-footer{
+    width: 100%;
+}
