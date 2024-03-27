@@ -1,0 +1,113 @@
+
+
+.carousel-inner{
+    height: 500px;
+}
+.carousel-picture{
+    height: 100%;
+}
+.introduce-item{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.pic-jewelry-container{
+    margin-left : 10%;
+    margin-right: 10%;
+    margin-top: 3%;
+    margin-bottom: 2%;
+
+}
+.pic-jewelry-area{
+   padding: 15%;
+   padding-bottom: 0% !important;
+   height: 70%;
+}
+.pic-jewelry{
+    width: 100%;
+    height: 100%;
+}
+
+.intro-passage{
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 3%;
+    background-image: radial-gradient(#ffa6a6, #f5d6d2, #f8f8f8);
+    text-align: center;
+
+}
+
+.quote-area{
+    text-align: center;
+    margin-top: 5%;
+}
+
+#quote{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+    font-style: oblique;
+    color: #a25323;
+}
+
+.collections{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color:#b4a298;
+    margin-bottom: 2%;
+}
+.collection-img{
+    box-shadow: 0px 0px 12px 5px #bfbfbf;
+    width: 100%;
+    border-radius: 10%;
+    border-color: #bfbfbf;
+    border-style: solid;
+    
+}
+
+#name-branch{
+    padding-top: 10%;
+    font-size: 28px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #a25323;
+}
+.collection-passage{
+    text-align: center;
+}
+.achievement{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    text-align: center;
+}
+#experience{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom: 3%;
+}
+.achieve-item{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10%;
+}
+.achievement-title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: 700;
+    position: absolute;
+    padding-top: 5%;
+    padding-left: 15%;
+
+}
+.counting{
+    padding-left: 2%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: 700;
+}
+.image-achievement-area{
+
+    width: 20%;
+}
+.image-achievement{
+    width: 100%;
+}
+
