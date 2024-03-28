@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color : brown;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(../../../image/background1.jpg);
+    background-size :cover;
+    background-position-y: -250px;
+
+}
+
+.main {
+    background-color: rgba(255,255,255,0.8);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.head{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding-bottom: 10px;
+} 
+
+.head > button{
+    width : 170px;
+    height : 50px;
+    font-size : 20px;
+    border-radius: 20px;
+    color : brown;
+    margin : 0 10px;
+    background : transparent;
+    transition : 0.2s;
+}
+
+.head > button:hover{
+    color :aliceblue;
+    background : brown;
+    border : 1px solid #990000;
+}
+
+.form-group{
+    border-bottom : 1px solid black;
+    margin : 30px auto;
+    width : 90%;
+}
+
+.form-group > input{
+    border : 0px;
+    width : 100%;
+    background : transparent;
+    outline: none;
+    font-size: 16px;
+    color : brown;
+}
+
+.form-submit{
+    margin : 40px auto 0;
+    text-align: center;
+}
+
+.form-submit > input{
+    height : 40px;
+    width : 90%;
+    font-size: 16px;
+    background : transparent;
+    border-radius: 10px;
+    transition : 0.2s;
+}
+
+.form-submit > input:hover{
+    color : brown;
+    border : 1px solid brown;
+
+}
+
+.login-form,
+
+.register-form {           
+    display: none;
+}
+.active-form {            
+    display: block;
+}

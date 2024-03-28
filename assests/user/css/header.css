@@ -1,5 +1,9 @@
 /* For desktop  */
 
+a {
+    text-decoration: none;
+}  
+
 #logo-area{
     height: 150px;
     margin-right: 5%;

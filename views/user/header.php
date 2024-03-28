@@ -22,7 +22,7 @@
                     <div class="row cart-avata">
                             <div class="col-5 user-area ">
                               <div class="fa fa-user " href="#" id="icon-user">
-                                <span id="user">User</span>
+                                <span id="user"><a href="login.php">User</a></span>
                               </div>
                             </div>
                             <div class="col-7 cart-area ">
