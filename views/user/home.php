@@ -10,7 +10,6 @@
       <?php include '../../assests/user/css/bootstrap/bootstrap.min.css'; ?>
       <?php include '../../assests/user/css/home.css'; ?>
       <?php include '../../assests/user/css/aos/aos.css'; ?>
-      
     </style>
     <link href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
@@ -18,24 +17,9 @@
 
 </head>
 
-<?php 
-  function setInterval( $milisecond, $goal){
-    $start = 0;
-    $second = $milisecond/1000 ;
-    $text = '<div class = "counting">';
-    
-    while($start <= $goal){
-      $start++;
-      sleep($second);
-       echo $start;
-    }
 
-  }
-?>
 <body>
 
-
-    <div class="">
 
         <div class = "body">
 
@@ -155,7 +139,7 @@
           
         </div>
       
-    </div>
+  
     
 </body>
 </html>

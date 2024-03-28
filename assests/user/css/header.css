@@ -10,10 +10,7 @@
     height: 100%;
 }
 
-.body{
-    position: relative;
-    top: 1%;
-}
+
 .item-header{
     padding-left: 50px;
     padding-right: 60px;
@@ -82,3 +79,4 @@
       width: 100%;
     }
   }
+

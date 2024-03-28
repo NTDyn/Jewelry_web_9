@@ -1,0 +1,105 @@
+.contact-img-area{
+    width: 100%;
+}
+.contact-img{
+    width: 100%;
+}
+.contact-passages-area{
+    padding-right: 5% !important;
+    padding-left: 5% !important;
+    padding-top: 8%;
+}
+
+.contact-contents{
+    text-align: center;
+    font-family:serif;
+    font-size: 18px;
+    line-height: 1.8;
+}
+.contact-prd{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#serena{
+    margin-top: 5%;
+    font-size: 22px;
+    font-family: 'Courier New', Courier, monospace;
+    color:  #a25323;
+    font-weight: 700;
+    text-align: center;
+}
+.contact-titles{
+    padding-bottom: 3%;
+    font-size: 34px;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}
+
+.image-contact{
+    width: 100%;
+}
+.img-jewelry-area{
+    padding-top: 3%;
+    width: 30%;
+}
+.img-jewelry{
+    width: 100%;
+}
+.jewelry-product-title{
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    color:black;
+    font-weight: 700;
+}
+#activity-time{
+    margin-bottom: 3%;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+.map-area{
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+.map-location{
+    height: 300px;
+    width: 100%;
+    border-radius: 10%;
+    border-style: solid;
+}
+.location-line{
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+.contact-detail{
+    padding-top: 5%;
+    margin-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.image-contact-detail-area{
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.image-contact-detail{
+    transition: transform .2s;
+    padding: 8%;
+    width: 100%;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 20px;
+    border-color:#fbe3d9;
+    box-shadow: 2px 1px 27px 5px #efdfd5;
+}
+.image-contact-detail:hover{
+    transform: scale(1.3);
+}

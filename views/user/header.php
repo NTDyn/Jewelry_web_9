@@ -4,17 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    <?php include '../../assests/user/css/header.css'; ?> 
-    <?php include '../../assests/user/css/iconfonts/plugin.css'; ?> 
-    <?php include '../../assests/user/css/iconfonts/icons.css'; ?> 
-  </style>
+  
+    <link  type="text/css" href= "../../assests/user/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
+    <link  type="text/css"  href="../../assests/user/css/header.css"  rel="stylesheet"> 
+    <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
+    <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
+    <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
+    
 </head>
 <body>
 <div class = "header">
             <nav class="navbar navbar-expand-sm">
                 <div class="container" >
-                    <a class="navbar-brand" id="logo-area" >
+                    <a class="navbar-brand" id="logo-area" href="../../views/user/index.php" >
                         <img src="../../image/logo.png" class="rounded-pill" id="logo" alt="logo-index" >
                     </a>
                     <div class="row cart-avata">
@@ -41,8 +43,8 @@
                             <li class="nav-item item-header">
                               <a class="nav-link link-item" href="#">Sản phẩm</a>
                             </li>
-                            <li class="nav-item item-header">
-                              <a class="nav-link  link-item" href="#">Về chúng tôi</a>
+                            <li class="nav-item item-header ">
+                              <?php echo ' <a class="nav-link link-item" href="../../views/user/contact.php">Về chúng tôi</a>' ?>
                             </li>    
                           </ul>
                           <form class="d-flex nav-itemx" id="form-search">
@@ -58,6 +60,8 @@
         </div>
         
 </body>
-</html>     
+</html> 
+<script><?php require("../../assests/user/js/jquery.min.js"); ?></script>
+<script><?php require("../../assests/user/js/bootstrap/bootstrap.bundle.min.js");?></script>    
 
        
