@@ -93,7 +93,7 @@
 
                 </div>
             </div>
-            <div class="row contact-detail" data-aos="zoom-out-up">
+            <div class="row contact-detail" data-aos="zoom-in">
                 <div class="col-2 image-contact-detail-area">
                     <img src="../../image/call-icon.png" class="image-contact-detail">
                 </div>

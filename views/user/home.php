@@ -92,20 +92,20 @@
         <!--collection -->
           <div class="collections container-fluid">
           <div class="row">
-            <div class="col-5 collection-img-area" data-aos="fade-right">
-              <?php echo '<img src="../../image/Serena-Jewelry.png" class="collection-img">' ?>
+            <div class="col-5 collection-img-area" >
+              <?php echo '<img src="../../image/Serena-Jewelry.png" class="collection-img" data-aos="flip-up">' ?>
             </div>
-            <div class="col-7 collection-passage" data-aos="fade-left">
+            <div class="col-7 collection-passage" >
               <div id="name-branch">SERENA JEWELRY</div></br>
               <span style="font-size: 20px;"> Vươn mình đón ánh bình minh, đóa hoa hướng dương rực rỡ giữa mênh mông đất trời đã vẽ nên bức tranh thiên nhiên tràn đầy sức sống.</span>
             </div>
             <div class="row " >
-              <div class="col-7 collection-passage " data-aos="fade-right">
+              <div class="col-7 collection-passage " >
                 <div id="name-branch">SERENA JEWELRY</div></br>
                 <span  style="font-size: 20px;"> Nét đẹp kiêu hãnh chính là nguồn cảm hứng bất tận cho bộ sưu tập trang sức Serena – lời ca ngợi cho tinh thần lạc quan, tích cực của những cô nàng hiện đại.</span>
               </div>
-              <div class="col-5 collection-img-area" data-aos="fade-left">
-                <?php echo '<img src="../../image/collection2.jpg" class="collection-img">' ?>
+              <div class="col-5 collection-img-area" >
+                <?php echo '<img src="../../image/collection2.jpg" class="collection-img" data-aos="flip-down">' ?>
               </div>
             </div>
           </div>
