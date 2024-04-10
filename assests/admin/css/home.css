@@ -1,0 +1,137 @@
+
+.img-carousel-area{
+    align-content: center;
+    margin-right: 10%;
+    width: 30%;
+    padding-left: 10%;
+    height: 70px;
+}
+.img-carousel{
+
+    font-size: 30px;
+}
+
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+        transition: all 10s linear 0s;
+        
+    }
+
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+        transition: all 10s linear 0s;
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start { 
+    
+    transition: all 10s linear 0s;
+    
+}
+.card{
+    flex-direction: row !important;
+    align-items: center;
+    margin-left: 3%;
+    margin-right: 3%;
+    height: 70px;
+}
+.title-carousel{
+    color: #aebfbf;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.revenue-carousel{
+    font-size: 26px;
+    font-family: sans-serif;
+    
+}
+.revenue-period{
+    margin: 2%;
+    background-image: linear-gradient(to right, #a0f4c2 , #fbd786, #f7797d);
+    border-style: solid ;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: white;
+}
+.card-revenue{
+    flex-direction: column !important;
+    text-align: center;
+    border-style: solid ;
+    border-width: 1px;
+    color: white;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.card-revenue-title{
+    font-size: 20px;
+    font-family: sans-serif;
+}
+.card-revenue-quality{
+    font-size: 26px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.card-sales{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+#revenueChart{
+
+    width: 100%;
+    max-width: 700px
+}
+.charts-area{
+    padding: 0 !important;
+    margin-left: 5% !important;
+    --bs-gutter-x: 0 !important;
+}
+.revenue-chart-area{
+    box-shadow: 5px 0px 15px 10px #eaf1f9;
+    justify-content: center;
+    margin-right: 10%;
+    padding-left: 5% !important;
+    padding-top: 2% !important;
+}
+.rating-chart-area{
+    box-shadow: 5px 0px 15px 10px #eaf1f9;
+    justify-content: center;
+}
+#ratingChart{
+    max-width:300px !important;
+    max-height: 300px !important;
+}
+#rating-title{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-width: 1px;
+    border-style: solid ;
+    border-color: white;
+    border-bottom-color:#f1f1f1;
+    border-left-color: red;
+    border-left-width: 3px;
+    border-radius: 5px;
+    padding-left: 3%;
+}
+.title-label{
+    font-size: 20px;
+    font-family: sans-serif;
+}

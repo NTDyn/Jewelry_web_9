@@ -44,6 +44,7 @@
     border: none;
     color: #a25323;
     transition: left 0.5s;
+    background-color: #f4e9e9;
 }
 .sidebar-category{
     height: fit-content;
@@ -53,8 +54,7 @@
 #content{
     margin-left: 150px;
     transition: margin-left .5s;
-    padding: 16px;
-    background-color:#f4e9e9;
+
 }
 
 .item-sidebar{
@@ -64,6 +64,9 @@
     font-family:poppins,Arial,sans-serif;
     font-size: 16px;
     font-weight: bold;
+}
+.navbar-horizon{
+    background-color:#f4e9e9;
 }
 .user-area{
     display: inline-flex;
@@ -84,7 +87,11 @@
     padding-right: 5px;
     font-family: sans-serif;
 }
-  
+.content-view{
+    margin-top: 2%;
+
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}

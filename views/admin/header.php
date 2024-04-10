@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link  type="text/css" href= "../../assests/admin/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/admin/css/header_ad.css?v=7"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/admin/css/header.css?v=12"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/admin/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
@@ -14,25 +14,29 @@
   <div class = "header-ad">
     <div class="sidebar navbar" id="sidebar-header">
       <div class="btn-moveNav-area">
-        <a class="navbar-brand " id="logo-area">
+        <?php echo '<a class="navbar-brand " id="logo-area" href="../../views/admin/home.php">' ?>
           <img src="../../image/logo-footer.png" id="logo" alt="logo-index" >
-        </a>
+        <?php echo '</a>' ?>
         <button class="fa fa-eercast move-sidebar" onclick="moveNav()"></button>
       </div>
-      <a href="#" class="fa fa-cubes sidebar-category" id="sidebar-first">
-        <span class="item-sidebar">Category</span></a>
+      <?php echo '<a href="../../views/admin/category.php" class="fa fa-cubes sidebar-category" id="sidebar-first">'?>
+        <span class="item-sidebar">Thể loại</span>
+      <?php echo '</a>' ?>
       <a href="#" class="si si-grid sidebar-category" id="sidebar-second">
-        <span class="item-sidebar">Product</span>
+        <span class="item-sidebar">Sản phẩm</span>
       </a>
       <a href="#" class="si si-people sidebar-category" id="sidebar-third">
-        <span class="item-sidebar">Customer</span>
+        <span class="item-sidebar">Khách hàng</span>
       </a>
-      <a href="#" class="si si-notebook sidebar-category" id="sidebar-fourth" >
-        <span class="item-sidebar">Bill</span>
+      <a href="#" class="si si-layers sidebar-category" id="sidebar-fourth">
+        <span class="item-sidebar">Đơn hàng</span>
+      </a>
+      <a href="#" class="si si-notebook sidebar-category" id="sidebar-fifth" >
+        <span class="item-sidebar">Hóa đơn</span>
       </a>
     </div>
     <div id="content">
-      <nav class="navbar navbar-expand-sm">
+      <nav class="navbar navbar-expand-sm navbar-horizon">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -48,13 +52,14 @@
                   </span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../../views/user/contact.php">Liên hệ</a></li>
-                  <li><a class="dropdown-item" href="#">FQS</a></li>
+                  <li><a class="dropdown-item" href="../../views/admin/login.php">Đăng nhập</a></li>
+                  <li><a class="dropdown-item" href="../../views/admin/login.php">Đăng ký</a></li>
                 </ul>
               </li>
             </ul>
           </div>
       </nav>
+      <div class="content-view"></div>
     </div>
   </div>
 

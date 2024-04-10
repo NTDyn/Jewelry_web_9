@@ -1,0 +1,95 @@
+.cate-statistical{
+    justify-content: center;
+}
+.category-card{
+    padding: 1%;
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    box-shadow:0px 2px 15px 3px #b5b5ff;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: white;
+}
+.name-category{
+    font-family: sans-serif;
+    font-size: 20px;
+    color:#3d73f1 ;
+    font-weight: 700;
+}
+.total-number{
+    padding-top: 2%;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: #d3d3d3;
+}
+.number-area{
+    font-size: 26px;
+    font-family: sans-serif;
+    color: black;
+}
+.chart-icon{
+    color: red;
+    font-size: 40px !important;
+}
+.table-category-area{
+    width: 90%;
+    margin-top: 2%;
+    margin-left: 5%;
+    box-shadow: 5px 0px 15px 5px #e1e1e1;
+}
+.table-category{
+    width: 100%;
+    border-style: solid ;
+    border-collapse: collapse;
+    border-width: 1px;
+    text-align: center;
+}
+td , th{
+    border-style: solid !important ;
+    border-collapse: collapse;
+    border-width: 1px !important;
+}
+.title-table-area{
+    padding: 2%;
+    border-style: solid;
+    border-width: 1px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-left-color: red ;
+    border-left-width: 5px ;
+}
+#title-table{
+    font-size: 20px;
+    font-family: sans-serif;
+    color:#8d8787 ;
+    
+}
+.btn-edit{
+    color: blue;
+    border: none;
+    background-color: white;
+    font-size: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.btn-remove{
+    color: red;
+    border: none;
+    background-color: white;
+    font-size: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.revenue-chart-area{
+    margin-top: 3%;
+    display: flex;
+    box-shadow: 5px 0px 15px 10px #eaf1f9;
+    justify-content: center;
+    padding-top: 2% !important;
+    padding-bottom: 2%;
+}
+#revenueChart{
+
+    width: 100%;
+    max-width: 900px
+}

@@ -1,6 +1,8 @@
 
   
-
+$(document).ready(function(){
+    $('.content-view').append($('.content'));
+})
 function moveNav() {
     if( $('#sidebar-header').css('width') === '150px' ){
         $('#sidebar-header').css('width', '250px') ;
@@ -8,6 +10,7 @@ function moveNav() {
         $('#content').css('margin-left', '250px');
         $('.item-sidebar').css('display','block');
         $('.move-sidebar').css('left', '190px')
+        
 
     } else {
         $('#sidebar-header').css('width', '150px');
