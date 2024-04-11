@@ -9,6 +9,7 @@
     <link  type="text/css" href="../../assests/admin/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
+    <link  type="text/css"  href="../../assests/admin/css/product.css"  rel="stylesheet"> 
 </head>
 <body>
   <div class = "header-ad">
@@ -22,7 +23,7 @@
       <?php echo '<a href="../../views/admin/category.php" class="fa fa-cubes sidebar-category" id="sidebar-first">'?>
         <span class="item-sidebar">Thể loại</span>
       <?php echo '</a>' ?>
-      <a href="#" class="si si-grid sidebar-category" id="sidebar-second">
+      <a href="../../views/admin/product.php" class="si si-grid sidebar-category" id="sidebar-second">
         <span class="item-sidebar">Sản phẩm</span>
       </a>
       <a href="#" class="si si-people sidebar-category" id="sidebar-third">
