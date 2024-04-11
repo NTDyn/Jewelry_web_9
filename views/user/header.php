@@ -10,7 +10,7 @@
     <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
-    
+    <link  type="text/css"  href="../../assests/user/css/product.css"  rel="stylesheet"> 
 </head>
 <body>
       <div class = "header container">
@@ -40,7 +40,7 @@
                               <a class="nav-link  link-item" href="#">Bộ sưu tập</a>
                             </li>
                             <li class="nav-item item-header">
-                              <a class="nav-link link-item" href="#">Sản phẩm</a>
+                              <a class="nav-link link-item" href="../../views/user/product.php">Sản phẩm</a>
                             </li>
                             <li class="nav-item  item-header dropdown ">
                                 <button type="button" class="nav-link link-item" data-bs-toggle="dropdown">
