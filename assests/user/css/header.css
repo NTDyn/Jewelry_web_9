@@ -6,6 +6,7 @@ a {
 }  
 
 #logo-area{
+
     height: 150px;
     margin-right: 5%;
 }
@@ -17,8 +18,8 @@ a {
 
 
 .item-header{
-    padding-left: 50px;
-    padding-right: 60px;
+    margin-left: 50px;
+    margin-right: 50px;
     text-align: center;
 }
 
@@ -77,7 +78,51 @@ a {
 .main-items{
     margin-top: 1%;
 }
+.modal-title{
+    margin-left: auto;
 
+}
+.item-product-cart{
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.name-product-cart{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: 700;
+}
+.img-product-cart{
+    box-shadow: 0px 2px 17px 3px #e2e5f3;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    width: 100%;
+}
+.minus-btn , .plus-btn{
+    padding: 5px;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e1e1e1;
+}
+.color-prd{
+    width: 100%;
+}
+
+.quality-product-cart{
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: 700;
+}
+.price-product-cart{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: 700;
+}
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     [class*="col-"] {

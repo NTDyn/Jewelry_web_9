@@ -8,13 +8,13 @@
     
     <style>
       <?php include '../../assests/user/css/bootstrap/bootstrap.min.css'; ?>
-      <?php include '../../assests/user/css/home.css'; ?>
       <?php include '../../assests/user/css/aos/aos.css'; ?>
     </style>
+    
     <link href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
-
+    <link href="../../assests/user/css/home.css" rel="stylesheet">
 </head>
 
 
@@ -58,7 +58,7 @@
 
         <!-- quote -->
           <div class="quote-area">
-            <span id= "quote">Wearing jewelry is a way to express the woman you are without saying a word!</span>
+            <span id= "quote">Đeo trang sức là cách thể hiện con người phụ nữ của bạn mà không cần nói lời nào!</span>
           </div>
 
         <!--introduce-->
@@ -68,7 +68,7 @@
                 <img src = "../../image/bracelet.jpg" class="pic-jewelry">
               </div>
               <div class="intro-passage">
-                <span>Unique pieces that are carefully crafted to ensure that you'll love for a lifetime</span>
+                <span>Những tác phẩm độc đáo được chế tác cẩn thận để đảm bảo rằng bạn sẽ yêu thích suốt đời</span>
               </div>
             </div>
             <div class="col-4 introduce-item" >
@@ -76,7 +76,7 @@
                 <img src = "../../image/necklace.jpg" class="pic-jewelry">
               </div>
               <div class="intro-passage">
-                <span>Unique pieces that are carefully crafted to ensure that you'll love for a lifetime</span>
+                <span>Những tác phẩm độc đáo được chế tác cẩn thận để đảm bảo rằng bạn sẽ yêu thích suốt đời</span>
               </div>
             </div>
             <div class="col-4 introduce-item" >
@@ -84,7 +84,7 @@
                 <img src = "../../image/earring.jpg" class="pic-jewelry">
               </div>
               <div class="intro-passage ">
-                <span>Unique pieces that are carefully crafted to ensure that you'll love for a lifetime</span>
+                <span>Những tác phẩm độc đáo được chế tác cẩn thận để đảm bảo rằng bạn sẽ yêu thích suốt đời</span>
               </div>
             </div>
           </div>
@@ -144,6 +144,5 @@
 </body>
 </html>
 <script><?php require("../../assests/user/js/jquery.min.js"); ?></script>
-<script><?php require("../../assests/user/js/bootstrap/bootstrap.bundle.min.js");?></script>
 <script><?php require("../../assests/user/js/aos/aos.js");?></script>
 <script><?php require("../../assests/user/js/aos/aos.add.js");?></script>
