@@ -1,6 +1,8 @@
 $(document).ready(function(){
-    revenueChart()
+    revenueChart();
+    $('#breadcrumb-second').text('Category');
 })
+
 
 function revenueChart(){
 

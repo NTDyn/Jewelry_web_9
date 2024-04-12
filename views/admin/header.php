@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link  type="text/css" href= "../../assests/admin/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/admin/css/header.css?v=12"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/admin/css/header.css?v=1"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/admin/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
@@ -59,6 +59,30 @@
             </ul>
           </div>
       </nav>
+      <!-- breakcumb-->
+      <nav class="navbar navber-expand-sm features-header">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item" id="breadcrumb-first">Home<a href="../../views/admin/home.php"></a></li>
+            <li class="breadcrumb-item" id="breadcrumb-second"><a href="#"></a></li>
+          </ol>
+        </nav>
+        <ul class="navbar-nav feature-buttons row ">
+            <li class="nav-item btn-support-area col-auto">
+              <button class="btn-support">
+                <span class= "fa fa-headphones" id="support-icon"></span>
+                <span id="support-title">&nbsp;Hỗ trợ </span>
+              </button>
+            </li>
+            <li class="nav-item btn-add-area col-auto">
+              <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modal-add">
+                <span class= "fa fa-plus" id="add-icon"></span>
+                <span id="add-title">&nbsp;Thêm mới</span>
+              </button>
+            </li>
+        </ul>
+      </nav>
+      
       <div class="content-view"></div>
     </div>
   </div>
