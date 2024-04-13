@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../assests/admin/css/category.css?v=1">
+    <link rel="stylesheet" href="../../assests/admin/css/category.css?v=2">
 </head>
+<?php 
+    include '../../controllers/category_C.php';
+    
+?>
 <body>
-    <?php include 'header.php'?>
-
+    <?php 
+        include 'header.php';
+        
+    ?>
+    
+    
     <div class=" content ">
         <!--Card of category-->
         <div class="row cate-statistical g-0">
@@ -164,14 +172,15 @@
 
                         <h4 class="modal-title ">Thêm mới loại sản phẩm</h4>
                        
+                        
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                       <form>
+                       <form method = "post" >
                             <div class="row form-line">
-                                <label class="col-4 form-label">Tên thể loại</label>
-                                <input type="text" class="col-6">
+                                <label class="col-4 form-label" >Tên thể loại</label>
+                                <input type="text" class="col-6" name = "txtCategory" id="txtCategory"/>
                             </div>
                             <div class="row form-line">
                                 <label class="col-4 form-label">Hoạt động</label>
@@ -181,17 +190,28 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                
                             </div>
-                            
+
+                        <!-- Modal footer -->
+                    
+                            <div class="modal-footer">
+                                <input type="submit" class="btn" id="btn-modal-add"  name = "btn-add" value="Thêm" onsubmit="<?php addCategory(); ?> "/>
+                            </div>
                        </form>
                     </div>  
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn" id="btn-modal-add" data-bs-dismiss="modal">Thêm</button>
-                    </div>
+                    <?php 
+                            function addCategory(){
+                                $name = htmlspecialchars($_REQUEST['txtCategory']);
+                                if(!empty($name )){
+                                    $cateControl = new category_C();
+                                    $cateControl->addCategory($name);
 
+                                }
+                            }
+                        
+                        
+                    ?>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 <?php 
-    include_once '../models/category_E.php';
-    include_once './Database/database.php';
+    include_once '../../models/category_E.php';
+    include 'Database/database.php';
     
-    class Model_Category{
+    class category_M extends connectDB {
         
 
         public function category(){
@@ -10,13 +10,23 @@
         }
 
         public function addCategory($name){
-            $conn = mysqli_connect('localhost','root','','jewerly',3309);
-            $sql = "INSERT INTO Category (Category_Name) VALUES ('Day chuyen')";
-            if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+                    
+                    if($this->connectDB()){
+         
+                        $sql = "INSERT INTO Category(Category_Name) VALUES ('" . $name . "')";
+                        if (mysqli_query($this->conn , $sql) ) {
+                            return true;
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $this->conn->error;
+                            return false;
+                        }
+                    } 
+                    else {
+                        echo 'not connect';
+                    }
+                    
+                
+
         }
 
     }
