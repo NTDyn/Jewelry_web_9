@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link  type="text/css" href= "../../assests/admin/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/admin/css/header.css?v=1"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/admin/css/header.css?v=2"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/admin/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
