@@ -177,7 +177,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                       <form method = "post" >
+                       <form method = "post" action="<?php addCategory(); ?> ">
                             <div class="row form-line">
                                 <label class="col-4 form-label" >Tên thể loại</label>
                                 <input type="text" class="col-6" name = "txtCategory" id="txtCategory"/>
@@ -195,23 +195,24 @@
                         <!-- Modal footer -->
                     
                             <div class="modal-footer">
-                                <input type="submit" class="btn" id="btn-modal-add"  name = "btn-add" value="Thêm" onsubmit="<?php addCategory(); ?> "/>
+                                <input type="submit" class="btn" id="btn-modal-add"  name = "btn-add" value="Thêm" />
                             </div>
                        </form>
                     </div>  
 
                     <?php 
-                            function addCategory(){
-                                $name = htmlspecialchars($_REQUEST['txtCategory']);
-                                if(!empty($name )){
-                                    $cateControl = new category_C();
-                                    $cateControl->addCategory($name);
-
+                            function addCategory(){                          
+                                if(isset($_POST['txtCategory'])){
+                                    $name = $_POST['txtCategory'];
+                                    if(!empty($name )){
+                                        $cateControl = new category_C();
+                                        $cateControl->addCategory($name);
+                                    }
                                 }
                             }
-                        
-                        
                     ?>
+
+                
                 </div>
             </div>
         </div>
@@ -221,4 +222,4 @@
 </body>
 </html>
 <script src="../../assests/admin/js/chart/chart.js"></script>
-<script src="../../assests/admin/js/category.js?v=3"></script>
+<script src="../../assests/admin/js/category.js?v=4"></script>
