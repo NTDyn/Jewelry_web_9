@@ -1,6 +1,10 @@
 $(document).ready(function(){
+ // new WOW().init();
+
     revenueChart();
     $('#breadcrumb-second').text('Category');
+  
+  
 })
 
 
@@ -60,6 +64,33 @@ function revenueChart(){
       });
 }
 
-if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
+
+$('.switch').click(function(){
+  $(':checkbox').each(function () { 
+    this.checked = !this.checked; 
+    // if(!this.checked){
+    //   console.log('uncheck');
+    // } else {
+    //   console.log('checked');
+    // }
+  
+  });
+})
+
+
+
+function swalSuccess(){
+  Swal.fire({
+    title: "Good job!",
+    text: "You clicked the button!",
+    icon: "success",
+   
+  });
 }
+
+                             
+
+
+
+
+
