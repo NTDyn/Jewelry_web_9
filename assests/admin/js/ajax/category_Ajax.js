@@ -5,7 +5,7 @@ $(document).on('click','#btn-modal-add',function(e) {
     $.ajax({
         data: data,
         type: "post",
-        url: "../../route/route.php",
+        url: "../../route/route_category.php",
         success: function(dataResult){
             $("#modal-add").modal('hide');
             Swal.fire({
@@ -15,11 +15,16 @@ $(document).on('click','#btn-modal-add',function(e) {
                 timer: 3000,
               });
               $('#list-category').empty();
-              getCate()
+              getCate();
         }
 
     });
 });
+
+$("#add-form").submit(function(e) {
+    e.preventDefault();
+});
+
 let table ;
 
 $(document).ready(async function(e){
@@ -27,17 +32,14 @@ $(document).ready(async function(e){
     await getCate();
 })
 async function getCate() {
-    var _data = {"action": "read" , "arrCate": ""};
-    var list =[]; 
+    var _data = {"action": "read" }; 
     $.ajax({
         data: _data ,
         type: "post",
-        url: "../../route/route.php",
+        url: "../../route/route_category.php",
        
-        
        success: await function(dataResult){
             dataResult = JSON.parse(dataResult);
-            $('#arrCate').val(dataResult); 
             dataList = dataResult;
            appendListCategory(dataResult);
            table = $('#myTable').DataTable();
@@ -96,7 +98,7 @@ $(document).on('click','.btn-modal-remove', function(e){
     $.ajax({
         data: data,
         type: "post",
-        url: "../../route/route.php",
+        url: "../../route/route_category.php",
         success: function(dataResult){
             if(dataResult == "true"){
                 $("#modalRemove").modal('hide');
@@ -131,7 +133,7 @@ $(document).on('click','.btn-modal-restart', function(e){
     $.ajax({
         data: data,
         type: "post",
-        url: "../../route/route.php",
+        url: "../../route/route_category.php",
         success: function(dataResult){
             if(dataResult == "true"){
                 $("#modalRestart").modal('hide');
@@ -166,7 +168,7 @@ $(document).on('click','#btn-modal-edit', function(e){
     $.ajax({
         data: data,
         type: "post",
-        url: "../../route/route.php",
+        url: "../../route/route_category.php",
         success: function(dataResult){
             if(dataResult == "true"){
                 $("#modalEdit").modal('hide');

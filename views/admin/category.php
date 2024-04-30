@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../assests/admin/css/category.css?v=1">
-    <link rel="stylesheet" href="../../assests/admin/css/wow_init/anime.min.css?v=3">
+    <link rel="stylesheet" href="../../assests/admin/css/wow_init/anime.min.css?v=5">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css?v=1">
 </head>
 <?php 
@@ -193,6 +193,7 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                        <form method = "post" id="add_form" >
+                            <input type="hidden" value="add" name="action">
                             <div class="row form-line">
                                 <label class="col-4 form-label" >Tên thể loại</label>
                                 <input type="text" class="col-6" name = "txtCategory" id="txtCategory"/>
@@ -210,9 +211,7 @@
                         <!-- Modal footer -->
                     
                             <div class="modal-footer">
-                                <input type="hidden" value="add" name="action">
-                                <input class="btn" id="btn-modal-add"  name = "btn-add" value="Thêm"  />
-                                
+                                <button class="btn" id="btn-modal-add" > Thêm </button>
                             </div>
                        </form>
                     </div>   
@@ -267,10 +266,10 @@
 </body>
 </html>
 <script src="../../assests/admin/js/chart/chart.js"></script>
-<script src="../../assests/admin/js/category.js?v=3"></script>
-<script src="../../assests/admin/js/swal/swalNotification.js?v=7"></script>
+<script src="../../assests/admin/js/category.js?v=5"></script>
+<script src="../../assests/admin/js/swal/swalNotification.js"></script>
 <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
-<script src="../../assests/admin/js/ajax/category_Ajax.js?v=1"></script>
+<script> <?php require '../../assests/admin/js/ajax/category_Ajax.js' ?> </script>
 
 
 

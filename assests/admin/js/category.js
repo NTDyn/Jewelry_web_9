@@ -1,10 +1,6 @@
 $(document).ready(function(){
- // new WOW().init();
-
     revenueChart();
-    $('#breadcrumb-second').text('Category');
-  
-  
+    $('#breadcrumb-second').text('Thể loại');
 })
 
 
@@ -68,25 +64,10 @@ function revenueChart(){
 $('.switch').click(function(){
   $(':checkbox').each(function () { 
     this.checked = !this.checked; 
-    // if(!this.checked){
-    //   console.log('uncheck');
-    // } else {
-    //   console.log('checked');
-    // }
-  
   });
 })
 
 
-
-function swalSuccess(){
-  Swal.fire({
-    title: "Good job!",
-    text: "You clicked the button!",
-    icon: "success",
-   
-  });
-}
 
                              
 

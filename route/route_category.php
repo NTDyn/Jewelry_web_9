@@ -11,6 +11,7 @@
     
     }
 
+    // Get list of Category
     if(isset($_POST['action'] )){
         if($_POST['action'] =="read"){
             $contr = new category_C(); 

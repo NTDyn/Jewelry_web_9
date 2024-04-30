@@ -44,6 +44,7 @@
             $result = $modelCate->editCategory($id,$name);
             echo json_encode($result);
         }
+        
 
     }
 
