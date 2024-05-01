@@ -3,13 +3,13 @@
     font-size: 18px;
     color : brown;
     margin: 0px;
-    padding: 70px;
+    padding: 50px;
     justify-content: center;
     align-items: center;
     height: 82vh;
     background-image: url(../../../image/background_login.jpg);
     background-size :cover;
-    background-position-y: -200px;
+    background-position-y: -250px;
 
 }
 
@@ -18,7 +18,7 @@ a {
 }
 
 a:hover{
-    color:aliceblue;
+    color :aliceblue;
 } 
 
 .main {
@@ -26,7 +26,7 @@ a:hover{
     margin-right: auto;
     align-items: center;
     background-color: rgba(255,255,255,0.8);
-    padding: 50px;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     width:35%;
@@ -72,8 +72,8 @@ a:hover{
 }
 
 .forgotpassword{
-    margin-right: 30px; 
-    font-size: 14px;
+    margin-right: 20px; 
+    font-size: 10px;
     color: blue;
     text-align: right;
 }
