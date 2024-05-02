@@ -130,3 +130,19 @@ a {
     }
   }
 
+
+  .btn-buy{
+    padding: 5px 12px;
+    border-style: solid ;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color:#ab7f6f ;
+    background-color: #ab7f6f;
+}
+.payment-page{
+    text-decoration: dashed !important;
+    color: white;
+    font-weight: bold;
+}
+
+

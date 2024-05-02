@@ -38,7 +38,7 @@
                 array_push($errorList, $result);
                 
             } 
-            if(!preg_match("/^([a-zA-Z' ]+)$/", $customer->Customer_Name )  ){
+            if(!preg_match("/^([a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/i", $customer->Customer_Name )  ){
                 $result = new validate_customer();
                 $result->Subject = "Customer_Name";
                 $result->Status = 0;
@@ -104,6 +104,8 @@
             return $errorList;
         }
 
+        
+
         function getCustomer($id){
             $modelCate = $this->model("customer_M");
             $result = $modelCate->getCustomer($id);
@@ -121,7 +123,7 @@
                 $result->Message = "Thông tin không được để trống!";
                 array_push($errorList, $result);
             } 
-            if(!preg_match("/^([a-zA-Z' ]+)$/", $customer->Customer_Name )  ){
+            if(!preg_match("/^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/i", $customer->Customer_Name )  ){
                 $result = new validate_customer();
                 $result->Subject = "Customer_Name";
                 $result->Status = 0;
