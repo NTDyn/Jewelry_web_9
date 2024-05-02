@@ -6,7 +6,7 @@
   <title>Document</title>
   
     <link  type="text/css" href= "../../assests/user/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/user/css/header.css?v=2"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/user/css/header.css?v=3"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
@@ -99,7 +99,9 @@
 
               <!-- Modal footer -->
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class=" btn-buy">
+                  <a href = "payment.php" class="payment-page"> Mua hàng</a>
+                </button>
               </div>
 
             </div>
