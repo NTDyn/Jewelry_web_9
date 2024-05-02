@@ -8,7 +8,7 @@
     
     function connectDB(){
       $result = false ;
-      if($this->conn = mysqli_connect($this->servername, $this->username, $this->password,$this->dbname, 3306))
+      if($this->conn = mysqli_connect($this->servername, $this->username, $this->password,$this->dbname, 3307))
         $result = true;
       mysqli_select_db($this->conn, $this->dbname);
       mysqli_query($this->conn, "SET NAMES 'utf8'");
