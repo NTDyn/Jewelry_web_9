@@ -125,6 +125,8 @@ $_SESSION['act'] = rand();
     <th>Xóa</th>
    </tr>
 
+   
+
   </thead>
   <tbody>
     <?php $sql_sanpham="select * from product" ;
