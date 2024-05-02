@@ -1,6 +1,9 @@
 <?php include('header.php');
 include('../user/connect.php');
-$sql_loaisp="select * from category";
+include('../admin/product_controller.php');
+$data_product=getListProduct($conn);
+
+$sql_loaisp="select * from category where Category_Status=1";
 $result =mysqli_query($conn,$sql_loaisp);
 if(isset($_POST["them_sp"])){
     if(isset($_POST['ten_sp'])){
@@ -21,11 +24,13 @@ if(isset($_POST["them_sp"])){
     move_uploaded_file($img_sp_name,'../../assests/image_product/'.$img_sp);
     $sql_add= "insert into product( Product_Name, Category_ID, Product_Price, Product_Status, Product_Quality, Product_Describe, Product_Image) VALUES ('$ten_sp',$loai_sp,$gia_sp,1,$soluong_sp,'$mota_sp',' $target')";
     $query_add=mysqli_query($conn,$sql_add);
+
     }
 
 }
-$_SESSION['act'] = rand();
+
  ?>
+ 
 
 <div class="backgroud">
 
@@ -87,8 +92,8 @@ $_SESSION['act'] = rand();
       </div>
       <input type="hidden" name="act" value="<?php echo $_SESSION['act']; ?>">
             <div class="col-lg-12 mt-5">
-                <button name="them_sp" id="submit" class="btn btn-success">Add Sản Phẩm</button>
-                <button id="btn-update" class="btn btn-primary">Update</button>
+                <button name="them_sp" id="submit" class="btn btn-success">Thêm Sản Phẩm</button>
+               
             </div>
     </form>
 </div>
@@ -108,6 +113,7 @@ $_SESSION['act'] = rand();
         document.getElementById("btn-update").style.display="none";
 
     })
+    
 </script>
 <div class="table_sp">
 <table class="table">
@@ -127,21 +133,21 @@ $_SESSION['act'] = rand();
 
   </thead>
   <tbody>
-    <?php $sql_sanpham="select * from product" ;
+    <?php 
     $stt=0;
-    $result_sanpham=mysqli_query($conn,$sql_sanpham);
+    
    
-    while($row=mysqli_fetch_assoc($result_sanpham)){
+    for($i=0;$i<count($data_product);$i++){
     ?>
    <tr>
     <td>
      <?php echo $stt+=1;?>
     </td>
     <td>
-        <?php echo $row['Product_Name']?>
+        <?php echo $data_product[$i]["Product_Name"]?>
     </td>
     <td>
-        <?php $sql_lsp="select * from category where Category_ID=".$row["Category_ID"];
+        <?php $sql_lsp="select * from category where Category_ID=".$data_product[$i]["Category_ID"];
         $result=mysqli_query($conn,$sql_lsp);
         $row_lsp=mysqli_fetch_assoc($result);
         echo 
@@ -149,25 +155,26 @@ $_SESSION['act'] = rand();
          ?>
     </td>
     <td>
-        <?php echo $row['Product_Price']?>
+        <?php echo $data_product[$i]['Product_Price']?>
     </td>
     <td>
-    <?php echo $row['Product_Quality']?>
+    <?php echo $data_product[$i]['Product_Quality']?>
     </td>
     <td>
-        <img  src=<?php echo "'".$row['Product_Image']."'"?> alt="">
+        <img  src=<?php echo "'".$data_product[$i]['Product_Image']."'"?> alt="">
     </td>
     <td>
-    <?php echo $row['Product_Describe']?>
+    <?php echo $data_product[$i]['Product_Describe']?>
     </td>
     <td>
-    <?php if( $row['Product_Status']==1) echo"Hoạt Động" ;else echo "Đã Xóa"?>
+    <?php if( $data_product[$i]['Product_Status']==1) echo"Hoạt Động" ;else echo "Đã Xóa"?>
     </td>
     <td>
-      <button Name='edit' class="fa fa-edit"></button>
+     
+     <a id="btn_edit"  href="product_edit.php?edit_id=<?php echo $data_product[$i]["Product_ID"]?>" class="fa fa-edit edit"></a> 
     </td>
     <td>
-        <button Name='delete' class="fa fa-close"></button>
+        <a id="btn_delete" onclick="return confirm ('Bạn có chắc chắn xóa sản phẩm này không?');" href="product_delete.php?id=<?php echo $data_product[$i]["Product_ID"]?>" class="fa fa-close"></a>
     </td>
    </tr>
  <?php } ?>
@@ -175,8 +182,13 @@ $_SESSION['act'] = rand();
 </table>
 </div>
 <script>
+    document.getElementById("breadcrumb-second").innerText="Product";
+   
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
+ 
+
+
 </script>
 
