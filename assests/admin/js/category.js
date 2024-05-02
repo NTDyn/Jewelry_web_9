@@ -1,6 +1,6 @@
 $(document).ready(function(){
     revenueChart();
-    $('#breadcrumb-second').text('Category');
+    $('#breadcrumb-second').text('Thể loại');
 })
 
 
@@ -60,6 +60,18 @@ function revenueChart(){
       });
 }
 
-if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
-}
+
+$('.switch').click(function(){
+  $(':checkbox').each(function () { 
+    this.checked = !this.checked; 
+  });
+})
+
+
+
+                             
+
+
+
+
+

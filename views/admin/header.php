@@ -10,6 +10,7 @@
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
     <link  type="text/css"  href="../../assests/admin/css/product.css"  rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
 </head>
 <body>
   <div class = "header-ad">
@@ -26,10 +27,10 @@
       <a href="../../views/admin/product.php" class="si si-grid sidebar-category" id="sidebar-second">
         <span class="item-sidebar">Sản phẩm</span>
       </a>
-      <a href="#" class="si si-people sidebar-category" id="sidebar-third">
+      <a href="../../views/admin/customer.php" class="si si-people sidebar-category" id="sidebar-third">
         <span class="item-sidebar">Khách hàng</span>
       </a>
-      <a href="#" class="si si-layers sidebar-category" id="sidebar-fourth">
+      <a href="../../views/admin/order.php" class="si si-layers sidebar-category" id="sidebar-fourth">
         <span class="item-sidebar">Đơn hàng</span>
       </a>
       <a href="#" class="si si-notebook sidebar-category" id="sidebar-fifth" >
@@ -93,3 +94,5 @@
 <script><?php require("../../assests/admin/js/jquery.min.js"); ?></script>
 <script><?php require("../../assests/admin/js/bootstrap/bootstrap.bundle.min.js");?></script>    
 <script><?php require("../../assests/admin/js/header.js"); ?></script>
+<script src="../../assests/admin/js/swal/swalNotification.js"></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
