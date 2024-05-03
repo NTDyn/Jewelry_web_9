@@ -1,6 +1,6 @@
 <?php 
     include 'customer_E.php';
-    include 'Database/database.php';
+    include '../Database/database.php';
 
     class Customer_M extends connectDB {
 
