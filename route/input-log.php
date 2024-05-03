@@ -3,7 +3,6 @@ require '../controllers/connect.php';
 if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
-
     if(!empty($username) && !empty($password)){
         $sql = "SELECT * FROM customer WHERE Customer_Username = '$username' AND Customer_Password = '$password'";
         $result = $conn->query($sql);
