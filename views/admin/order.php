@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=11">
+    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=13">
 </head>
 <body>
     <?php  include 'header.php' ?>;
@@ -27,6 +27,9 @@
                 </tbody>
             </table>
         </div>
+
+            
+  
     </div>
 
     <!-- The Modal detail order -->
@@ -222,16 +225,12 @@
 
     <!-- The Modal add new order -->
     <div class="modal fade" id="modal-add">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header ">
                         <button type="button" class="btn-close " id="btn-modal-close" data-bs-dismiss="modal" ></button>
-                        <div class="modal-img-area">
-                            <img id="modal-img" src="../../image/prince-jewelry.jpg" style="width: 100%">
-                        </div></br>
-
                         <h4 class="modal-title ">Thêm đơn hàng mới</h4>
                        
                         
@@ -270,35 +269,13 @@
                                     <p class=" error-email error-notify"></p>
                                 </div>
                             </div>
-                            <div class="row form-line">
-                                <label class="col-4 form-label" >Tên đăng nhập <span style="color:red">*</span></label>
-                                <div class="col-6">
-                                    <input type="text" class="form-control" name = "customer-username"  />
-                                    <p class=" error-username error-notify"></p>
-                                </div>
-                            </div>
-                            <div class="row form-line">
-                                <label class="col-4 form-label" >Mật khẩu <span style="color:red">*</span> </label>
-                                <div class="col-6">
-                                    <input type="pwd" class="form-control" name = "customer-password" />
-                                    <p class=" error-password error-notify"></p>
-                                </div>
-                            </div>
-                            <div class="row form-line">
-                                <label class="col-4 form-label">Hoạt động </label>
-                                <div class="col-6 ">
-                                    <label class=" switch">
-                                        <input type="checkbox"  name="btnActive" id="btnActive">
-                                        
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                            </div>
+                            
+                            
 
                         <!-- Modal footer -->
                     
                             <div class="modal-footer">
-                                <button class="btn" id="btn-modal-add" >Thêm</button>
+                                <button class="btn" id="btn-modal-next" >Tiếp theo</button>
                             </div>
                        </form>
                     </div>   
@@ -306,7 +283,11 @@
             </div>
         </div>
     <!-- End modal -->
+
+
+     
     <?php  include 'footer.php' ?>
 </body>
 </html>
 <script><?php require ("../../assests/admin/js/order.js") ?></script>
+<script src="../../assests/admin/js/chart/chart.js?v=1"></script>
