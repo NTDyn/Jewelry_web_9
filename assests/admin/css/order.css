@@ -19,9 +19,18 @@
     font-family: sans-serif;
 }
 th{
+    color: white;
     text-align: center !important;
+    border: solid;
+    background-color:#ffc3c3;
+    border-color:#e1e1e1;
+    border-width: 1px;
 }
 td{
+    border-bottom-style: solid !important ;
+    border-collapse: collapse;
+    border-bottom-width: 1px !important;
+    border-bottom-color:#d6d6d6 !important;
     text-align: center !important;
 }
 .order-item{
