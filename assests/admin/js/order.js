@@ -1,7 +1,9 @@
 $(document).ready(function(){
     //$('#order-table').dataTable();
     readListOrder();
+
 })
+
 
 function readListOrder(){
     var _data = {"action": "read"}; 
