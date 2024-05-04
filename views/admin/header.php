@@ -54,8 +54,8 @@
                   </span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../../views/admin/login.php">Đăng nhập</a></li>
-                  <li><a class="dropdown-item" href="../../views/admin/login.php">Đăng ký</a></li>
+                  <li><a class="dropdown-item" href="../../views/admin/register.php">Đăng ký</a></li>
+                  <li><a class="dropdown-item" href="../../views/user/login.php">Đăng xuất</a></li>
                 </ul>
               </li>
             </ul>

@@ -22,8 +22,6 @@ if(isset($_POST['register'])){
         }
     }
 
-    
-
     if(!empty($fullname)
         &&!empty($phone)
         &&!empty($address)
@@ -45,7 +43,7 @@ if(isset($_POST['register'])){
                         echo "<script>window.location.href = '../views/user/register.php';</script>";	
                     }else{
                         $sql = "INSERT INTO `customer` (`Customer_Name`, `Customer_Phone`, `Customer_Address`, `Customer_Email`, `Customer_Username`,`Customer_Password`, `Customer_Status`)
-                                VALUES('$fullname', '$phone', '$address', '$email', '$username', '$password', 0)";// mã hóa md5('$password')
+                                VALUES('$fullname', '$phone', '$address', '$email', '$username', '$password', 1)";// mã hóa md5('$password')
                         
                         if($conn->query($sql) === TRUE){
                             $content = "Đăng ký thành công";

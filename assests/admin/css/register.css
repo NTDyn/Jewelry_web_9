@@ -3,57 +3,40 @@
     font-size: 18px;
     color : brown;
     margin: 0px;
-    padding: 70px;
+    padding: 50px;
     justify-content: center;
     align-items: center;
     height: 82vh;
-    background-image: url(../../../image/background_login.jpg);
+    background-image: url(../../../image/backgorundadmin.jpg);
     background-size :cover;
     background-position-y: -250px;
 
 }
 
-a {
-    text-decoration: none;
-}
-
-a:hover{
-    color:red;
-} 
-
 .main {
     margin-left: auto;
     margin-right: auto;
-    align-items: center;
+    align-items: 50px;
     background-color: rgba(255,255,255,0.8);
-    padding: 50px;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     width:35%;
 }
 
 .head{
-    display: flex;
-    justify-content: center; 
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
     align-items: center;
-} 
-
-.head > button{
-    width : 180px;
-    height : 45px;
-    font-size : 20px;
-    border-radius: 10px;
-    color : brown;
-    margin : 0 10px;
-    background : transparent;
-    transition : 0.2s;
-    border-width: 3px;
+    height: 40px;
 }
 
-.head > button:hover{
-    background : #BB0000;
-    border : 3px solid white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+.head > p {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    height: 40px;
 }
 
 .form-group{
@@ -72,8 +55,8 @@ a:hover{
 }
 
 .forgotpassword{
-    margin-right: 30px; 
-    font-size: 14px;
+    margin-right: 20px; 
+    font-size: 10px;
     color: blue;
     text-align: right;
 }
