@@ -96,3 +96,7 @@
 <script><?php require("../../assests/admin/js/header.js"); ?></script>
 <script src="../../assests/admin/js/swal/swalNotification.js"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+<!--Select2 js -->
+<script src="../../assests/admin/js/select2/select2.full.min.js"></script>
+<script src="../../assests/admin/js/select2/select2.js?v=3"></script>
+<!-- Script-->

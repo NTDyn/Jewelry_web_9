@@ -239,6 +239,7 @@ function editCustomer(){
             dataResult = JSON.parse(dataResult);
             $('.error-notify').text('');
             $.each(dataResult, function(k,v){
+                
                 if(v.Status == 0){
                     errorInnerHTML(v);
                 }
@@ -287,7 +288,4 @@ function errorInnerHTML(valid){
         $('.error-email').text(valid.Message);
     }
 
-    if(valid.Subject == "Customer_Username"){
-        $('.error-username').text(valid.Message);
-    } 
 }

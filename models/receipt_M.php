@@ -1,6 +1,7 @@
 <?php 
     include 'receipt_E.php';
     include 'customer_E.php';
+    include 'product_E.php';
     include 'receiptDetail_E.php';
     include '../Database/database.php';
 
@@ -81,10 +82,20 @@
             if($this->connectDB()){
                 $sql ="SELECT * FROM Product WHERE Product_ID = " . $id;
                 $result = mysqli_query($this->conn, $sql);
+                $pr = new product_E();
                 if($row = mysqli_fetch_array($result) ){
-                    $name = $row['Product_Name'];
+                    
+                    $pr->Product_ID =  $row['Product_ID'];
+                    $pr->Product_Name = $row['Product_Name'];
+                    $pr->Category_ID = (int) $row['Category_ID'];
+                    $pr->Product_Price = (int) $row['Product_Price'];
+                    $pr->Product_Quality = (int) $row['Product_Quality'];
+                    $pr->Product_Describe=  $row['Product_Describe'];
+                    $pr->Product_Image =  $row['Product_Image'];
+                    $pr->Product_Status = (int) $row['Product_Status'];
+                    
                 }
-                return $name;
+                return $pr;
             }
         }
 
@@ -132,6 +143,58 @@
                      echo "Error: " . $sql . "<br>" . $this->conn->error;
                      return false;
                 }
+            }
+        }
+
+        public function existCustomer($customer){
+            if($this->connectDB()){
+                $sql ="SELECT * FROM Customer WHERE Customer_Phone = '" . $customer->Customer_Phone . "'";
+                $result = mysqli_query($this->conn, $sql);
+                if($result){
+                   if( $row = mysqli_fetch_array($result) ){
+                    $customer = new Customer_E();
+                    $customer->Customer_ID = (int) $row['Customer_ID'];
+                    $customer->Customer_Name = $row['Customer_Name'];
+                    $customer->Customer_Phone = $row['Customer_Phone'];
+                    $customer->Customer_Email = $row['Customer_Email'];
+                    $customer->Customer_Address = $row['Customer_Address'];
+                    $customer->Customer_Username = $row['Customer_Username'];
+                    $customer->Customer_Password = $row['Customer_Password'];
+                    $customer->Customer_Status = $row['Customer_Status'];
+                    return $customer;
+                   } else{
+                        return false ;
+                   }
+                   
+                } else {
+                     echo "Error: " . $sql . "<br>" . $this->conn->error;
+                     return false;
+                }
+
+            }
+        }
+        public function getListProduct(){
+            if($this->connectDB()){
+                $sql = "SELECT * FROM Product WHERE Product_Status = 1";
+                $result = mysqli_query($this->conn , $sql);
+                $list= array();
+                if(mysqli_num_rows($result) > 0){
+                    
+                    while($row = mysqli_fetch_array($result) ){
+                        $pr = new Product_E();
+                        $pr->Product_ID = (int) $row['Product_ID'];
+                        $pr->Product_Name =  $row['Product_Name'];
+                        $pr->Category_ID = (int) $row['Category_ID'];
+                        $pr->Product_Price = (int) $row['Product_Price'];
+                        $pr->Product_Quality = (int) $row['Product_Quality'];
+                        $pr->Product_Describe=  $row['Product_Describe'];
+                        $pr->Product_Image =  $row['Product_Image'];
+                        $pr->Product_Status = (int) $row['Product_Status'];
+                        array_push($list, $pr) ;
+                    }
+                }
+                
+                return $list;
             }
         }
     }

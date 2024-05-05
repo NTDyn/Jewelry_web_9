@@ -1,7 +1,7 @@
 $(document).ready(function(){
     //$('#order-table').dataTable();
     readListOrder();
-
+    getListProduct();
 })
 
 
@@ -137,8 +137,11 @@ function getDetailOfReceipt(id_receipt){
 
  async function appendDetail(list){
     $('.product-order-infor').empty();
+    
     for(let i = 0 ; i < list.length ; i++){
-        let name = await getProduct(list[i].Product_ID);
+        let pr = await getProduct(list[i].Product_ID);
+        console.log(pr.Product_Name);
+        let name = pr.Product_Name;
         list[i]["Product_Name"] = name;
         appendInforDetail(list[i]);
        
@@ -167,17 +170,17 @@ function appendInforDetail(data){
 }
 async function getProduct(id){
     var _data = {"action": "getProduct", "product-id": id}; 
-    let name = '';
+    let result = {};
     await $.ajax({
         data: _data ,
         type: "post",
         url: "../../route/route_receipt.php",
         success: function(dataResult) {
-            //dataResult = JSON.stringify(dataResult);
-             name = dataResult;
+            dataResult = JSON.parse(dataResult);
+            result = dataResult;
         }
     })
-    return name;
+    return result;
 }
 
 $(document).on('click', '.btn-next', function(){
@@ -314,4 +317,153 @@ function formatToMoney(_number){
     let VietNamDong = Intl.NumberFormat('en-VI');
     let result = VietNamDong.format(_number) ;
     return result;
+}
+
+  function existCustomer(){
+    let phone = $('#txt-phone').val();
+    var data = {"action":"existCustomer", "customer-phone": phone};
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            $('.error-notify').text('');
+            
+            if(dataResult == 'false'){
+                $('.isDisable').prop('disabled', false);
+                $('#txt-name').val("");
+                $('#txt-address').val("");
+                $('#txt-email').val("");
+            } else {
+                dataResult = JSON.parse(dataResult);
+                $('#txt-name').val(dataResult.Customer_Name);
+                $('#txt-address').val(dataResult.Customer_Address);
+                $('#txt-email').val(dataResult.Customer_Email);
+                $('.isDisable').prop('disabled', true);
+            }
+            
+        }
+    })
+  }
+  function checkCustomerInfor(){
+    var data = $("#checkCustomer_form").serialize();
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            $('.error-notify').text('');
+            dataResult = JSON.parse(dataResult);
+            $.each(dataResult, function(k,v){
+                
+                if(v.Status == 0){
+                    errorInnerHTML(v);
+                }
+                if(v.Status == 200){
+                    getListProduct();
+
+                }
+            })
+        }
+    })
+}
+
+function errorInnerHTML(valid){
+  
+
+    if(valid.Subject == "Customer_Empty"){
+        $('.error-main').text(valid.Message);
+    }
+
+    if(valid.Subject == "Customer_Name"){
+        $('.error-name').text(valid.Message);
+    }
+
+    if(valid.Subject == "Customer_Phone"){
+        $('.error-phone').text(valid.Message);
+    }
+
+    if(valid.Subject == "Customer_Address"){
+        $('.error-address').text(valid.Message);
+    }
+
+    if(valid.Subject == "Customer_Email"){
+        $('.error-email').text(valid.Message);
+    }
+
+    if(valid.Subject == "Customer_Username"){
+        $('.error-username').text(valid.Message);
+    } 
+}
+
+function getListProduct(){
+    var data = {"action":"getListProduct"};
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            dataResult = JSON.parse(dataResult);
+            innerProductList(dataResult);
+        }
+    })
+    $('#tb-selected-product').dataTable();
+}
+
+function innerProductList(dataList){
+   
+    $.each(dataList, function(k,v){
+        str = "";
+       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+        $('#list-product').append(str);
+    })
+    //$('#list-product').select2();
+}
+
+$(document).on('click', '.choose-product', function(e){
+    let id = $(this).closest('.product-item').find('.product-id').text();
+    let name = $(this).closest('.product-item').find('.product-name').text();
+    let price = $(this).closest('.product-item').find('.product-price').text();
+    let img= $(this).closest('.product-item').find('.product-img').attr('src');
+
+    let str = '';
+        str += '<div class = "row">'
+        str += '<div class="col-1 ">';
+        str += '<img class="product-img" src = "' + img + '" >';
+        str += '</div>';
+        str += '<div class = "col-3 product-name">'+ name + "</div>"
+        str += '<div class="col-2 product-price">' + price + "</div>";
+        str += '<div class = "col-2">'
+        str += '<span class ="fa fa-minus"></span>';
+        str += '<span class ="">1</span>';
+        str += '<span class ="fa fa-plus"></span>';
+        str +=  '</div>';
+        str += '<div class="col-2">';
+        str += '<button class="fa fa-trash" ></button>';
+        str += '</div>';
+        str += '</div>';
+    e.preventDefault();
+     $('.product-cart').append(str);
+     
+})
+
+$('#txt-phone').bind("enterKey",function(e){
+    $('.isVisible').css('display','block');
+    existCustomer();
+ });
+ $('#txt-phone').keyup(function(e){
+     if(e.keyCode == 13)
+     {
+         $(this).trigger("enterKey");
+     }
+ });
+
+$('#list-product').change(function(){
+    let id = $(this).val();
+    console.log(id);
+    innerSelectedProduct();
+})
+
+function innerSelectedProduct(){
+
 }
