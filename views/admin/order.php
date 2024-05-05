@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=13">
+    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=7">
+    <!--Select2 css -->
+    <link id="link6" href="../../assests/admin/js/select2/select2.min.css" rel="stylesheet" />
+
 </head>
 <body>
+
     <?php  include 'header.php' ?>;
     <div class="content">
         <div id="table-order-area">
@@ -224,70 +228,91 @@
     </div>
 
     <!-- The Modal add new order -->
-    <div class="modal fade" id="modal-add">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header ">
-                        <button type="button" class="btn-close " id="btn-modal-close" data-bs-dismiss="modal" ></button>
-                        <h4 class="modal-title ">Thêm đơn hàng mới</h4>
-                       
-                        
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                       <form method = "post" id="add_form" >
-                            <input type="hidden" value="add" name="action">
-                            <p class=" error-main error-notify" style="text-align: center;"></p>
-                            <div class="row form-line">
-                                <label class="col-4 form-label" >Tên khách hàng <span style="color:red">*</span> </label>
-                                <div class="col-6">
-                                    <input type="text" class="form-control" name = "customer-name" required >       
-                                    <p class=" error-name error-notify"></p>
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade " id="modal-add" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-modal-close btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="post" id="checkCustomer_form">
+                    <fieldset style="display: block;">
+                        <input type="hidden" value="checkCustomerInfor" name="action">
+                                <p class=" error-main error-notify" style="text-align: center;"></p>
+                                <div class="row form-line">
+                                    <label class="col-1 form-label" > Số điện thoại <span style="color:red">*</span> </label>
+                                    <div class="col-2">
+                                        <input type="phone" class="form-control" name = "customer-phone"  id="txt-phone" >
+                                        <p class=" error-phone error-notify"></p>
+                                    </div>
+                                    <label class="col-1 form-label  isVisible" >Tên khách hàng <span style="color:red">*</span> </label>
+                                    <div class="col-2 isVisible">
+                                        <input type="text" class="form-control isDisable" name = "customer-name" id="txt-name" >       
+                                        <p class=" error-name error-notify"></p>
+                                    </div>
+                                    <label class="col-1 form-label isVisible " >Địa chỉ <span style="color:red">*</span> </label>
+                                    <div class="col-2 isVisible">
+                                        <input type="text" class="form-control isDisable" name = "customer-address" id= "txt-address"/>
+                                        <p class=" error-address error-notify"></p>
+                                    </div>
+                                    <label class="col-1 form-label isVisible" >Email <span style="color:red">*</span> </label>
+                                    <div class="col-2 isVisible">
+                                        <input type="email" class="form-control isDisable" name = "customer-email" id="txt-email"/>
+                                        <p class=" error-email error-notify"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-line">
-                                <label class="col-4 form-label" > Liên hệ <span style="color:red">*</span> </label>
-                                <div class="col-6">
-                                    <input type="phone" class="form-control" name = "customer-phone">
-                                    <p class=" error-phone error-notify"></p>
-                                </div>
-                            </div>
-                            <div class="row form-line">
-                                <label class="col-4 form-label" >Địa chỉ <span style="color:red">*</span> </label>
-                                <div class="col-6">
-                                    <input type="text" class="form-control" name = "customer-address" />
-                                    <p class=" error-address error-notify"></p>
-                                </div>
-                            </div>
-                            <div class="row form-line">
-                                <label class="col-4 form-label" >Email <span style="color:red">*</span> </label>
-                                <div class="col-6">
-                                    <input type="email" class="form-control" name = "customer-email"/>
-                                    <p class=" error-email error-notify"></p>
-                                </div>
-                            </div>
-                            
-                            
-
-                        <!-- Modal footer -->
+                    </fieldset>
                     
-                            <div class="modal-footer">
-                                <button class="btn" id="btn-modal-next" >Tiếp theo</button>
-                            </div>
-                       </form>
-                    </div>   
+                    </form>
+
+                    <div>
+                        <table id="tb-selected-product">
+                            <thead>
+                                <th></th>
+                                <th>Tên sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <select class="form-control select2-show-search" style="width: 100%" id="list-product" >
+                                            <option  disabled selected hidden>Please Choose...</option>
+                                        </select>
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    
+                    </div>
+                    
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </div>
         </div>
-    <!-- End modal -->
+    </div>
+
+
 
 
      
     <?php  include 'footer.php' ?>
 </body>
 </html>
+
 <script><?php require ("../../assests/admin/js/order.js") ?></script>
 <script src="../../assests/admin/js/chart/chart.js?v=1"></script>
