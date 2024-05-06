@@ -10,29 +10,9 @@ if(isset($_POST['login'])){
         $result = $conn->query($sql);
         $result1 = $conn->query($sql1);
 
-        if ($result1->num_rows == 1) {
-            $row = $result1->fetch_assoc();
-            $status = $row['Admin_Status'];
-       
-            if ($status == 1) {
-                $_SESSION["user"] = $username;
-                echo "<script>window.location.href = '../views/admin/home.php';</script>";
-                //header("location:http://localhost/Jewelry_web_9/views/admin/home.php");
-                //exit();
-            } else if ($status == 0) {
-                echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
-                echo "<script>window.location.href = '../views/user/login.php';</script>";
-                //header("location:http://localhost/Jewelry_web_9/views/user/index.php");
-                //exit();
-            }
-        } else{
-            echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
-            echo "<script>window.location.href = '../views/user/login.php';</script>";
-        }
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            $status = $row['Customer_Status'];
-        
+            $status = $row['Customer_Status'];       
             if ($status == 1) {
                 $_SESSION["user"] = $username;
                 echo "<script>window.location.href = '../views/user/index.php';</script>";
@@ -41,9 +21,27 @@ if(isset($_POST['login'])){
                 echo "<script>window.location.href = '../views/user/login.php';</script>";
             }
         } else{
-            echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
-            echo "<script>window.location.href = '../views/user/login.php';</script>";
+            if ($result1->num_rows == 1) {
+                $row = $result1->fetch_assoc();
+                $status = $row['Admin_Status'];
+           
+                if ($status == 1) {
+                    $_SESSION["user"] = $username;
+                    echo "<script>window.location.href = '../views/admin/home.php';</script>";
+                    //header("location:http://localhost/Jewelry_web_9/views/admin/home.php");
+                    //exit();
+                } else if ($status == 0) {
+                    echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
+                    echo "<script>window.location.href = '../views/user/login.php';</script>";
+                    //header("location:http://localhost/Jewelry_web_9/views/user/index.php");
+                    //exit();
+                }
+            } else{
+                echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
+                echo "<script>window.location.href = '../views/user/login.php';</script>";
+            }
         }
+
     }else{
         echo "<script>alert('Mời bạn điền đầy đủ thông tin')</script>";	
         echo "<script>window.location.href = '../views/user/login.php';</script>";
