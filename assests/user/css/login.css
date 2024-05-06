@@ -9,7 +9,7 @@
     height: 82vh;
     background-image: url(../../../image/background_login.jpg);
     background-size :cover;
-    background-position-y: -200px;
+    background-position-y: -250px;
 
 }
 
@@ -18,7 +18,7 @@ a {
 }
 
 a:hover{
-    color:aliceblue;
+    color:red;
 } 
 
 .main {

@@ -1,6 +1,6 @@
 <?php 
     include_once 'category_E.php';
-    include 'Database/database.php';
+    include '../Database/database.php';
     
     class category_M extends connectDB {
         

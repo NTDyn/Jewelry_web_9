@@ -1,0 +1,105 @@
+.khung {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color : brown;
+    margin: 0px;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+    height: 82vh;
+    background-image: url(../../../image/backgorundadmin.jpg);
+    background-size :cover;
+    background-position-y: -250px;
+
+}
+
+.main {
+    margin-left: auto;
+    margin-right: auto;
+    align-items: 50px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width:35%;
+}
+
+.head{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.head > p {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    height: 40px;
+}
+
+.form-group{
+    border-bottom : 1px solid black;
+    margin : 25px auto;
+    width : 85%;
+}
+
+.form-group > input{
+    border : 0px;
+    width : 100%;
+    background : transparent;
+    outline: none;
+    font-size: 14px;
+    color : brown;
+}
+
+.forgotpassword{
+    margin-right: 20px; 
+    font-size: 10px;
+    color: blue;
+    text-align: right;
+}
+
+.form-submit{  
+    margin-top: 30px;
+    text-align: center;
+}
+
+.form-submit > input{
+    height : 40px;
+    width : 85%;
+    border-radius: 10px;
+    background : transparent;
+    border-radius: 10px;
+    transition : 0.2s;
+    font-weight: bold;
+    font-size: 16px;
+    border-width: 3px;
+}
+
+.form-submit > input:hover{
+    color : brown;
+    border : 2px solid brown;
+}
+
+.back_index{
+    margin-top: 30px;
+    text-align: right;
+    text-align: end;
+}
+
+.back_index > input{  
+    color:#990000;
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.back_index > input:hover{
+    color :aliceblue;
+    background : brown;
+    border : 2.5px solid white;
+
+}

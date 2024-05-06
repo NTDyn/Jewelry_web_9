@@ -1,17 +1,17 @@
 <?php 
  
-    class validate_customer{
+    class validate_E{
         public String $Subject;
         public int $Status  ;
         public String $Message;
         public object $Data;
 
         public function  getStatus(){
-            return $this->Status = new validate_customer();
+            return $this->Status = new validate_E();
         }
 
         public function validate(){
-            return new validate_customer();
+            return new validate_E();
         }
 
         

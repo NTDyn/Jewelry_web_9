@@ -61,9 +61,9 @@ function appendListCategory(dataList){
             str += '<td class="category-name">' + v.Category_Name + '</td>';
             str += '<td>' + v.Category_Number + '</td>';
             if(v.Category_Status == 1){
-                str += '<td> Hoạt động </td>';
+                str += '<td style = "color: #00c851 ; font-weight:bold"> Hoạt động </td>';
             } else {
-                str += '<td> Ngừng hoạt động</td>';
+                str += '<td style="color: red ; font-weight:bold"> Ngừng hoạt động</td>';
             }
             str += '<td>';
             str += ' <button  class="btn-edit" data-bs-toggle="modal" data-bs-target="#modalEdit" >';
