@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=7">
+    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=14">
     <!--Select2 css -->
     <link id="link6" href="../../assests/admin/js/select2/select2.min.css" rel="stylesheet" />
 
@@ -236,7 +236,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="btn-modal-close btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <h4 class="modal-title" id="myModalLabel">Thêm đơn hàng mới</h4>
                 </div>
                 <div class="modal-body">
                     <form role="form" method="post" id="checkCustomer_form">
@@ -269,7 +269,7 @@
                     
                     </form>
 
-                    <div>
+                    <div id="tb-selected-product-area">
                         <table id="tb-selected-product">
                             <thead>
                                 <th></th>
@@ -278,29 +278,61 @@
                                 <th>Số lượng</th>
                                 <th></th>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody id="tb-product-body">
+                                <tr class="cart-item">
                                     <td></td>
                                     <td>
-                                        <select class="form-control select2-show-search" style="width: 100%" id="list-product" >
-                                            <option  disabled selected hidden>Please Choose...</option>
+                                        <select class="form-control select2-show-search" style="width: 100%" id="fix-selection">
+                                            <option value="" disabled selected hidden>Please Choose...</option>
                                         </select>
                                     </td>
-                                    <td>0</td>
+                                    <td class="product-price">0</td>
                                     <td>0</td>
                                     <td></td>
                                 </tr>
                             </tbody>
                         </table>
-                        
-                    
+                    </div>    
+                
+                    <div class="payment-infor-area row" >
+                        <div class="col-6">
+                            <div class ="row">
+                                <div class="col-4 txt-label">Phương thức thanh toán</div>
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                                        <label class="form-check-label" for="radio1">Tiền mặt</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                                        <label class="form-check-label " for="radio2">Tài khoản ngân hàng</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" row" style="margin-top: 1%">
+                                <label class="col-4 txt-label" for="comment">Lưu ý của khách hàng:</label>
+                                <textarea class=" form-control col-8 " rows="5" id="comment" name="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-6" style ="padding-left: 10%">
+                            <div class="row" style="margin-bottom: 3%">
+                                <div class="col-5 txt-label">Đơn vị vận chuyển:</div>
+                                <div class="col-7"> JSP</div>
+                            </div>
+                            <div class="row" style="margin-bottom: 3%">
+                                <div class="col-5 txt-label">Số lượng sản phẩm: </div>
+                                <div class="col-7"><span id="total-quantity">0</span></div>
+                            </div>
+                            <div class="row" style="margin-bottom: 3%">
+                                <div class="col-5 txt-label">Tổng số tiền:</div>
+                                <div class="col-7" id = "total-price" >0</div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class=" btn-order" data-bs-dismiss="modal">Đặt hàng</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </div>
         </div>

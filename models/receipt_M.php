@@ -78,26 +78,6 @@
             }
         }
 
-        public function getProduct($id){
-            if($this->connectDB()){
-                $sql ="SELECT * FROM Product WHERE Product_ID = " . $id;
-                $result = mysqli_query($this->conn, $sql);
-                $pr = new product_E();
-                if($row = mysqli_fetch_array($result) ){
-                    
-                    $pr->Product_ID =  $row['Product_ID'];
-                    $pr->Product_Name = $row['Product_Name'];
-                    $pr->Category_ID = (int) $row['Category_ID'];
-                    $pr->Product_Price = (int) $row['Product_Price'];
-                    $pr->Product_Quality = (int) $row['Product_Quality'];
-                    $pr->Product_Describe=  $row['Product_Describe'];
-                    $pr->Product_Image =  $row['Product_Image'];
-                    $pr->Product_Status = (int) $row['Product_Status'];
-                    
-                }
-                return $pr;
-            }
-        }
 
         public function confirmOrder($id_receipt){
             if($this->connectDB()){
