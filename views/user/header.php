@@ -37,7 +37,7 @@
                       <div class="collapse navbar-collapse" id="collapsibleNavbar">
                           <ul class="navbar-nav">
                             <li class="nav-item item-header">
-                              <a class="nav-link  link-item" href="#">Bộ sưu tập</a>
+                              <a class="nav-link  link-item" href="../../views/user/collection.php">Bộ sưu tập</a>
                             </li>
                             <li class="nav-item item-header">
                               <a class="nav-link link-item" href="../../views/user/product.php">Sản phẩm</a>
