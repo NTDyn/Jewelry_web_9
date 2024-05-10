@@ -5,7 +5,7 @@ $password = "";
 $da="jewelry";
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password,$da, 3307);
+$conn = mysqli_connect($servername, $username, $password,$da, 3306);
 
 // Check connection
 if (!$conn) {

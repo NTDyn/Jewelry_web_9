@@ -16,6 +16,7 @@
     overflow: hidden;
     position: relative;
 }
+
 .product-grid .product-image a.image{ display: block; }
 .product-grid .product-image img{
     width: 100%;

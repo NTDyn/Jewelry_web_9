@@ -1,4 +1,6 @@
+<?php session_start();?>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,7 +12,10 @@
     <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
-   
+
+    <link  type="text/css"  href="../../assests/user/css/product.css"  rel="stylesheet"> 
+    
+
 </head>
 <body>
       <div class = "header container">
@@ -107,10 +112,17 @@
                 <h4 class="modal-title">Giỏ hàng</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
-
+               
               <!-- Modal body -->
-              <div class="modal-body">
-                <div class="row item-product-cart">
+              <form action="payment.php" method="post">
+               
+               <div class="modal-body"> 
+               <?php 
+                 include 'connect.php';
+                 include '../../route/show_cart.php';
+                 $html=getHTML($conn);
+                  echo $html; ?> 
+                <!-- <div class="row item-product-cart">
                   <div class="col-2">
                     <img src="../../image/necklace.jpg" class="img-product-cart">
                   </div>
@@ -121,21 +133,27 @@
                   <div class="col-2">
                     <button class="fa fa-minus minus-btn" ></button>
                     <span class="quality-product-cart">1</span>
-                    <button class="fa fa-plus plus-btn"></button>
+                    <button  class="fa fa-plus plus-btn"></button>
                   </div>
                   <div class="col-1 price-product-cart">1000000</div>
-                  <div class="col-1 fa fa-check-square-o"></div>
-                  <div class="col-1 fa fa-remove"></div>
-                </div>
-                
+                  <div class="col-1"><input name=ch type="checkbox" ></div>  -->
+             
+                  <!-- <div  class="col-1 fa fa-no-check-square-o"></div> -->
+                  <!-- <div class="col-1 fa fa-remove"></div>
+                </div> -->
+
+               
               </div>
+
+             
 
               <!-- Modal footer -->
               <div class="modal-footer">
-                <button type="button" class=" btn-buy">
-                  <a href = "payment.php" class="payment-page"> Mua hàng</a>
+                <button type="submit" name="btn_muahang" class=" btn-buy">
+                  <a  class="payment-page"> Mua hàng</a>
                 </button>
               </div>
+              </form>
 
             </div>
           </div>
@@ -144,8 +162,17 @@
         
 </body>
 </html> 
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+
+</script>
 <script><?php require("../../assests/user/js/jquery.min.js"); ?></script>
 <script><?php require("../../assests/user/js/bootstrap/bootstrap.bundle.min.js");?></script>    
 <script><?php require("../../assests/user/js/cart.js"); ?></script>
+<script><?php require("../../assests/user/js/product.js"); ?></script>
+<?php 
 
+?>
        

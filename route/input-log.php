@@ -31,6 +31,7 @@ if(isset($_POST['login'])){
                     //header("location:http://localhost/Jewelry_web_9/views/admin/home.php");
                     //exit();
                 } else if ($status == 0) {
+                 
                     echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
                     echo "<script>window.location.href = '../views/user/login.php';</script>";
                     //header("location:http://localhost/Jewelry_web_9/views/user/index.php");
