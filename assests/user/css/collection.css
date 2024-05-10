@@ -1,8 +1,31 @@
+.collection-img{
+    width: 100%;
+}
+.title-collection{
+    margin-top: 5%;
+    text-align: center;
+    color: #a25323;
+    font-size: 24px;
+    font-family: monospace;
+}
+.collection-item{
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    margin-top: 1% !important;
+    border-radius: 15px ;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    box-shadow: 0px 2px 11px 11px #e1e1e1;
+    padding: 2%;
+}
 .product-area{
     margin-left: 2% !important;
     margin-right: 2% !important;
 }
 .product-grid{
+    margin-left: 1%;
+    margin-right: 1%;
     background-color: #fff;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
@@ -16,7 +39,6 @@
     overflow: hidden;
     position: relative;
 }
-
 .product-grid .product-image a.image{ display: block; }
 .product-grid .product-image img{
     width: 100%;
@@ -120,8 +142,9 @@
     text-align: center;
     padding: 15px 0 0;
 }
-.product-grid .title{
-    font-size: 14px;
+.product-grid .product-name {
+    color: black;
+    text-decoration: none !important;
     font-weight: 500;
     text-transform: capitalize;
     margin: 0 0 8px;
@@ -130,10 +153,12 @@
     color: #333;
     transition: all 0.3s ease 0s;
 }
-.product-grid .title a:hover{ color: #0a805e; }
+.product-grid .product-name a:hover{ 
+    color: #0a805e; 
+}
 .product-grid .price{
     color: #0a805e;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
 }
 .product-grid .price span{
@@ -146,6 +171,27 @@
 @media screen and (max-width: 990px){
     .product-grid{ margin: 0 0 30px; }
 }
-.product-image{
+.product-name{
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+}
+.title{
+    text-align: center;
+}
+.product-item{
+    padding: 2%;
+
+}
+.product-picture{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
     height: 350px !important;
+}
+.price{
+    margin-bottom: 2% !important;
 }

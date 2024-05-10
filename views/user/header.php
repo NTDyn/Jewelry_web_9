@@ -5,15 +5,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Serena Jewelry</title>
   
     <link  type="text/css" href= "../../assests/user/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/user/css/header.css?v=3"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/user/css/header.css?v=6"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
+
     <link  type="text/css"  href="../../assests/user/css/product.css"  rel="stylesheet"> 
     
+
 </head>
 <body>
       <div class = "header container">
@@ -24,7 +26,7 @@
                     <div class="row cart-avata">
                             <div class="col-5 user-area ">
                               <div class="fa fa-user " href="#" id="icon-user">
-                                <span id="user"><a href="login.php">User</a></span>
+                                <span id="user"><a style="text-decoration: none; color: #a25323" href="login.php">User</a></span>
                               </div>
                             </div>
                             <div class="col-7 cart-area " data-bs-toggle="modal" data-bs-target="#modal-cart">
@@ -39,8 +41,41 @@
                       </button>
                       <div class="collapse navbar-collapse" id="collapsibleNavbar">
                           <ul class="navbar-nav">
-                            <li class="nav-item item-header">
-                              <a class="nav-link  link-item" href="#">Bộ sưu tập</a>
+                            <li class="nav-item item-header subnav ">
+                              <div class="nav-link  link-item ">
+                                <a href="../../views/user/collection.php" class="link-item" >Bộ sưu tập </a>
+                                
+                                <div class="subnav-content">
+                                  <div class="row">
+                                    <div class="col-3 collection-nav" >
+                                      <a href="collection1.php" style="text-decoration: none !important;">
+                                        <div class="collection-nav-img-area">
+                                          <img src="../../image/nhan_cau_hon.jpg" class="collection-nav-img">
+                                        </div>
+                                          <p class="title-clt">Bộ sưu tập nhẫn cầu hôn 2024</p>
+                                      </a>
+                                    </div>
+                                    <div class="col-3 collection-nav">
+                                      <div class="collection-nav-img-area">
+                                        <img src="../../image/vong_tay.jpg" class="collection-nav-img">
+                                      </div>
+                                        <p class="title-clt">Bộ sưu tập vòng tay mùa hè 2024</p>
+                                    </div>
+                                    <div class="col-3 collection-nav">
+                                        <div class="collection-nav-img-area">
+                                          <img src="../../image/day_chuyen.jpg" class="collection-nav-img">
+                                        </div>
+                                        <p class="title-clt">Bộ sưu tập dây chuyền đá quý 2024</p>
+                                    </div>
+                                    <div class="col-3 collection-nav">
+                                        <div class="collection-nav-img-area">
+                                          <img src="../../image/hoa_tai.jpg" class="collection-nav-img">
+                                        </div>
+                                        <p class="title-clt">Bộ sưu tập hoa tai Á Đông 2024</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </li>
                             <li class="nav-item item-header">
                               <a class="nav-link link-item" href="../../views/user/product.php">Sản phẩm</a>

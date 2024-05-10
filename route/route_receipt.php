@@ -29,15 +29,6 @@
     }
 
     if(isset($_POST['action'])){
-        if($_POST['action'] == 'getProduct'){
-            $contr = new receipt_C();
-            $id = (int) $_POST['product-id'];
-            $result = $contr->getProduct($id);
-            echo  $result;
-        }
-    }
-
-    if(isset($_POST['action'])){
         if($_POST['action'] == 'confirm'){
             $contr = new receipt_C();
             $id = (int) $_POST['receipt-id'];

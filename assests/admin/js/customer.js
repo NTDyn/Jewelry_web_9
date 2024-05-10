@@ -168,7 +168,6 @@ function addCustomer(){
         type: "post",
         url: "../../route/route_customer.php",
         success: function(dataResult){
-            alert(dataResult);
             dataResult = JSON.parse(dataResult);
             $('.error-notify').text('');
             $.each(dataResult, function(k,v){

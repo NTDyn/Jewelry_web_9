@@ -1,5 +1,4 @@
-document.getElementById("breadcrumb-second").innerText="Product";
-   
+
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
@@ -77,3 +76,8 @@ else{
 function edit_product(){
     
 }
+
+$(document).ready(function(){
+    $('#breadcrumb-second').text('Sản phẩm');
+})
+

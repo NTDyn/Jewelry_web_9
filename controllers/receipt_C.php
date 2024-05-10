@@ -23,12 +23,6 @@
             return json_encode($result);
         }
 
-        function getProduct($id){
-            $model = $this->model("receipt_M");
-            $result = $model->getProduct($id);
-            return json_encode( $result);
-        }
-
         function confirmOrder($id_receipt){
             $model = $this->model("receipt_M");
             $result = $model->confirmOrder($id_receipt);

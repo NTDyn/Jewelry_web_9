@@ -1,8 +1,35 @@
+let ProductList =[];
+
 $(document).ready(function(){
-    //$('#order-table').dataTable();
+    $('#breadcrumb-second').text('Đơn hàng');
     readListOrder();
     getListProduct();
 })
+
+
+function getListProduct(){
+    var data = {"action":"getListProduct"};
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            dataResult = JSON.parse(dataResult);
+            ProductList = dataResult;
+            innerProductList(ProductList);
+        }
+    })
+    $('#tb-selected-product').dataTable();
+}
+
+function innerProductList(dataList){
+   
+    $.each(dataList, function(k,v){
+        str = "";
+       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+        $('.select2-show-search').append(str);
+    })
+}
 
 
 function readListOrder(){
@@ -135,12 +162,11 @@ function getDetailOfReceipt(id_receipt){
     })
 }
 
- async function appendDetail(list){
+function appendDetail(list){
     $('.product-order-infor').empty();
     
     for(let i = 0 ; i < list.length ; i++){
-        let pr = await getProduct(list[i].Product_ID);
-        console.log(pr.Product_Name);
+        let pr = ProductList.find(x=>x.Product_ID == list[i].Product_ID);
         let name = pr.Product_Name;
         list[i]["Product_Name"] = name;
         appendInforDetail(list[i]);
@@ -167,20 +193,6 @@ function appendInforDetail(data){
         $('.product-order-infor').append(str);
         $('#order-note').text(data.Receipt_Note);
         
-}
-async function getProduct(id){
-    var _data = {"action": "getProduct", "product-id": id}; 
-    let result = {};
-    await $.ajax({
-        data: _data ,
-        type: "post",
-        url: "../../route/route_receipt.php",
-        success: function(dataResult) {
-            dataResult = JSON.parse(dataResult);
-            result = dataResult;
-        }
-    })
-    return result;
 }
 
 $(document).on('click', '.btn-next', function(){
@@ -396,30 +408,6 @@ function errorInnerHTML(valid){
     } 
 }
 
-function getListProduct(){
-    var data = {"action":"getListProduct"};
-    $.ajax({
-        data: data ,
-        type: "post",
-        url: "../../route/route_receipt.php",
-        success:  function(dataResult){
-            dataResult = JSON.parse(dataResult);
-            innerProductList(dataResult);
-        }
-    })
-    $('#tb-selected-product').dataTable();
-}
-
-function innerProductList(dataList){
-   
-    $.each(dataList, function(k,v){
-        str = "";
-       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
-        $('#list-product').append(str);
-    })
-    //$('#list-product').select2();
-}
-
 $(document).on('click', '.choose-product', function(e){
     let id = $(this).closest('.product-item').find('.product-id').text();
     let name = $(this).closest('.product-item').find('.product-name').text();
@@ -458,12 +446,154 @@ $('#txt-phone').bind("enterKey",function(e){
      }
  });
 
-$('#list-product').change(function(){
+$('#fix-selection').change(function(){
     let id = $(this).val();
-    console.log(id);
-    innerSelectedProduct();
+
+    let findID = $('.selected-product option[value = '+ id + ']').filter(':selected');
+    if(findID.length !== 0){
+        let quantity =  findID.closest('.cart-item').find('.product-quantity');
+        let number = parseInt(quantity.text()) + 1;
+        quantity.text(number);
+        
+    } else{
+        innerSelectedProduct(id);
+        let total_quantity = parseInt($('#total-quantity').text()) + 1;
+        $('#total-quantity').text(total_quantity)
+    }
+    let pr = ProductList.find(x=>x.Product_ID == id);
+    $(this).val("");
+    totalPrice(pr.Product_Price);
 })
 
-function innerSelectedProduct(){
+ function innerSelectedProduct(id){
+    let pr =  ProductList.find(x=> x.Product_ID == id);
+    let price = pr.Product_Price;
+    str = '';
+    str += '<tr class="cart-item">';
+    str += '<td class="product-image-area">';
+    str += '<img class="product-image" src = "' + pr.Product_Image + '" >';
+    str += '</td>';
+    str += '<td>';
+    str += ' <select class="form-control select2-show-search selected-product" style="width: 100%"  >';
+    
+    $.each(ProductList, function(k,v){
+        if(v.Product_ID == id){
+            str += '  <option  selected hidden value= "' + id + '">' + v.Product_Name + '</option>';
+        }
+       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+    })
+    str += '</select>';
+    str += '</td>';
+    str += ' <td class="product-price">' + formatToMoney( price) + '</td>';
+    str += '<td class="product-quantity-area">';
+    str += '<button class="fa fa-minus btn-minus" </button>';
+    str += '<span class="product-quantity">1</span>' ;
+    str += '<button class="fa fa-plus btn-plus" </button>';
+    str += '</td>';
+    str += '<td>';
+    str += '<button class = "fa fa-trash btn-trash-product"></button>'
+    str += '</td>';
+    str += '</tr>';
+    $('#tb-product-body').append(str);
+}
+
+$(document).on('change', '.selected-product',  function(){
+    let id = $(this).val();
+    let pr =  ProductList.find(x=> x.Product_ID == id);
+    let price = pr.Product_Price;
+    $(this).closest('.cart-item').find('.product-price').text(formatToMoney(price) + " VND");
+    let img = pr.Product_Image;
+    $(this).closest('.cart-item').find('.product-image').attr('src',img);
+
+})
+
+$(document).on('click', '.btn-plus',  function(){
+    let quantity = parseInt($(this).closest('.cart-item').find('.product-quantity').text());
+    let id = parseInt($(this).closest('.cart-item').find('.selected-product').val());
+    number = _plusQuantity(id, quantity );
+    $(this).closest('.cart-item').find('.product-quantity').text(number);
+})
+
+$(document).on('click', '.btn-minus', function(){
+    let id = parseInt($(this).closest('.cart-item').find('.selected-product').val());
+    let quantity = parseInt($(this).closest('.cart-item').find('.product-quantity').text());
+    number = _minusQuantity(id,quantity);
+    $(this).closest('.cart-item').find('.product-quantity').text(number);
+})
+
+function _plusQuantity(id, quantity ){
+    let pr = ProductList.find(x => x.Product_ID == id);
+    let maxQuanlity = pr.Product_Quality;
+    if(quantity == maxQuanlity){
+        _qlt = quantity;
+        return _qlt;
+    } else {
+        _qlt = quantity + 1;
+        let total_quantity = parseInt($('#total-quantity').text()) + 1;
+        $('#total-quantity').text(total_quantity)
+        totalPrice(pr.Product_Price);
+        return _qlt;
+    }
 
 }
+ function _minusQuantity( id,quantity ){
+    let pr = ProductList.find(x=> x.Product_ID == id);
+    if(quantity == 1){
+        _qlt = quantity;
+        return _qlt;
+    } else {
+        _qlt = quantity - 1;
+        let total_quantity = parseInt($('#total-quantity').text()) - 1;
+        $('#total-quantity').text(total_quantity);
+        let oldPrice = parseInt(formatFromMoney($('#total-price').text()));
+        total = oldPrice - pr.Product_Price;
+        $('#total-price').text(formatToMoney(total) + " VND");
+        return _qlt;
+    }
+
+}
+
+$(document).on('click', '.btn-trash-product', function(){
+    let id= $(this).closest('.cart-item').find('.selected-product').val();
+    let pr = ProductList.find(x=>x.Product_ID == id);
+    let price = pr.Product_Price;
+    let quantity = $(this).closest('.cart-item').find('.product-quantity').text();
+    let minus = price * quantity;
+    let oldPrice = parseInt(formatFromMoney($('#total-price').text()));
+    total = oldPrice - minus
+    $('#total-price').text(formatToMoney(total));
+    $(this).closest('.cart-item').remove();
+
+})
+
+function formatFromMoney(_number){
+    let integerNumber = _number.replaceAll(",","");
+    return integerNumber;
+}
+
+function totalPrice(addPrice){
+    form = formatFromMoney($('#total-price').text());
+   let oldPrice = parseInt(form);
+   total = oldPrice + addPrice;
+   $('#total-price').text(formatToMoney(total) + " VND");
+}
+
+$('.btn-order').click(function(){
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn có chắc chắn muốn thêm đơn hàng?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#00c851",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Thêm đơn hàng"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Thành công!",
+            text: "Đã thêm đơn hàng thành công.",
+            icon: "success"
+          });
+        }
+      });
+})
