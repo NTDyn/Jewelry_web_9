@@ -1,3 +1,4 @@
+
 <?php include('header.php');
 include('../user/connect.php');
 $sql_loaisp="select * from category";
@@ -33,66 +34,66 @@ $_SESSION['act'] = rand();
     <form enctype="multipart/form-data" method="post" >
         <div class="close">
             <i id="close_button"  class="fa fa-close"></i>
-        </div>
+            </div>
         <h2 class="mt-5 mb-5" id="td">
             Sản Phẩm
         </h2>
 
 
-        <div class="mb-5">
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="mb-5">
+                    <div class="row">
+                        <div class="col-sm-12">
                     <input type="text" name="ten_sp" class="form-control" id="ten_sp" value="" placeholder="tên sản phẩm" required>
-                </div>
-                </div>
-                <div class=" col-md6 mb-3"></div>
-            
-                <div class="row">
-                    <div class="col-sm-6">
+                        </div>
+                        </div>
+                        <div class=" col-md6 mb-3"></div>
+                    
+                        <div class="row">
+                            <div class="col-sm-6">
                     <input type="text" name="gia_sp" class="form-control" id="gia" value="" placeholder="giá"  required>
+                            </div>
+                            <div class="col-sm-6">
+                            <input type="number" name="soluong" class="form-control" id="sl" placeholder="1"  required>
+                            </div>
+                        </div>
+                    
+                        <div class=" col-md6 mb-3">
+                        
                     </div>
-                    <div class="col-sm-6">
-                    <input type="number" name="soluong" class="form-control" id="sl" placeholder="1"  required>
+                    
+                    <div class="row">
+                        <div class="col-sm-12" >
+                            <input enctype="multipart/form-data" type="file" name="image" class="form-control" id="image" placeholder="Hình Ảnh"  required>
+                        </div>
+                    </div>
+                    <div class=" col-md6 mb-3">   </div>
+                        
+                    <div class="row">
+                        <div class="col-sm-12" >
+                        <select name="loaisp" class="form-select" id="loaiSP"  required>
+                            <?php
+                    
+                                while($row=mysqli_fetch_assoc($result)){?>
+                                <option value="<?php echo $row['Category_ID']?>"><?php echo $row['Category_Name']?></option>
+                            <?php  }?> 
+                        </select>
                     </div>
                 </div>
-              
-                <div class=" col-md6 mb-3">
-                   
-            </div>
-            
-              <div class="row">
-        <div class="col-sm-12" >
-        <input enctype="multipart/form-data" type="file" name="image" class="form-control" id="image" placeholder="Hình Ảnh"  required>
+                <div class=" col-md6 mb-3"> </div>
+                        
+                <div class="row">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control"name="mota" id="motasp" value="" style="height: 80px" ></textarea>
+                    </div>
+                </div>
+                <input type="hidden" name="act" value="<?php echo $_SESSION['act']; ?>">
+                        <div class="col-lg-12 mt-5">
+                            <button name="them_sp" id="submit" class="btn btn-success">Add Sản Phẩm</button>
+                            <button id="btn-update" class="btn btn-primary">Update</button>
+                        </div>
+                </form>
         </div>
-      </div>
-      <div class=" col-md6 mb-3">   </div>
-                   
-      <div class="row">
-        <div class="col-sm-12" >
-        <select name="loaisp" class="form-select" id="loaiSP"  required>
-      <?php
-       
-         while($row=mysqli_fetch_assoc($result)){?>
-         <option value="<?php echo $row['Category_ID']?>"><?php echo $row['Category_Name']?></option>
-         <?php  }?> 
-   </select>
-        </div>
-      </div>
-      <div class=" col-md6 mb-3"> </div>
-                   
-      <div class="row">
-      <div class="form-floating mb-3">
-       <textarea class="form-control"name="mota" id="motasp" value="" style="height: 80px" ></textarea>
-        </div>
-      </div>
-      <input type="hidden" name="act" value="<?php echo $_SESSION['act']; ?>">
-            <div class="col-lg-12 mt-5">
-                <button name="them_sp" id="submit" class="btn btn-success">Add Sản Phẩm</button>
-                <button id="btn-update" class="btn btn-primary">Update</button>
-            </div>
-    </form>
-</div>
-</div>
+    </div>
 <script>
     document.getElementById("close_button").addEventListener("click", ()=>{
         document.getElementsByClassName("container")[0].style.display="none";
