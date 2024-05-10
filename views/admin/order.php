@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Serena Web</title>
     <link rel="stylesheet" href="../../assests/admin/css/order.css?v=14">
     <!--Select2 css -->
     <link id="link6" href="../../assests/admin/js/select2/select2.min.css" rel="stylesheet" />

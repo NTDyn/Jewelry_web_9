@@ -1,10 +1,36 @@
 let ProductList =[];
 
 $(document).ready(function(){
-    //$('#order-table').dataTable();
+    $('#breadcrumb-second').text('Đơn hàng');
     readListOrder();
     getListProduct();
 })
+
+
+function getListProduct(){
+    var data = {"action":"getListProduct"};
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            dataResult = JSON.parse(dataResult);
+            ProductList = dataResult;
+            innerProductList(ProductList);
+        }
+    })
+    $('#tb-selected-product').dataTable();
+}
+
+function innerProductList(dataList){
+   
+    $.each(dataList, function(k,v){
+        str = "";
+       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+        $('.select2-show-search').append(str);
+    })
+}
+
 
 function readListOrder(){
     var _data = {"action": "read"}; 
@@ -380,30 +406,6 @@ function errorInnerHTML(valid){
     if(valid.Subject == "Customer_Username"){
         $('.error-username').text(valid.Message);
     } 
-}
-
-function getListProduct(){
-    var data = {"action":"getListProduct"};
-    $.ajax({
-        data: data ,
-        type: "post",
-        url: "../../route/route_receipt.php",
-        success:  function(dataResult){
-            dataResult = JSON.parse(dataResult);
-            ProductList = dataResult;
-            innerProductList(ProductList);
-        }
-    })
-    $('#tb-selected-product').dataTable();
-}
-
-function innerProductList(dataList){
-   
-    $.each(dataList, function(k,v){
-        str = "";
-       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
-        $('.select2-show-search').append(str);
-    })
 }
 
 $(document).on('click', '.choose-product', function(e){
