@@ -69,9 +69,15 @@
     flex-wrap: wrap;
     flex-direction: row-reverse;
 }
-.edit{
+.edit,.delete{
     color: black;
     text-decoration: none;
+    padding: 10px;
 
+}
+
+#search{
+    border:1px ridge #aaa;
+    border-radius: 3px;
 }
 

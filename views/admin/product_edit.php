@@ -1,5 +1,9 @@
+
+
 <?php 
 include '../user/connect.php';
+
+
 $id=$_GET['edit_id'];
 $sql_product="select * from product where Product_ID=".$id;
     $result=mysqli_query($conn,$sql_product);
@@ -32,8 +36,8 @@ $sql_product="select * from product where Product_ID=".$id;
         $img_sp=$_FILES["image"]["name"];
         $img_sp_name=$_FILES["image"]["tmp_name"];
         move_uploaded_file($img_sp_name,'../../assests/image_product/'.$img_sp);
-        $sql_add= "update product set Product_Name='".$ten_sp."' ,Product_Price=".$gia_sp." , Product_Quality=".$soluong_sp." , Product_Describe='".$mota_sp."' ,Product_Image='".$target."' where Product_ID=".$id;
-        $query_add=mysqli_query($conn,$sql_add);
+        $sql_edit= "update product set Product_Name='".$ten_sp."' ,Product_Price=".$gia_sp." , Product_Quality=".$soluong_sp." , Product_Describe='".$mota_sp."' ,Product_Image='".$target."' where Product_ID=".$id;
+        $query_edit=mysqli_query($conn,$sql_edit);
     }
   
     }
@@ -54,9 +58,22 @@ $sql_product="select * from product where Product_ID=".$id;
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
     <link  type="text/css"  href="../../assests/admin/css/product.css"  rel="stylesheet"> 
+    <script src="../../assests/admin/js/swal/swalNotification.js"></script>
+    <script><?php require("../../assests/admin/js/jquery.min.js"); ?></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <title>Document</title>
 </head>
 <body>
+    <?php if($product["Product_Status"]==0) {
+ echo  '<script> 
+    Swal.fire("Sản phẩm đã xóa", "Không thể cập nhật!", "error");
+
+    
+  </script>';
+  
+    }
+    else{
+   ?>
 <div class="backgroud">
 
 <div class="container">
@@ -128,13 +145,14 @@ $sql_product="select * from product where Product_ID=".$id;
 </div>
 </body>
 <script>
+
       document.getElementsByClassName("container")[0].style.display="block";
       document.getElementById("close_button").addEventListener("click", ()=>{
         window.location.href = 'product.php';
     });
 </script>
 </html>
-<?php
+<?php }
 include '../admin/product.php';
 ?>
 

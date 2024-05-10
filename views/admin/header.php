@@ -10,6 +10,7 @@
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
     <link  type="text/css"  href="../../assests/admin/css/product.css"  rel="stylesheet"> 
+
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
 </head>
 <body>
@@ -94,6 +95,7 @@
 <script><?php require("../../assests/admin/js/jquery.min.js"); ?></script>
 <script><?php require("../../assests/admin/js/bootstrap/bootstrap.bundle.min.js");?></script>    
 <script><?php require("../../assests/admin/js/header.js"); ?></script>
+<script><?php require("../../assests/admin/js/product.js"); ?></script>
 <script src="../../assests/admin/js/swal/swalNotification.js"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 <!--Select2 js -->

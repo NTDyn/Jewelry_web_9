@@ -19,20 +19,52 @@ if(isset($_POST["them_sp"])){
     if(isset($_FILES["image"])){
     $img_sp=$_FILES["image"]["name"];
     $img_sp_name=$_FILES["image"]["tmp_name"];
+    $uploaded_type=$_FILES["image"]["type"];
+    $uploaded_size=$_FILES["image"]["size"];
+    // echo $uploaded_type;
+    // if($uploaded_type!="jpg"&& $uploaded_type!="png"&& $uploaded_type!="jpeg"){
+    //     echo "<script>swal.fire({
+    //         title: 'Hình Ảnh',
+    //         text: 'chỉ hỗ trợ upload JPEG, JPG, PNG',
+    //         type: 'error',
+            
+    //       }).then(function(){
+    //         window.location.href='product.php';
+    //       });
+        
+         
+    //       </script>";
+          
+    // }
     
-    
+    // else{
     move_uploaded_file($img_sp_name,'../../assests/image_product/'.$img_sp);
     $sql_add= "insert into product( Product_Name, Category_ID, Product_Price, Product_Status, Product_Quality, Product_Describe, Product_Image) VALUES ('$ten_sp',$loai_sp,$gia_sp,1,$soluong_sp,'$mota_sp',' $target')";
-    $query_add=mysqli_query($conn,$sql_add);
-
+    
+    if($query_add=mysqli_query($conn,$sql_add)){
+        echo '<script> Swal.fire({
+            title: "Thành công!",
+            text: "Thêm sản phẩm thành công!",
+            icon: "success",
+            timer: 2000,
+          });</script>';
+       }else{
+        echo '<script> Swal.fire({
+            title: "Thất bại!",
+            text: "Thêm sản phẩm thất bại!",
+            icon: "error",
+            timer: 2000,
+          });</script>';
     }
+    }
+    // }
 
 }
 
  ?>
  
 
-<div class="backgroud">
+ <div class="backgroud">
 
 <div class="container">
     <form enctype="multipart/form-data" method="post" >
@@ -105,14 +137,31 @@ if(isset($_POST["them_sp"])){
    
 </script>
 <div class="add_sp">
-<button type="button" id="btn_them" class="btn btn-outline-success">Thêm</button>
+<!-- <button type="button" id="btn_them" class="btn btn-outline-success">Thêm</button>
+ -->
+ <input  type="text" name="hint" id="search" placeholder="Tìm Kiếm"  >
 </div>
 <script>
-    document.getElementById("btn_them").addEventListener("click",()=>{
+    document.getElementsByClassName("btn-add")[0].addEventListener("click",()=>{
         document.getElementsByClassName("container")[0].style.display="block";
         document.getElementById("btn-update").style.display="none";
+        
 
     })
+ 
+      $(document).ready(function(){
+        $("#search").keyup(function(){
+            var hint=$("#search").val();
+           $.post("product_controller.php",{hint:hint}, function(data){
+            
+          $('.danhsach').html(data);
+           })
+        })
+      })
+   
+   
+   
+    
     
 </script>
 <div class="table_sp">
@@ -127,14 +176,14 @@ if(isset($_POST["them_sp"])){
     <th>Hình Ảnh</th>
     <th>Mô Tả</th>
     <th>Trạng Thái</th>
-    <th>Sửa</th>
-    <th>Xóa</th>
+    <th>Hành Động</th>
+   
    </tr>
 
    
 
   </thead>
-  <tbody>
+  <tbody class="danhsach">
     <?php 
     $stt=0;
     
@@ -174,9 +223,8 @@ if(isset($_POST["them_sp"])){
     <td>
      
      <a id="btn_edit"  href="product_edit.php?edit_id=<?php echo $data_product[$i]["Product_ID"]?>" class="fa fa-edit edit"></a> 
-    </td>
-    <td>
-        <a id="btn_delete" onclick="return confirm ('Bạn có chắc chắn xóa sản phẩm này không?');" href="product_delete.php?id=<?php echo $data_product[$i]["Product_ID"]?>" class="fa fa-close"></a>
+    
+        <a id="btn_delete" onclick=" return delete_product(<?php echo $data_product[$i]['Product_ID'] ?>  ,<?php echo $data_product[$i]['Product_Status'] ?>)==true"  href="product_delete.php?id=<?php echo $data_product[$i]["Product_ID"]?>" class=" <?php if($data_product[$i]['Product_Status']==1) {echo "fa fa-close delete";}else{ echo "fa fa-check delete";} ?>"></a>
     </td>
    </tr>
  <?php } ?>
@@ -184,12 +232,8 @@ if(isset($_POST["them_sp"])){
 </table>
 </div>
 <script>
-    document.getElementById("breadcrumb-second").innerText="Product";
    
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
- 
+
 
 
 </script>
