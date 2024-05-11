@@ -174,6 +174,7 @@
 <script><?php require("../../assests/user/js/bootstrap/bootstrap.bundle.min.js");?></script>    
 <script><?php require("../../assests/user/js/cart.js"); ?></script>
 <script><?php require("../../assests/user/js/product.js"); ?></script>
+<script src="../../assests/admin/js/swal/swalNotification.js"></script>
 <?php 
 
 ?>

@@ -149,3 +149,27 @@
 .product-image{
     height: 350px !important;
 }
+.product-modal-icon{
+    margin-right: 3%;
+    margin-left: 1%;
+    font-size: 22px !important;
+}
+.modal-product-image{
+    width: 100%;
+}
+.modal-product-price{
+    color: red;
+    font-size: 22px;
+}
+.modal-line{
+    border-top: 2px solid red;
+}
+.modal-product-add-cart{
+    background-color:#00c851 ;
+    color: white;
+    border-style: solid ;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 6px 10px;
+}
