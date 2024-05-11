@@ -79,14 +79,14 @@ if(isset($_POST["them_sp"])){
         <div class="mb-5">
             <div class="row">
                 <div class="col-sm-12">
-                    <input type="text" name="ten_sp" class="form-control" id="ten_sp" value="" placeholder="tên sản phẩm" required>
+                    <input type="text" name="ten_sp" class="form-control" id="ten_sp" value="" placeholder="Tên sản phẩm" required>
                 </div>
                 </div>
                 <div class=" col-md6 mb-3"></div>
             
                 <div class="row">
                     <div class="col-sm-6">
-                    <input type="text" name="gia_sp" class="form-control" id="gia" value="" placeholder="giá"  required>
+                    <input type="text" name="gia_sp" class="form-control" id="gia" value="" placeholder="Đơn giá"  required>
                     </div>
                     <div class="col-sm-6">
                     <input type="number" name="soluong" class="form-control" id="sl" placeholder="1"  required>
@@ -218,7 +218,7 @@ if(isset($_POST["them_sp"])){
     <?php echo $data_product[$i]['Product_Describe']?>
     </td>
     <td>
-    <?php if( $data_product[$i]['Product_Status']==1) echo"Hoạt Động" ;else echo "Đã Xóa"?>
+    <?php if( $data_product[$i]['Product_Status']==1) echo"Hoạt Động" ;else echo "Ngừng hoạt động"?>
     </td>
     <td>
      

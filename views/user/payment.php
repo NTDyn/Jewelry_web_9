@@ -137,10 +137,8 @@ function getspbyid($con,$id){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../../assests/user/css/payment.css?v=4" >
-    
+    <link rel="stylesheet" href="../../assests/user/css/payment.css?v=7" >
 
-    <link rel="Serena Jewelry" href="../../assests/user/css/payment.css?v=4" >
 
 </head>
 <body>
@@ -201,26 +199,49 @@ function getspbyid($con,$id){
 
         <div class="infor-items">
             <div class="row">
-                <div class="col-5">
+                <div class="col-7">
                     <label>Lời nhắn</label>
                     <input name="note_shop" placeholder="Lưu ý cho cửa hàng" class="note-shop"/>
                 </div>
+                <div class="col-5">
+                    <div class="row">
+                        <span  class="txt-label col-4">Đơn vị vận chuyển: </span>
+                        <span class="col-6" style="margin-top:2%"> JSP (Miễn phí vận chuyển)</span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row ">
                 <div class="col-7">
-                    <span>Đơn vị vận chuyển: JSP</span>
-                    <span>56.000</span>
+                    <div class ="row payment-option">
+                        <div class="col-4" style="font-weight: bold">Phương thức thanh toán</div>
+                        <div class="col-8">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                                <label class="form-check-label" for="radio1">Tiền mặt</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                                <label class="form-check-label " for="radio2">Tài khoản ngân hàng</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class=" row ">
+                        <span class="col-4 txt-label">Số lượng sản phẩm:</span>
+                        <span class="col-4" style=" font-weight:100 !important; margin-top:2%" > <?php echo( count($arr_id_select))?>  </span>
+                    </div>
+                    <div  class="row">
+                        <span class="col-4 txt-label"> Tổng giá tiền:</span>
+                        <span class="col-4" style="font-weight:100 !important; margin-top:2%"><?php echo tinhtong($conn,$arr_id_select)?> đ</span>    
+                    </div>
                 </div>
             </div>
             <div class="row">
-                <div id="total-area-price">Tổng giá tiền
-                    <span> <?php  echo '('.count($arr_id_select)?>  sản phẩm): </span>
-                    <span><?php echo tinhtong($conn,$arr_id_select)?></span>    
-                    <span>
-                       
-                            <button name="thanhtoan" type="submit">Thanh Toán</button>
-                      
-                    </span>
+                <div class="btn-order-area">
+                    <button name="thanhtoan" type="submit" id="btn-order">Thanh Toán</button>
                 </div>
-
             </div>
         </div>
     </div>

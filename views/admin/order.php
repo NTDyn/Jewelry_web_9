@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serena Web</title>
-    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=14">
+    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=3">
     <!--Select2 css -->
     <link id="link6" href="../../assests/admin/js/select2/select2.min.css" rel="stylesheet" />
 
@@ -220,7 +220,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn-cancel-order " data-bs-dismiss="modal">Hủy đơn </button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
             </div>
 
             </div>
@@ -244,26 +244,33 @@
                         <input type="hidden" value="checkCustomerInfor" name="action">
                                 <p class=" error-main error-notify" style="text-align: center;"></p>
                                 <div class="row form-line">
-                                    <label class="col-1 form-label" > Số điện thoại <span style="color:red">*</span> </label>
-                                    <div class="col-2">
+                                    <label class="col-3 form-label" > Số điện thoại <span style="color:red">*</span> </label>
+                                    
+                                    <label class="col-3 form-label  isVisible" >Tên khách hàng <span style="color:red">*</span> </label>
+                                    
+                                    <label class="col-3 form-label isVisible " >Địa chỉ <span style="color:red">*</span> </label>
+                                    
+                                    <label class="col-3 form-label isVisible" >Email <span style="color:red">*</span> </label>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
                                         <input type="phone" class="form-control" name = "customer-phone"  id="txt-phone" >
                                         <p class=" error-phone error-notify"></p>
                                     </div>
-                                    <label class="col-1 form-label  isVisible" >Tên khách hàng <span style="color:red">*</span> </label>
-                                    <div class="col-2 isVisible">
+                                    <div class="col-3 isVisible">
                                         <input type="text" class="form-control isDisable" name = "customer-name" id="txt-name" >       
                                         <p class=" error-name error-notify"></p>
                                     </div>
-                                    <label class="col-1 form-label isVisible " >Địa chỉ <span style="color:red">*</span> </label>
-                                    <div class="col-2 isVisible">
-                                        <input type="text" class="form-control isDisable" name = "customer-address" id= "txt-address"/>
-                                        <p class=" error-address error-notify"></p>
-                                    </div>
-                                    <label class="col-1 form-label isVisible" >Email <span style="color:red">*</span> </label>
-                                    <div class="col-2 isVisible">
+                                    <div class="col-3 isVisible">
                                         <input type="email" class="form-control isDisable" name = "customer-email" id="txt-email"/>
                                         <p class=" error-email error-notify"></p>
                                     </div>
+                                    <div class="col-3 isVisible">
+                                        <input type="text" class="form-control " name = "customer-address" id= "txt-address"/>
+                                        <p class=" error-address error-notify"></p>
+                                    </div>
+                                    
                                 </div>
                     </fieldset>
                     

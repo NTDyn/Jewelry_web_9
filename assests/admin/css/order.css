@@ -126,7 +126,7 @@ td{
     margin-bottom: 2%;
 }
 .form-label{
-    text-align: end;
+    padding-left: 1% !important;
     color: #999999;
 }
 .detail-item{

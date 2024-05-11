@@ -1,9 +1,11 @@
+<link  type="text/css"  href="../../assests/user/css/product.css"  rel="stylesheet"> 
 <?php 
 include 'header.php';
 include 'connect.php';
 // echo var_dump($_SESSION['user']);
 
 ?>
+<div class="product-area">
 <form action="" method="post">
 <div class="row">
     <?php $sql="select * from product where Product_Status=1"; 
@@ -12,7 +14,7 @@ include 'connect.php';
     ?>
 
     <div class="col-md-3 col-sm-6" style="margin-top: 10px; margin-bottom: 10px; " >
-        <div class="product-grid"  style="border: solid #a25323 1px; border-radius: 5px 5px;">
+        <div class="product-grid" >
             <div class="product-image">
                 <a href="#" class="image">
                 <img class="pic-1" style="width: 350px; height: 400px;" src=<?php echo "'".$row_pr['Product_Image']."'"?>>
@@ -44,3 +46,4 @@ include 'connect.php';
 
 </div>
 </form>
+</div>

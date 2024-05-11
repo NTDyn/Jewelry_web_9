@@ -25,15 +25,14 @@ function getHTML($conn){
                   <img src="'.$getsp['Product_Image'].'" class="img-product-cart">
                 </div>
                 <div class="col-3 name-product-cart">'.$getsp['Product_Name'].'</div>
-                <div class="col-2 color-product-cart">
-                  <img src="../../image/color-pink.jpg" class="col-1 color-prd">
-                </div>
                 <div class="col-3">
-                <input onclick="giamsl('.$list_cart[$i]['product'][$j]['id'].','.$getsp["Product_Price"].',this)" class="btgiam" style="width:30px;margin-left:10px"" type="button" value="-">
-                  <span  class="quality-product-cart">'.(int)$list_cart[$i]['product'][$j]['sl'].'</span>
+                  <input onclick="giamsl('.$list_cart[$i]['product'][$j]['id'].','.$getsp["Product_Price"].',this)" class="btgiam" style="width:30px;margin-left:10px"" type="button" value="-">
+                    <span  class="quality-product-cart">'.(int)$list_cart[$i]['product'][$j]['sl'].'</span>
                   <input onclick="tangsl('.$list_cart[$i]['product'][$j]['id'].','.$getsp["Product_Price"].',this)" class="bttang" style="width:30px;margin-left:10px"" type="button" value="+">
-                  <span class="sl" >'.$getsp["Product_Price"]*$list_cart[$i]['product'][$j]['sl'].'</span>
 
+                </div>
+                <div class="col-2">
+                  <span class="sl" >'.$getsp["Product_Price"]*$list_cart[$i]['product'][$j]['sl'].'</span>
                 </div>
                 
                 <div class="col-1"><input name="id_select[]" value='.$getsp["Product_ID"].'  type="checkbox" ></div>

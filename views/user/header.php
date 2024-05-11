@@ -8,13 +8,10 @@
   <title>Serena Jewelry</title>
   
     <link  type="text/css" href= "../../assests/user/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/user/css/header.css?v=6"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/user/css/header.css?v=7"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
-
-    <link  type="text/css"  href="../../assests/user/css/product.css"  rel="stylesheet"> 
-    
 
 </head>
 <body>
@@ -24,10 +21,13 @@
                         <img src="../../image/logo.png" class="rounded-pill" id="logo" alt="logo-index" >
                     </a>
                     <div class="row cart-avata">
-                            <div class="col-5 user-area ">
-                              <div class="fa fa-user " href="#" id="icon-user">
-                                <span id="user"><a style="text-decoration: none; color: #a25323" href="login.php">User</a></span>
-                              </div>
+                            <div class="col-5 user-area dropdown row" > 
+                              <div class="fa fa-user " id="icon-user" data-bs-toggle="dropdown"><span id="user" >User</span></div>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                                    <li><div class="dropdown-item" href="#">Đơn mua</div></li>
+                                  </ul>
                             </div>
                             <div class="col-7 cart-area " data-bs-toggle="modal" data-bs-target="#modal-cart">
                               <div class="fa fa-shopping-bag " href="#" id="icon-cart"> </div>
@@ -159,7 +159,9 @@
           </div>
         </div>
     </div>
-        
+  <!--END MODAL CART-->
+  
+
 </body>
 </html> 
 <script>

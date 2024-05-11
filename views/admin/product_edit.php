@@ -89,14 +89,14 @@ $sql_product="select * from product where Product_ID=".$id;
         <div class="mb-5">
             <div class="row">
                 <div class="col-sm-12">
-                    <input type="text" name="ten_sp" class="form-control" id="ten_sp" value="<?php echo $product["Product_Name"]?>" placeholder="tên sản phẩm" required>
+                    <input type="text" name="ten_sp" class="form-control" id="ten_sp" value="<?php echo $product["Product_Name"]?>" placeholder="Tên sản phẩm" required>
                 </div>
                 </div>
                 <div class=" col-md6 mb-3"></div>
             
                 <div class="row">
                     <div class="col-sm-6">
-                    <input type="text" name="gia_sp" class="form-control" id="gia" value="<?php echo $product["Product_Price"]?>" placeholder="giá"  required>
+                    <input type="text" name="gia_sp" class="form-control" id="gia" value="<?php echo $product["Product_Price"]?>" placeholder="Đơn giá"  required>
                     </div>
                     <div class="col-sm-6">
                     <input type="number" name="soluong" class="form-control" id="sl" value="<?php echo $product["Product_Quality"]?>" placeholder="1"  required>

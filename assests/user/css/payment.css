@@ -47,6 +47,7 @@
     justify-content: center;
 }
 .infor-items{
+    margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -58,10 +59,30 @@
     border-color: #ddbfae;
     border-width: 1px;
 }
-#total-area-price{
+
+.payment-option{
+    margin-top: 3%;
+}
+.txt-label{
     display: flex;
-    justify-content: end;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     margin-top: 2%;
+}
+.btn-order-area{
+    margin-top: 2%;
+    display: flex;
+    justify-content: end;
+}
+#btn-order{
+    font-size: 18px;
+    background-color:#a25323 ;
+    color: white;
+    border-style: solid ;
+    border-color:#a25323 ;
+    color: white; ;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 6px 10px;
+    box-shadow:0px 0px 10px 5px #c89681;
 }

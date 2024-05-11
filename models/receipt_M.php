@@ -68,9 +68,14 @@
                         $detail->Detail_ID = (int) $row['Detail_ID'];
                         $detail->Receipt_ID = $row['Receipt_ID'];
                         $detail->Product_ID = $row['Product_ID'];
-                        $detail->Detail_Quantity = $row['Detail_Quantity'];
+                        $detail->Detail_Quantity = $row['Detail_Quality'];
                         $detail->Detail_Price = $row['Detail_Price'];
-                        $detail->Receipt_Note = $row['Receipt_Note'];
+                        if($row['Receipt_Note'] == null){
+                            $detail->Receipt_Note ="";
+                        } else {
+                            $detail->Receipt_Note = $row['Receipt_Note'];
+                        }
+                        
                         array_push($list, $detail);
                     }
                 }
