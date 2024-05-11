@@ -1,11 +1,14 @@
 let ProductList =[];
+let selectedProductList = [];
 
 $(document).ready(function(){
     $('#breadcrumb-second').text('Đơn hàng');
     readListOrder();
     getListProduct();
+    $('#fix-selection').select2({
+        dropdownParent: $('#modal-add')
+    });
 })
-
 
 function getListProduct(){
     var data = {"action":"getListProduct"};
@@ -27,7 +30,7 @@ function innerProductList(dataList){
     $.each(dataList, function(k,v){
         str = "";
        str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
-        $('.select2-show-search').append(str);
+        $('#fix-selection').append(str);
     })
 }
 
@@ -456,9 +459,13 @@ $('#fix-selection').change(function(){
         quantity.text(number);
         
     } else{
+       
         innerSelectedProduct(id);
         let total_quantity = parseInt($('#total-quantity').text()) + 1;
-        $('#total-quantity').text(total_quantity)
+        $('#total-quantity').text(total_quantity);
+        
+        
+        console.log(selectedProductList);
     }
     let pr = ProductList.find(x=>x.Product_ID == id);
     $(this).val("");
@@ -475,12 +482,11 @@ $('#fix-selection').change(function(){
     str += '</td>';
     str += '<td>';
     str += ' <select class="form-control select2-show-search selected-product" style="width: 100%"  >';
-    
     $.each(ProductList, function(k,v){
-        if(v.Product_ID == id){
-            str += '  <option  selected hidden value= "' + id + '">' + v.Product_Name + '</option>';
+        if(selectedProductList.find(x=>x.Product_ID != v.Product_ID)){
+            str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
         }
-       str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+      
     })
     str += '</select>';
     str += '</td>';
@@ -495,8 +501,13 @@ $('#fix-selection').change(function(){
     str += '</td>';
     str += '</tr>';
     $('#tb-product-body').append(str);
+    selectedProductList.push(pr);
+    loadListSelectable();
 }
 
+function loadListSelectable(){
+  //  $('.selected-product').find('option')
+}
 $(document).on('change', '.selected-product',  function(){
     let id = $(this).val();
     let pr =  ProductList.find(x=> x.Product_ID == id);
