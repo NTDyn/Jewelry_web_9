@@ -18,20 +18,20 @@ function getListProduct(){
 
     });
 }
-
 function appenProductList(list){
     $('.product-area').empty()
     $.each(list, function(k,v){
         str = '';
         str += '<div class = "col-3 product-item">';
+        str += '<input type="hidden" class="product-id" value="' + v.Product_ID + '">';
         str += '<div class="product-grid">';
         str += '<div class="product-image">';
         str += '<a href="#">';
         str += ' <img class="product-picture" src="' + v.Product_Image + '">';
         str += '</a>';
         str += '<ul class="product-links">';
-        str += '<li><a href="#"  ><i class="fa fa-eye"></i></a></li>';
-        str += ' <li><a href="#"><i class="fa fa-shopping-cart" ></i></a></li>';
+        str += '<li class="btn-detail"><a href="#"  ><i class="fa fa-eye "></i></a></li>';
+        str += ' <li><a href="cart.php?id_sp='+ v.Product_ID + '"><i class="fa fa-shopping-cart" ></i></a></li>';
         str += ' <li><a href="#" ><i class="fa fa-random"></i></a></li>';
         str += '</ul>';
         str += '</div>';
@@ -68,3 +68,23 @@ function formatToMoney(_number){
     let result = VietNamDong.format(_number) ;
     return result;
 }
+$(document).on('click','.btn-detail',function(){
+    $('#modalDetail').modal('show');
+    let id = $(this).closest('.product-item').find('.product-id').val();
+    let pr = listProduct.find(x=>x.Product_ID == id);
+    $('.modal-product-image').attr('src', pr.Product_Image);
+    $('.modal-product-name').text(pr.Product_Name);
+    $('.modal-product-describe').text(pr.Product_Describe);
+    $('.modal-product-price').text(formatToMoney(pr.Product_Price) + " vnd");
+    
+})
+
+
+$('.modal-product-add-cart').click(function(){
+    Swal.fire({
+        title: "Thành công!",
+        text: "Sản phẩm đã được thêm vào giỏ hàng!",
+        icon: "success",
+        timer: 2000,
+      });
+})

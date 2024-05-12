@@ -1,62 +1,24 @@
-<link  type="text/css"  href="../../assests/user/css/product.css?v=2"  rel="stylesheet"> 
+<link  type="text/css"  href="../../assests/user/css/product.css?v=3"  rel="stylesheet"> 
 <?php 
 include 'header.php';
 include 'connect.php';
 // echo var_dump($_SESSION['user']);
 
 ?>
-<div class="product-area">
-<form action="" method="post">
-<div class="row">
-    <?php $sql="select * from product where Product_Status=1"; 
-    $result_pr=mysqli_query($conn,$sql);
-    while($row_pr=mysqli_fetch_assoc($result_pr)){
-    ?>
-
-    <div class="col-md-3 col-sm-6" style="margin-top: 10px; margin-bottom: 10px; " >
-        <div class="product-grid product-item" >
-            <input type="hidden" class="product-id" value="<?php echo $row_pr["Product_ID"] ?>">
-            <div class="product-image">
-                <a href="#" class="image">
-                <img class="pic-1" style="width: 350px; height: 400px;" src=<?php echo "'".$row_pr['Product_Image']."'"?>>
-                    <img class="pic-2"  style="width: 350px; height: 400px;" src=<?php echo "'".$row_pr['Product_Image']."'"?>>
-                </a>
-                <a href="#" class="product-like-icon" data-tip="Yêu Thích">
-                    <i class="fa fa-heart"></i>
-                </a>
-                <ul class="product-links">
-                    <li><a href="#"  ><i class="fa fa-eye"></i></a></li>
-                    <!-- <li><button class="fa fa-shopping-cart "></button></li> -->
-                    <li ><a href="cart.php?id_sp=<?php echo $row_pr["Product_ID"] ?>"><i class="fa fa-shopping-cart"></i></a></li>
-                    <li><a href="#" ><i class="fa fa-random"></i></a></li>
-                </ul>
-            </div>
-            <div class="product-content">
-                <h3 class="title"><a href="#"><?php echo $row_pr['Product_Name'] ?></a></h3>
-                <div class="price"><?php echo $row_pr['Product_Price'] ?></div>
-               
-            </div>
-        </div>
-    </div>
-
-<?php } 
-  
-?> 
+<div class="row product-area">
 
 
 
 </div>
-</form>
-</div>
 
-<!-- The Modal -->
+<!-- The Detail Modal -->
 <div class="modal" id="modalDetail">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title modal-product-name">Day chuyen</h4>
+        <h4 class="modal-title modal-product-name"></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 

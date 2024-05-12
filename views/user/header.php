@@ -91,8 +91,8 @@
                             </li>    
                           </ul>
                           <form class="d-flex nav-itemx" id="form-search">
-                            <input class="form-control me-2 w2-input" type="text" placeholder="Search">
-                            <button class="si si-magnifier" type="button" id="btn-search"></button>
+                            <input class="form-control me-2 w2-input search-value" type="text" placeholder="Search" name="searchValue" value="">
+                            <button class="si si-magnifier" type="button" id="btn-search" type="submit"></button>
                           </form>
                       </div>
                     </div>
@@ -173,8 +173,8 @@
 <script><?php require("../../assests/user/js/jquery.min.js"); ?></script>
 <script><?php require("../../assests/user/js/bootstrap/bootstrap.bundle.min.js");?></script>    
 <script><?php require("../../assests/user/js/cart.js"); ?></script>
-<script><?php require("../../assests/user/js/product.js"); ?></script>
 <script src="../../assests/admin/js/swal/swalNotification.js"></script>
+<script><?php require("../../assests/user/js/search.js"); ?></script>
 <?php 
 
 ?>
