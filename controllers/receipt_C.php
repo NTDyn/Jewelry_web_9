@@ -79,7 +79,7 @@
                 $result->Message = "Số điện thoại bao gồm 10 số!";
                 array_push($errorList, $result);
             }
-            if(!preg_match("/^([0-9a-zA-Z'. ]+)$/", $customer->Customer_Address)  ){
+            if(!preg_match("/^([a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ.,\s]+)$/i", $customer->Customer_Address)  ){
                 $result = new validate_E();
                 $result->Subject = "Customer_Address";
                 $result->Status = 0;
@@ -112,6 +112,19 @@
             $model = $this->model("receipt_M");
             $result = $model->getListProduct();
             echo json_encode($result);
+        }
+
+        function addReceipt($receipt){
+            $model = $this->model("receipt_M");
+            $result = $model->addReceipt($receipt);
+            return json_encode($result);
+        }
+        function addReceiptDetail($list){
+            $model = $this->model("receipt_M");
+            
+           $result = $model->addReceiptDetail($list);
+
+           // return json_encode($result);
         }
     }
 

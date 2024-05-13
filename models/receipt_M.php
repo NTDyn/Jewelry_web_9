@@ -182,5 +182,46 @@
                 return $list;
             }
         }
+
+        public function addReceipt($receipt){
+            if($this->connectDB()){
+                $sql = "INSERT INTO Receipt(Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Status) VALUES( " . $receipt->Customer_ID . ", '" . $receipt->Receipt_Date . "' , " . $receipt->Receipt_Total. " , '".$receipt->Receipt_Note ."' , 2)";
+               
+                if(mysqli_query($this->conn, $sql)){
+                    return true;
+                } else {
+                     echo "Error: " . $sql . "<br>" . $this->conn->error;
+                     return false;
+                }
+            }
+        }
+        public function addReceiptDetail($list){
+            if($this->connectDB()){
+                $sql = "SELECT MAX(Receipt_ID) FROM Receipt";
+                $result =mysqli_query($this->conn, $sql);
+                $max = 0 ;
+                if($result){
+                    $row = mysqli_fetch_array($result);
+                    $max =(int) $row['MAX(Receipt_ID)'];
+                }
+                print($max);
+                foreach($list as $detail){
+                  // print_r($detail['Quantity']);
+                  // print_r($detail['Price']);
+                   //print_r($max);
+                   $query =" INSERT INTO Receipt_Detail(Receipt_ID, Product_ID, Detail_Quality,Detail_Price) VALUES(" . $max . ", ". $detail['Product_ID'] . ", " . $detail['Quantity'] . ", ". $detail['Price'] . ")";
+                   mysqli_query($this->conn, $query);
+                    //  if(){
+                    //      return true;
+                    //  } else {
+                    //      echo "Error: " . $query . "<br>" . $this->conn->error;
+                    //      return false;
+                    //  }
+                }
+                
+               
+                
+            }
+        }
     }
 ?>
