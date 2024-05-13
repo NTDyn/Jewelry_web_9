@@ -254,6 +254,7 @@
                                     
                                 </div>
                                 <div class="row">
+                                    <input type="hidden" name="customer-id" id="txt-id">
                                     <div class="col-3">
                                         <input type="phone" class="form-control" name = "customer-phone"  id="txt-phone" >
                                         <p class=" error-phone error-notify"></p>
@@ -273,8 +274,8 @@
                                     
                                 </div>
                     </fieldset>
-                    
                     </form>
+                    
 
                     <div id="tb-selected-product-area">
                         <table id="tb-selected-product">
@@ -318,7 +319,7 @@
                             </div>
                             <div class=" row" style="margin-top: 1%">
                                 <label class="col-4 txt-label" for="comment">Lưu ý của khách hàng:</label>
-                                <textarea class=" form-control col-8 " rows="5" id="comment" name="text"></textarea>
+                                <textarea class=" form-control col-8 " rows="5" id="comment" name="text-note"></textarea>
                             </div>
                         </div>
                         <div class="col-6" style ="padding-left: 10%">
@@ -332,19 +333,44 @@
                             </div>
                             <div class="row" style="margin-bottom: 3%">
                                 <div class="col-5 txt-label">Tổng số tiền:</div>
-                                <div class="col-7" id = "total-price" >0</div>
+                                <div class="col-7" id = "total-price" name="total-price" >0</div>
                             </div>
                         </div>
                     </div>
+                   
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class=" btn-order" data-bs-dismiss="modal">Đặt hàng</button>
+                    <button type="button" class=" btn-order"  >Đặt hàng</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </div>
         </div>
     </div>
 
+<div class="modal" id="confirm-add">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Bạn có chắc chắn?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Bạn có chắc chắn muốn thêm đơn hàng?
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" id=" btn-confirm-order" >Thêm đơn hàng</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 

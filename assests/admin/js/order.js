@@ -345,16 +345,17 @@ function formatToMoney(_number){
             $('.error-notify').text('');
             
             if(dataResult == 'false'){
-                $('.isDisable').prop('disabled', false);
+                $('.isDisable').prop('readonly', false);
                 $('#txt-name').val("");
                 $('#txt-address').val("");
                 $('#txt-email').val("");
             } else {
                 dataResult = JSON.parse(dataResult);
+                $('#txt-id').val(dataResult.Customer_ID);
                 $('#txt-name').val(dataResult.Customer_Name);
                 $('#txt-address').val(dataResult.Customer_Address);
                 $('#txt-email').val(dataResult.Customer_Email);
-                $('.isDisable').prop('disabled', true);
+                $('.isDisable').prop('readonly', true);
             }
             
         }
@@ -367,20 +368,19 @@ function formatToMoney(_number){
         type: "post",
         url: "../../route/route_receipt.php",
         success:  function(dataResult){
+            
             $('.error-notify').text('');
             dataResult = JSON.parse(dataResult);
             $.each(dataResult, function(k,v){
                 
                 if(v.Status == 0){
                     errorInnerHTML(v);
-                }
-                if(v.Status == 200){
-                    getListProduct();
-
-                }
+                } 
             })
         }
     })
+
+
 }
 
 function errorInnerHTML(valid){
@@ -457,19 +457,25 @@ $('#fix-selection').change(function(){
         let quantity =  findID.closest('.cart-item').find('.product-quantity');
         let number = parseInt(quantity.text()) + 1;
         quantity.text(number);
+        let indexObj = selectedProductList.findIndex(x=>x.Product_ID == id);
+        let numberQuantity = selectedProductList.find(x=>x.Product_ID == id).Quantity;
+        selectedProductList[indexObj].Quantity = numberQuantity + 1;
         
     } else{
-       
+        let product = ProductList.find(x=>x.Product_ID == id);
+        let prSelect = {};
+        prSelect['Product_ID'] = id;
+        prSelect['Quantity'] = 1;
+        prSelect['Price'] = product.Product_Price;
+        selectedProductList.push(prSelect);
         innerSelectedProduct(id);
-        let total_quantity = parseInt($('#total-quantity').text()) + 1;
-        $('#total-quantity').text(total_quantity);
         
-        
-        console.log(selectedProductList);
     }
+    let total_quantity = parseInt($('#total-quantity').text()) + 1;
+        $('#total-quantity').text(total_quantity);
     let pr = ProductList.find(x=>x.Product_ID == id);
     $(this).val("");
-    totalPrice(pr.Product_Price);
+    plusPrice(pr.Product_Price);
 })
 
  function innerSelectedProduct(id){
@@ -483,9 +489,14 @@ $('#fix-selection').change(function(){
     str += '<td>';
     str += ' <select class="form-control select2-show-search selected-product" style="width: 100%"  >';
     $.each(ProductList, function(k,v){
-        if(selectedProductList.find(x=>x.Product_ID != v.Product_ID)){
-            str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+        if(v.Product_ID == id){
+            str += '<option class="product-option" selected value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
+        } 
+        else {
+            str += '<option class="product-option " value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
         }
+          
+
       
     })
     str += '</select>';
@@ -501,21 +512,66 @@ $('#fix-selection').change(function(){
     str += '</td>';
     str += '</tr>';
     $('#tb-product-body').append(str);
-    selectedProductList.push(pr);
     loadListSelectable();
 }
 
 function loadListSelectable(){
   //  $('.selected-product').find('option')
 }
-$(document).on('change', '.selected-product',  function(){
+
+let oldValue;
+let oldQuantity;
+
+$(document).on('focus','.selected-product', function(){
+     oldValue = $(this).val();
+     oldQuantity = parseInt( $(this).closest('.cart-item').find('.product-quantity').text());
+}).on('change', '.selected-product',  function(){
     let id = $(this).val();
     let pr =  ProductList.find(x=> x.Product_ID == id);
-    let price = pr.Product_Price;
-    $(this).closest('.cart-item').find('.product-price').text(formatToMoney(price) + " VND");
-    let img = pr.Product_Image;
-    $(this).closest('.cart-item').find('.product-image').attr('src',img);
+    let findID = $('.selected-product option[value = '+ id + ']');
+    let oldProduct = ProductList.find(x=> x.Product_ID == oldValue);
+    if(!selectedProductList.find(x=>x.Product_ID == id)){ // neu chua duoc chon
+        let indexOldValue = selectedProductList.findIndex(x=>x.Product_ID == oldValue);
+         selectedProductList.splice(indexOldValue,1 );
+        let prSelect = {};
+        prSelect['Product_ID'] = id;
+        prSelect['Quantity'] = parseInt( $(this).closest('.cart-item').find('.product-quantity').text());
+        prSelect['Price'] = pr.Product_Price;
+        selectedProductList.push(prSelect);
+        let price = pr.Product_Price;
+        $(this).closest('.cart-item').find('.product-price').text(formatToMoney(price) + " VND");
+        let img = pr.Product_Image;
+        $(this).closest('.cart-item').find('.product-image').attr('src',img);
+        minusPrice(oldProduct.Product_Price);
+        plusPrice(pr.Product_Price);
+       
+        oldValue = id;
+    } 
+    else{ // da duoc chon
+        $(this).closest('.cart-item').remove();
+        let prOlder = ProductList.find(x=>x.Product_ID == oldValue);
+        minusPrice(oldQuantity * prOlder.Product_Price);
+        let quantityAdded = parseInt( $('.selected-product option[value = '+ id + ']').filter(':selected').closest('.cart-item').find('.product-quantity').text());
+        let maxQuanlity = prOlder.Product_Quality;
+        let newQuantity = quantityAdded + oldQuantity;
+        let totalQuantity = parseInt($('#total-quantity').text()) - oldQuantity;
+        if(newQuantity > maxQuanlity ){
+            newQuantity = maxQuanlity;
+            $('#total-quantity').text(totalQuantity + (maxQuanlity - quantityAdded));
+            $('.selected-product option[value = '+ id + ']').filter(':selected').closest('.cart-item').find('.product-quantity').text( maxQuanlity);
+            plusPrice((maxQuanlity- quantityAdded) * pr.Product_Price);
+        } else {
+            $('#total-quantity').text(totalQuantity + oldQuantity);
+            $('.selected-product option[value = '+ id + ']').filter(':selected').closest('.cart-item').find('.product-quantity').text( quantityAdded + oldQuantity);
+            plusPrice(oldQuantity * pr.Product_Price);
+        }
+        
+        //let quantity = $('.selected-product option[value = '+ id + ']').filter(':selected').closest('.cart-item').find('.product-quantity').text( quantityAdded + oldQuantity);
+       
+        
+      
 
+    }
 })
 
 $(document).on('click', '.btn-plus',  function(){
@@ -532,7 +588,7 @@ $(document).on('click', '.btn-minus', function(){
     $(this).closest('.cart-item').find('.product-quantity').text(number);
 })
 
-function _plusQuantity(id, quantity ){
+function _plusQuantity(id, quantity){
     let pr = ProductList.find(x => x.Product_ID == id);
     let maxQuanlity = pr.Product_Quality;
     if(quantity == maxQuanlity){
@@ -540,14 +596,17 @@ function _plusQuantity(id, quantity ){
         return _qlt;
     } else {
         _qlt = quantity + 1;
-        let total_quantity = parseInt($('#total-quantity').text()) + 1;
+        if(_qlt > maxQuanlity){
+             _qlt = maxQuanlity;
+        }
+        let total_quantity = parseInt($('#total-quantity').text()) +1;
         $('#total-quantity').text(total_quantity)
-        totalPrice(pr.Product_Price);
+        plusPrice(pr.Product_Price);
         return _qlt;
     }
 
 }
- function _minusQuantity( id,quantity ){
+ function _minusQuantity( id,quantity){
     let pr = ProductList.find(x=> x.Product_ID == id);
     if(quantity == 1){
         _qlt = quantity;
@@ -564,6 +623,7 @@ function _plusQuantity(id, quantity ){
 
 }
 
+
 $(document).on('click', '.btn-trash-product', function(){
     let id= $(this).closest('.cart-item').find('.selected-product').val();
     let pr = ProductList.find(x=>x.Product_ID == id);
@@ -574,7 +634,8 @@ $(document).on('click', '.btn-trash-product', function(){
     total = oldPrice - minus
     $('#total-price').text(formatToMoney(total));
     $(this).closest('.cart-item').remove();
-
+    let totalQuantity = parseInt($('#total-quantity').text());
+    $('#total-quantity').text(totalQuantity - quantity);
 })
 
 function formatFromMoney(_number){
@@ -582,15 +643,30 @@ function formatFromMoney(_number){
     return integerNumber;
 }
 
-function totalPrice(addPrice){
+function plusPrice(addPrice){
     form = formatFromMoney($('#total-price').text());
-   let oldPrice = parseInt(form);
-   total = oldPrice + addPrice;
-   $('#total-price').text(formatToMoney(total) + " VND");
+    let oldPrice = parseInt(form);
+    total = oldPrice + addPrice;
+    $('#total-price').text(formatToMoney(total) + " VND");
 }
 
+function minusPrice(Price){
+    form = formatFromMoney($('#total-price').text());
+    let oldPrice = parseInt(form);
+    total = oldPrice - Price;
+    $('#total-price').text(formatToMoney(total) + " VND");
+}
+
+
 $('.btn-order').click(function(){
-    Swal.fire({
+    
+    checkCustomerInfor();
+    if(selectedProductList.length == 0){
+        Swal.fire("Vui lòng chọn sản phẩm muốn mua!");
+    }
+
+    if($('.error-notify').text() == "" && selectedProductList.length != 0 ) {
+        Swal.fire({
         title: "Bạn có chắc chắn?",
         text: "Bạn có chắc chắn muốn thêm đơn hàng?",
         icon: "warning",
@@ -600,11 +676,71 @@ $('.btn-order').click(function(){
         confirmButtonText: "Thêm đơn hàng"
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: "Thành công!",
-            text: "Đã thêm đơn hàng thành công.",
-            icon: "success"
-          });
+         addNewOrder();
+         
         }
       });
+    }
+
+    
+    
+    
+
 })
+
+function addNewOrder(){
+    var data = {
+        "Customer_ID":  $('#txt-id').val(),
+        "Receipt_Total": parseInt(formatFromMoney($('#total-price').text())),
+        "Receipt_Note": $('#comment').text(), 
+        "action": "addReceipt"
+    };
+    
+
+    $.ajax({
+        data: data,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success: function(dataResult){
+            //alert(dataResult);
+            if(dataResult == 'true'){
+             //   alert(dataResult);
+               addDetailOrder();
+            }
+           
+        }
+
+        
+        
+
+    });
+    //addDetailOrder();
+    
+    
+}
+
+function addDetailOrder(){
+    var data = {
+        "listSelectedProduct":  selectedProductList,
+        "action": "addDetail"
+    };
+    
+    $.ajax({
+        data: data,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success: function(dataResult){
+            alert(dataResult);
+            if(dataResult == 1){
+                Swal.fire({
+                    title: "Thành công!",
+                    text: "Cập nhật trạng thái đơn hàng thành công!",
+                    icon: "success",
+                    timer: 2000,
+                  });
+            }
+           
+        }
+
+    });
+}

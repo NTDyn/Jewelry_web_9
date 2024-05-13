@@ -97,4 +97,28 @@
             echo  ($result);
         }
     }
+
+    if(isset($_POST['action'])){
+        if($_POST['action'] == 'addReceipt'){
+            $receipt = new Receipt_E() ;
+            $receipt->Customer_ID = $_POST['Customer_ID'];
+            $receipt->Receipt_Date = date('Y-m-d H:i:s');
+            $receipt->Receipt_Total = $_POST['Receipt_Total'];
+            $receipt->Receipt_Status = 2;
+            $receipt->Receipt_Note = $_POST['Receipt_Note'];
+            $contr = new receipt_C();
+            $result = $contr->addReceipt($receipt);
+            echo  ($result);
+        }
+    }
+
+    if(isset($_POST['action'])){
+        if($_POST['action'] == 'addDetail'){
+            $listProduct = $_POST['listSelectedProduct'];
+            $contr = new receipt_C();
+            $result = $contr->addReceiptDetail($listProduct);
+            echo  ($result);
+        }
+    }
+    
 ?>
