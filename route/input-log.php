@@ -1,5 +1,7 @@
 <?php
 session_start();
+//session_unset();
+//unset($_SESSION["user"]);
 require '../controllers/connect.php';
 if(isset($_POST['login'])){
     $username = $_POST['username'];

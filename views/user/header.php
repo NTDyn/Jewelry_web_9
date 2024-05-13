@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -22,9 +21,24 @@
                     </a>
                     <div class="row cart-avata">
                             <div class="col-5 user-area dropdown row" > 
-                              <div class="fa fa-user " id="icon-user" data-bs-toggle="dropdown"><span id="user" >User</span></div>
+                              <div class="fa fa-user " id="icon-user" data-bs-toggle="dropdown"><span id="user" >
+                              <?php 
+                                session_start();
+                                if(isset($_SESSION["user"])){
+                                  echo $_SESSION["user"];
+                                }else{
+                                  echo "User";
+                                }
+                              ?>
+                              </span></div>
                                   <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>
+                                  <?php 
+                                    if(isset($_SESSION["user"])){
+                                      echo '<li><a class="dropdown-item" href="logout.php">Đăng xuất</a></li>';
+                                    }else{
+                                      echo '<li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>';
+                                    }
+                                  ?>
                                     <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
                                     <li><div class="dropdown-item" href="#">Đơn mua</div></li>
                                   </ul>

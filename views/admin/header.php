@@ -48,7 +48,16 @@
               <li class="nav-item item-header dropdown header-user">
                 <button class="nav-link user-area" data-bs-toggle="dropdown">
                   <span class="name-user">
-                    <span>User name</span> 
+                    <span>
+                      <?php 
+                        session_start();
+                        if(isset($_SESSION["user"])){
+                          echo $_SESSION["user"];
+                        }else{
+                          echo "Username";
+                        }
+                      ?>
+                    </span> 
                   </span>
                   <span class="img-user-area">
                     <img src="../../image/img-user.png" class="img-user">
@@ -56,7 +65,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="../../views/admin/register.php">Đăng ký</a></li>
-                  <li><a class="dropdown-item" href="../../views/user/login.php">Đăng xuất</a></li>
+                  <li><a class="dropdown-item" href="../../views/user/logout.php">Đăng xuất</a></li>
                 </ul>
               </li>
             </ul>
