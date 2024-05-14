@@ -25,15 +25,13 @@ function getHTML($conn){
                   <img src="'.$getsp['Product_Image'].'" class="img-product-cart">
                 </div>
                 <div class="col-3 name-product-cart">'.$getsp['Product_Name'].'</div>
-                <div class="col-3">
+                <div class="col-4">
                   <input onclick="giamsl('.$list_cart[$i]['product'][$j]['id'].','.$getsp["Product_Price"].',this)" class="btgiam" style="width:30px;margin-left:10px"" type="button" value="-">
                     <span  class="quality-product-cart">'.(int)$list_cart[$i]['product'][$j]['sl'].'</span>
                   <input onclick="tangsl('.$list_cart[$i]['product'][$j]['id'].','.$getsp["Product_Price"].',this)" class="bttang" style="width:30px;margin-left:10px"" type="button" value="+">
-
+                  <span style="padding: 50px;" class="sl" >'.$getsp["Product_Price"]*$list_cart[$i]['product'][$j]['sl'].'</span>
                 </div>
-                <div class="col-2">
-                  <span class="sl" >'.$getsp["Product_Price"]*$list_cart[$i]['product'][$j]['sl'].'</span>
-                </div>
+              
                 
                 <div class="col-1"><input name="id_select[]" value='.$getsp["Product_ID"].'  type="checkbox" ></div>
         
@@ -90,7 +88,9 @@ $.post("../../route/quality_decrease.php", {id_sp:id}, function(data){
   var update_gia=cha.children[3];
   var tt=parseInt(data,10)*gia;
   update_gia.innerHTML=tt;
+  
 });
+
 
 
 }
