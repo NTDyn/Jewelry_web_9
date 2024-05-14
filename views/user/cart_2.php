@@ -8,7 +8,10 @@ if(isset($_SESSION["user"])){
     $username_login=$_SESSION['user'];
    
     if(isset($_GET['id_sp'])){
-            $id=$_GET['id_sp'];
+       
+            $id=$_GET["id_sp"];
+            $sl=(int)$_GET["sl_sp"];
+           
             // echo var_dump( $_SESSION['giohanglist']);
            if(isset($_SESSION["giohanglist"])){
             $arrList=$_SESSION['giohanglist'];
@@ -17,19 +20,19 @@ if(isset($_SESSION["user"])){
               
                 for($j=0;$j<count($arrList[$i]["product"]);$j++){
                    if($arrList[$i]["product"][$j]["id"]==$_GET["id_sp"]&&$arrList[$i]['product'][$j]["status"]==0){
-                    if($arrList[$i]['product'][$j]['sl']+1>10){
-                        echo "số lượng không hợp lê";
+                    if($arrList[$i]['product'][$j]['sl']+$sl>10){
+                        echo "số lượng không hợp lệ ";
                         return;
                     }
-                   $arrList[$i]['product'][$j]['sl']=$arrList[$i]['product'][$j]['sl']+1;
+                   $arrList[$i]['product'][$j]['sl']=$arrList[$i]['product'][$j]['sl']+$sl;
                 
                     $check=1;
                    }
                 }
                 if($check==0){
                     $sanpham=[
-                        "id"=>$_GET['id_sp'],
-                        "sl"=>1,
+                        "id"=>$_GET["id_sp"],
+                        "sl"=>$sl,
                         "status"=>0
                     ];
                     array_push($arrList[$i]['product'],$sanpham);
@@ -44,8 +47,8 @@ if(isset($_SESSION["user"])){
                     "username"=>$_SESSION["user"],
                     'product'=>[
                         [
-                            "id"=>$id,
-                            "sl"=>1,
+                            "id"=>$_GET["id_sp"],
+                            "sl"=>$sl,
                             "status"=>0
                         ]
                        
@@ -73,8 +76,8 @@ if(isset($_SESSION["user"])){
                 "username"=>$_SESSION['user'],
                 'product'=>[
                     [
-                        "id"=>$id,
-                        "sl"=>1,
+                        "id"=>$_GET["id_sp"],
+                        "sl"=>$sl,
                         "status"=>0
                     ]
                    
@@ -98,6 +101,7 @@ if(isset($_SESSION["user"])){
 
 }
 // header("Location:product.php");
+
 
 
 ?>
