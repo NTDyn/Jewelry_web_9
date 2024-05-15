@@ -1,16 +1,20 @@
 .khung {
     font-family: Arial, sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     color : brown;
     margin: 0px;
-    padding: 70px;
+    padding:20px;
     justify-content: center;
     align-items: center;
     height: 82vh;
-    background-image: url(../../../image/backgorundadmin.jpg);
+    background-color: #C0C0C0;
     background-size :cover;
-    background-position-y: -250px;
+    display: flex;
 
+}
+
+.khung1 {
+    width: 80%; 
 }
 
 a {
@@ -26,10 +30,10 @@ a:hover{
     margin-right: auto;
     align-items: center;
     background-color: rgba(255,255,255,0.8);
-    padding: 50px;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    width:35%;
+    width:70%;
 }
 
 .head{
@@ -38,14 +42,19 @@ a:hover{
     align-items: center;
 } 
 
-.head > p{
+.head > p {
     font-size: 30px;
-} 
+    margin-bottom: 0px;
+}
 
 .form-group{
     border-bottom : 1px solid black;
-    margin : 25px auto;
+    margin : 20px auto;
     width : 85%;
+}
+
+.form-group > p{
+    margin-bottom : 10px;
 }
 
 .form-group > input{
@@ -77,25 +86,4 @@ a:hover{
 .form-submit > input:hover{
     color : brown;
     border : 2px solid brown;
-}
-
-.back_index{
-    margin-top: 30px;
-    text-align: right;
-    text-align: end;
-}
-
-.back_index > input{  
-    color:#990000;
-    width: 120px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 18px;
-}
-
-.back_index > input:hover{
-    color :aliceblue;
-    background : brown;
-    border : 2.5px solid white;
-
 }

@@ -12,18 +12,18 @@ if(isset($_POST['register_admin'])){
         &&!empty($password)
         &&!empty($com_password)){
             //Xuất thông tin theo chiều dọc
-            echo "<pre>";
+            //echo "<pre>";
             //Xuất thông tin tại cái ô input
-            print_r($_POST);
+            //print_r($_POST);
          
-        /*$sql1 = "SELECT * FROM admin WHERE Username = '$username'";
+        $sql1 = "SELECT * FROM admin WHERE Username = '$username'";
         $result = $conn->query($sql1);
         if ($result->num_rows == 0) {
             if($password != $com_password){
                 echo "<script>alert('Mật khẩu nhập lại không trùng khớp')</script>";	
                 echo "<script>window.location.href = '../views/user/register.php';</script>";	
             }else{
-                $sql = "INSERT INTO `customer` (`Admin_Username`,`Username`,`Password`, `Admin_Status`)
+                $sql = "INSERT INTO `admin` (`Admin_Name`,`Username`,`Password`, `Admin_Status`)
                         VALUES('$adminname','$username', '$password', 1)";// mã hóa md5('$password')
                 
                 if($conn->query($sql) === TRUE){
@@ -40,7 +40,7 @@ if(isset($_POST['register_admin'])){
         }                                    
     }else{
         echo "<script>alert('Mời bạn nhập đầy đủ thông tin')</script>";
-        echo "<script>window.location.href = '../views/admin/register.php';</script>";*/
+        echo "<script>window.location.href = '../views/admin/register.php';</script>";
     }
 
 }

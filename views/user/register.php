@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập và Đăng ký</title>
+    <title>Đăng ký</title>
     <link rel="stylesheet" href="../../assests\user/css/register.css">
 </head>
 <body>

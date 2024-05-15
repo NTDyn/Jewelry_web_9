@@ -10,7 +10,7 @@
     <div class="khung">
         <div class="main">
             <div class="head">
-                <p><b>Đăng ký</b></p>
+                <p><b>Đăng ký Admin</b></p>
             </div>
 
             <form id="register-form" class="register-form" action="../../route/input-reg_admin.php" method="post">

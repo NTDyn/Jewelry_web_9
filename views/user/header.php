@@ -39,7 +39,7 @@
                                       echo '<li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>';
                                     }
                                   ?>
-                                    <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                                    <li><a class="dropdown-item" href="infor_personal.php">Thông tin tài khoản</a></li>
                                     <li><div class="dropdown-item" href="#">Đơn mua</div></li>
                                   </ul>
                             </div>
