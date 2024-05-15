@@ -124,7 +124,13 @@
             
            $result = $model->addReceiptDetail($list);
 
-           // return json_encode($result);
+            return json_encode($result);
+        }
+
+        function getAllHistoryOrder($id){
+            $model = $this->model("receipt_M");
+           $result = $model->getAllHistoryOrder($id);
+            return json_encode($result);
         }
     }
 

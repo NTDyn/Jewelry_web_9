@@ -40,7 +40,7 @@
                                     }
                                   ?>
                                     <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
-                                    <li><div class="dropdown-item" href="#">Đơn mua</div></li>
+                                    <li><a class="dropdown-item" href="../../views/user/historyOrder.php">Đơn mua</a></li>
                                   </ul>
                             </div>
                             <div class="col-7 cart-area " data-bs-toggle="modal" data-bs-target="#modal-cart">

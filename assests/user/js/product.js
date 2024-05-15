@@ -132,15 +132,15 @@ function searchProduct(){
     // })
     // appenProductList(arrSearch);
 
-    let keyword = xoa_dau(localStorage.getItem("searchValue"));
+    let keyword = localStorage.getItem("searchValue");
     let filteredData = [];
     if (keyword.length) {
         filteredData = allProductList
           .filter(item => {
             let startsWithCondition =
-              xoa_dau(item.Product_Name).toLowerCase().startsWith(keyword.toLowerCase());
+              xoa_dau(item.Product_Name).toLowerCase().startsWith(xoa_dau(keyword).toLowerCase());
             let includesCondition =
-              xoa_dau(item.Product_Name).toLowerCase().includes(keyword.toLowerCase());
+              xoa_dau(item.Product_Name).toLowerCase().includes(xoa_dau(keyword).toLowerCase());
 
             if (startsWithCondition) {
               return startsWithCondition

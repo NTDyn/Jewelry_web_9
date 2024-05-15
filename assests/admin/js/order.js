@@ -702,9 +702,7 @@ function addNewOrder(){
         type: "post",
         url: "../../route/route_receipt.php",
         success: function(dataResult){
-            //alert(dataResult);
             if(dataResult == 'true'){
-             //   alert(dataResult);
                addDetailOrder();
             }
            
@@ -714,7 +712,6 @@ function addNewOrder(){
         
 
     });
-    //addDetailOrder();
     
     
 }
@@ -730,11 +727,10 @@ function addDetailOrder(){
         type: "post",
         url: "../../route/route_receipt.php",
         success: function(dataResult){
-            alert(dataResult);
-            if(dataResult == 1){
+            if(dataResult == 'true'){
                 Swal.fire({
                     title: "Thành công!",
-                    text: "Cập nhật trạng thái đơn hàng thành công!",
+                    text: "Thêm đơn hàng thành công!",
                     icon: "success",
                     timer: 2000,
                   });

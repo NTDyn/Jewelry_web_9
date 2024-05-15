@@ -58,7 +58,7 @@
 
         public function getDetailOfReceipt($id_receipt){
             if($this->connectDB()){
-                $sql ="SELECT * FROM receipt_detail de , receipt re WHERE de.Receipt_ID = re.Receipt_ID AND re.Receipt_ID =  " . $id_receipt;
+                $sql ="SELECT * FROM receipt_detail de , receipt re, product pr WHERE de.Receipt_ID = re.Receipt_ID AND pr.Product_ID = de.Product_ID AND re.Receipt_ID =  " . $id_receipt;
                 $result = mysqli_query($this->conn, $sql);
                 $list =  array();
                 if(mysqli_num_rows($result) > 0){
@@ -70,6 +70,8 @@
                         $detail->Product_ID = $row['Product_ID'];
                         $detail->Detail_Quantity = $row['Detail_Quality'];
                         $detail->Detail_Price = $row['Detail_Price'];
+                        $detail->Product_Image = $row['Product_Image'];
+                        $detail->Product_Name = $row['Product_Name'];
                         if($row['Receipt_Note'] == null){
                             $detail->Receipt_Note ="";
                         } else {
@@ -198,30 +200,54 @@
         public function addReceiptDetail($list){
             if($this->connectDB()){
                 $sql = "SELECT MAX(Receipt_ID) FROM Receipt";
-                $result =mysqli_query($this->conn, $sql);
+                $result1 =mysqli_query($this->conn, $sql);
                 $max = 0 ;
-                if($result){
-                    $row = mysqli_fetch_array($result);
+                $result = false;
+                if($result1){
+                    $row = mysqli_fetch_array($result1);
                     $max =(int) $row['MAX(Receipt_ID)'];
                 }
-                print($max);
                 foreach($list as $detail){
-                  // print_r($detail['Quantity']);
-                  // print_r($detail['Price']);
-                   //print_r($max);
                    $query =" INSERT INTO Receipt_Detail(Receipt_ID, Product_ID, Detail_Quality,Detail_Price) VALUES(" . $max . ", ". $detail['Product_ID'] . ", " . $detail['Quantity'] . ", ". $detail['Price'] . ")";
-                   mysqli_query($this->conn, $query);
-                    //  if(){
-                    //      return true;
-                    //  } else {
-                    //      echo "Error: " . $query . "<br>" . $this->conn->error;
-                    //      return false;
-                    //  }
+                    $result2 = mysqli_query($this->conn, $query);
+                     if($result2){
+                         $result =  true;
+                     } else {
+                         echo "Error: " . $query . "<br>" . $this->conn->error;
+                         
+                     }
                 }
+
                 
-               
+               return $result ;
                 
             }
         }
+
+        public function getAllHistoryOrder($id){
+            if($this->connectDB()){
+                $sql = "SELECT * FROM Receipt re WHERE  re.Customer_ID = " . $id;
+                $result = mysqli_query($this->conn , $sql);
+                $list= array();
+                if(mysqli_num_rows($result) > 0){
+                    
+                    while($row = mysqli_fetch_array($result) ){
+                        $receipt = new Receipt_E();
+                        $receipt->Receipt_ID = (int) $row['Receipt_ID'];
+                        $receipt->Customer_ID = (int) $row['Customer_ID'];
+                        $receipt->Receipt_Date = $row['Receipt_Date'];
+                        $receipt->Receipt_Total = (int) $row['Receipt_Total'];
+                        $receipt->Receipt_Note = (int) $row['Receipt_Note'];
+                        $receipt->Receipt_Status = (int) $row['Receipt_Status'];
+
+                        array_push($list, $receipt) ;
+                    }
+                }
+                
+                return $list;
+            }
+        }
+
+        
     }
 ?>

@@ -15,8 +15,10 @@ if(isset($_POST['login'])){
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $status = $row['Customer_Status'];       
+            $id = $row['Customer_ID'];
             if ($status == 1) {
                 $_SESSION["user"] = $username;
+                $_SESSION["customer_id"] = $id;
                 echo "<script>window.location.href = '../views/user/index.php';</script>";
             } else if ($status == 0) {
                 echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
