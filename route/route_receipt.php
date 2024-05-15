@@ -120,5 +120,14 @@
             echo  ($result);
         }
     }
+
+    if(isset($_POST['action'])){
+        if($_POST['action'] == 'getAllHistoryOrder'){
+            $id = $_POST['Customer_ID'];
+            $contr = new receipt_C();
+            $result = $contr->getAllHistoryOrder($id);
+            echo  ($result);
+        }
+    }
     
 ?>

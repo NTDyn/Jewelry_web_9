@@ -248,9 +248,9 @@
                                     
                                     <label class="col-3 form-label  isVisible" >Tên khách hàng <span style="color:red">*</span> </label>
                                     
-                                    <label class="col-3 form-label isVisible " >Địa chỉ <span style="color:red">*</span> </label>
+                                    <label class="col-3 form-label isVisible " >Email <span style="color:red">*</span> </label>
                                     
-                                    <label class="col-3 form-label isVisible" >Email <span style="color:red">*</span> </label>
+                                    <label class="col-3 form-label isVisible" >Địa chỉ <span style="color:red">*</span> </label>
                                     
                                 </div>
                                 <div class="row">
