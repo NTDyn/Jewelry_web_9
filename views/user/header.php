@@ -35,11 +35,12 @@
                                   <?php 
                                     if(isset($_SESSION["user"])){
                                       echo '<li><a class="dropdown-item" href="logout.php">Đăng xuất</a></li>';
+                                      echo '<li><a class="dropdown-item" href="infor_personal.php">Thông tin tài khoản</a></li>';
                                     }else{
                                       echo '<li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>';
                                     }
                                   ?>
-                                    <li><a class="dropdown-item" href="infor_personal.php">Thông tin tài khoản</a></li>
+                                    
                                     <li><a class="dropdown-item" href="../../views/user/historyOrder.php">Đơn mua</a></li>
                                   </ul>
                             </div>

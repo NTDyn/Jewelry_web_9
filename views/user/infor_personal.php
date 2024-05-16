@@ -56,7 +56,7 @@
                     <p>Thông tin cá nhân</p>
                 </div>
 
-                <form id="chang_password-form" class="login-form active-form" action="#" method="post">
+                <form id="chang_password-form" class="login-form active-form" action="../../route/infor_personal.php" method="post">
                     <div class="form-group">
                         <p>Họ và tên: </p>
                         <input type="text" name="fullname" placeholder="<?php echo $fullname; ?>">
@@ -72,6 +72,9 @@
                     <div class="form-group">
                         <p>Email: </p>
                         <input type="text" name="email" placeholder="<?php echo $email; ?>">
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" name="changinfor" value="Cập nhập thông tin cá nhân">
                     </div>
                 </form>
                 
