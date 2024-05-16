@@ -134,7 +134,7 @@ function searchProduct(){
 
     let keyword = localStorage.getItem("searchValue");
     let filteredData = [];
-    if (keyword.length) {
+    if (keyword != null && keyword.length) {
         filteredData = allProductList
           .filter(item => {
             let startsWithCondition =

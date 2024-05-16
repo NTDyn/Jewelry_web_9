@@ -92,8 +92,17 @@ function appendListOrder(data){
                 str += ' <button class="btn-cancel" type="button" data-bs-toggle="modal" data-bs-target="#modalCancel" >';
                 str += '<span class="fa fa-trash"></span>';
                 str += '</button>';
-            } 
-            else if(v.Receipt_Status == 2 || v.Receipt_Status == 3 ){
+            } else if(v.Receipt_Status == 2  ){
+                str += ' <button  class="btn-detail" data-bs-toggle="modal" data-bs-target="#modalDetail" >';
+                str += '<span class="fa fa-eye " ></span>';
+                str += '</button>';
+                str += ' <button class="btn-next" type="button" data-bs-toggle="modal" data-bs-target="' + modal +'" >';
+                str += '<span class=" fa fa-check"></span>';
+                str += '</button>';
+                str += ' <button class="btn-cancel" type="button" data-bs-toggle="modal" data-bs-target="#modalCancel">';
+                str += '<span class="fa fa-trash"></span>';
+                str += '</button>';
+            }  else if( v.Receipt_Status == 3 ){
                 str += ' <button  class="btn-detail" data-bs-toggle="modal" data-bs-target="#modalDetail" >';
                 str += '<span class="fa fa-eye " ></span>';
                 str += '</button>';
