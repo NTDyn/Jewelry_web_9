@@ -14,7 +14,7 @@ if(isset($_POST['login'])){
             $status = $row['Admin_Status']; 
             $admin_id = $row['Admin_ID'];      
             if ($status == 1) {
-                $_SESSION["user"] = $username;
+                $_SESSION["admin"] = $username;
                 $_SESSION["Admin_ID"] = $admin_id;
                 echo "<script>window.location.href = '../views/admin/home.php';</script>";
             } else if ($status == 0) {

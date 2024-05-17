@@ -26,7 +26,7 @@
             </form>
 
         </div>
-        <form action="index.php">
+        <form action="../user/index.php">
             <div class="back_index">
                 <input type="submit" value="Quay lại"> 
             </div>

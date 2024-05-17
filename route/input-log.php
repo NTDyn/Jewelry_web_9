@@ -8,9 +8,9 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
     if(!empty($username) && !empty($password)){
         $sql = "SELECT * FROM customer WHERE Customer_Username = '$username' AND Customer_Password = '$password'";
-        $sql1 = "SELECT * FROM `admin` WHERE Username = '$username' AND Password = '$password'";
+        //$sql1 = "SELECT * FROM `admin` WHERE Username = '$username' AND Password = '$password'";
         $result = $conn->query($sql);
-        $result1 = $conn->query($sql1);
+        //$result1 = $conn->query($sql1);
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
@@ -24,7 +24,12 @@ if(isset($_POST['login'])){
                 echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
                 echo "<script>window.location.href = '../views/user/login.php';</script>";
             }
-        } else{
+        }else{
+            echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
+            echo "<script>window.location.href = '../views/user/login.php';</script>";
+        }
+        
+        /*else{
             if ($result1->num_rows == 1) {
                 $row = $result1->fetch_assoc();
                 $status = $row['Admin_Status'];
@@ -45,7 +50,7 @@ if(isset($_POST['login'])){
                 echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu')</script>";
                 echo "<script>window.location.href = '../views/user/login.php';</script>";
             }
-        }
+        }*/
 
     }else{
         echo "<script>alert('Mời bạn điền đầy đủ thông tin')</script>";	

@@ -38,6 +38,7 @@
                                       echo '<li><a class="dropdown-item" href="infor_personal.php">Thông tin tài khoản</a></li>';
                                     }else{
                                       echo '<li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>';
+                                      //echo '<li><a class="dropdown-item" href="../admin/login.php">Đăng nhập admin</a></li>';
                                     }
                                   ?>
                                     

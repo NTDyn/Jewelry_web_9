@@ -52,8 +52,8 @@
                     <span>
                       <?php 
                       
-                        if(isset($_SESSION["user"])){
-                          echo $_SESSION["user"];
+                        if(isset($_SESSION["admin"])){
+                          echo $_SESSION["admin"];
                         }else{
                           echo "Username";
                         }
@@ -66,7 +66,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="../../views/admin/register.php">Đăng ký</a></li>
-                  <li><a class="dropdown-item" href="../../views/user/logout.php">Đăng xuất</a></li>
+                  <li><a class="dropdown-item" href="../../views/admin/logout_admin.php">Đăng xuất</a></li>
                 </ul>
               </li>
             </ul>
