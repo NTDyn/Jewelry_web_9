@@ -1,3 +1,4 @@
+
 <?php
 
  include 'header.php';
@@ -151,7 +152,7 @@ function getspbyid($con,$id){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../../assests/user/css/payment.css?v=7" >
+    <link rel="stylesheet" href="../../assests/user/css/payment.css?v=8" >
 
 
 </head>
@@ -167,7 +168,7 @@ function getspbyid($con,$id){
                 <div class ="col-3" id="customer-name"> <?php echo  $getUser_Login["Customer_Name"] ?> </div>
                 <div class = "col-3" id="customer-phone"><?php echo  $getUser_Login['Customer_Phone']?> </div>
                 <div class = "col-5" id="customer-address"> <?php echo  $getUser_Login['Customer_Address']?></div>
-                <button class = " col-1"> Thay đổi</button>
+                <button type="button" class = " col-1 btn-change-address" data-bs-toggle="modal" data-bs-target="#modalChangeAddress">  Thay đổi</button>
             </div>
         </div>
         
@@ -263,6 +264,32 @@ function getspbyid($con,$id){
     </div>
     </form>
     <?php include 'footer.php' ?>
+
+    <!-- The Modal -->
+<div class="modal" id="modalChangeAddress">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Vui lòng nhập địa chỉ giao hàng của bạn</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="text" class="form-control" id="change-customer-address" placeholder="Địa chỉ" >
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-change-address" data-bs-dismiss="modal">Thay đổi</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
 <script src="../../assests/user/js/swal/swalNotification.js"></script>
