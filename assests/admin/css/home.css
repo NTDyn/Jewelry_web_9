@@ -1,4 +1,6 @@
-
+.feature-buttons{
+    display: none !important;
+}
 .img-carousel-area{
     align-content: center;
     margin-right: 10%;

@@ -1,5 +1,6 @@
-
+let listCategory = [];
 // Add Category
+
 $(document).on('click','#btn-modal-add',function(e) {
     var data = $("#add_form").serialize();
     $.ajax({
@@ -29,18 +30,18 @@ let table ;
 
 $(document).ready(async function(e){
     
-    await getCate();
+    getCate();
 })
-async function getCate() {
+ function getCate() {
     var _data = {"action": "read" }; 
     $.ajax({
         data: _data ,
         type: "post",
         url: "../../route/route_category.php",
        
-       success: await function(dataResult){
+       success:  function(dataResult){
             dataResult = JSON.parse(dataResult);
-            dataList = dataResult;
+            listCategory = dataResult;
            appendListCategory(dataResult);
            table = $('#myTable').DataTable();
         },
@@ -164,6 +165,20 @@ $(document).on('click','.btn-edit',function(){
     $('#id_edit_category').val(id);
 })
 $(document).on('click','#btn-modal-edit', function(e){
+    let name = $('#txt_edit_category').val();
+    if(listCategory.find(x=>x.Category_Name == name)){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Tên thể loại sản phẩm đã tồn tại!",
+          });
+    } else {
+        editCategory();
+    }
+
+})
+
+function editCategory(){
     var data = $("#edit-form").serialize();
     $.ajax({
         data: data,
@@ -185,7 +200,7 @@ $(document).on('click','#btn-modal-edit', function(e){
         }
 
     });
-})
+}
 
 $("#edit-form").submit(function(e) {
     e.preventDefault();

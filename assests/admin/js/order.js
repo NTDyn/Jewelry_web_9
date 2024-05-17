@@ -1,32 +1,77 @@
-let ProductList =[];
+let allProductList =[];
+let activeProductList =[];
 let selectedProductList = [];
+let listOrder = [];
+
+function appendCalendar(){
+
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+}
 
 $(document).ready(function(){
     $('#breadcrumb-second').text('Đơn hàng');
-    readListOrder();
-    getListProduct();
+    $start = moment(new Date()).format('YYYY-MM-DD 00:00:00');
+    $end = moment(new Date()).format('YYYY-MM-DD 23:59:59');
+    searchDateReceipt($start, $end);
+    getAllListProduct();
+    getActiveListProduct();
     $('#fix-selection').select2({
         dropdownParent: $('#modal-add')
     });
+    appendCalendar();
 })
 
-function getListProduct(){
-    var data = {"action":"getListProduct"};
+function getAllListProduct(){
+    var data = {"action":"getAllListProduct"};
     $.ajax({
         data: data ,
         type: "post",
         url: "../../route/route_receipt.php",
         success:  function(dataResult){
             dataResult = JSON.parse(dataResult);
-            ProductList = dataResult;
-            innerProductList(ProductList);
+           allProductList = dataResult;
+        }
+    })
+    $('#tb-selected-product').dataTable();
+}
+
+
+function getActiveListProduct(){
+    var data = {"action":"getActiveListProduct"};
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            dataResult = JSON.parse(dataResult);
+           activeProductList= dataResult;
+            innerProductList(activeProductList);
         }
     })
     $('#tb-selected-product').dataTable();
 }
 
 function innerProductList(dataList){
-   
     $.each(dataList, function(k,v){
         str = "";
        str += '<option class="product-option" value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
@@ -58,7 +103,7 @@ function appendListOrder(data){
     $.each(data, function(k,v){
         str = "";
         str += "<tr class='order-item'>";
-        str += "<td class='order-id'>" + v.Receipt_ID + "</td>";
+        str += "<td class='order-id' id='" + v.Receipt_ID +"'>" + v.Receipt_ID + "</td>";
         str += "<td class='customer-name' value = '" + v.Customer_ID + "'>" + v.Customer_Name + "</td>";
         str += "<td class='customer-phone'>" + v.Customer_Phone + "</td>";
         str += "<td class='order-total'>" + formatToMoney(v.Receipt_Total) + " đ </td>";
@@ -67,11 +112,11 @@ function appendListOrder(data){
         if(v.Receipt_Status == 0){
             str += "<td class='order-status' style='color: red ; font-weight:bold'>  Đã hủy </td>";
         } else if(v.Receipt_Status == 1){
-            str += "<td class='order-status'>  Chờ xác nhận</td>";
+            str += "<td class='order-status' style='color: black ; font-weight:bold'>  Chờ xác nhận</td>";
         } else if( v.Receipt_Status == 2){
-            str += "<td class='order-status'>  Xác nhận</td>";
+            str += "<td class='order-status' style='color: blue ; font-weight:bold'>  Xác nhận</td>";
         } else if( v.Receipt_Status == 3) {
-            str += "<td class='order-status'>  Đang giao hàng</td>";
+            str += "<td class='order-status' style='color: grey ; font-weight:bold'>  Đang giao hàng</td>";
         } else if(v.Receipt_Status == 4) {
             str += "<td class='order-status'  style='color: #00c851 ; font-weight:bold'>  Đã nhận</td>";
         }
@@ -154,7 +199,6 @@ function getCustomer(id){
         success:  function(dataResult){
             dataResult = JSON.parse(dataResult);
             $('#customer-name').text(dataResult.Customer_Name);
-            $('#customer-address').text(dataResult.Customer_Address);
             $('#customer-phone').text(dataResult.Customer_Phone);
         }
     })
@@ -178,7 +222,7 @@ function appendDetail(list){
     $('.product-order-infor').empty();
     
     for(let i = 0 ; i < list.length ; i++){
-        let pr = ProductList.find(x=>x.Product_ID == list[i].Product_ID);
+        let pr = allProductList.find(x=>x.Product_ID == list[i].Product_ID);
         let name = pr.Product_Name;
         list[i]["Product_Name"] = name;
         appendInforDetail(list[i]);
@@ -206,6 +250,7 @@ function appendInforDetail(data){
         $('#order-note').text(data.Receipt_Note);
         $('#receipt-payment').text(data.Receipt_Payment);
         $('#admin-name').text(data.Admin_Name);
+        $('#customer-address').text(data.Receipt_Address);
   
         
 }
@@ -220,7 +265,10 @@ $(document).on('click', '.btn-next', function(){
 
 $(document).on('click', '.btn-confirm', function(){
     confirmOrder();
-    readListOrder();
+    let id = $('#id-delivered').text();
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').text("Xác nhận");
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').css({"color": "blue" , "font-weight":"bold"});
+
 })
 
 function confirmOrder(){
@@ -240,7 +288,6 @@ function confirmOrder(){
                     icon: "success",
                     timer: 2000,
                   });
-                  readListOrder();
             }
             
 
@@ -250,6 +297,12 @@ function confirmOrder(){
 
 $(document).on('click', '.btn-delivered', function(){
     deliveredOrder();
+    let id = $('#id-delivered').text();
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').text("Đang giao hàng");
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').css({"color": "grey" , "font-weight":"bold"});
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-cancel').attr('disabled', true);
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-cancel').addClass('btn-cancel-disabled').removeClass('btn-cancel');
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-next').attr('data-bs-target', '#modalReceived');
    
 })
 
@@ -269,7 +322,6 @@ function deliveredOrder(){
                     icon: "success",
                     timer: 2000,
                   });
-                  readListOrder();
             }
             
 
@@ -279,6 +331,15 @@ function deliveredOrder(){
 
 $(document).on('click', '.btn-received', function(){
     receivedOrder();
+    let id = $('#id-delivered').text();
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').text("Đã nhận");
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').css({"color": "#00c851 " , "font-weight":"bold"});
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-cancel').attr('disabled', true);
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-next').attr('disabled', true);
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-next').addClass('btn-next-disabled').removeClass('btn-next');
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-cancel').addClass('btn-cancel-disabled').removeClass('btn-cancel');
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-next').attr('data-bs-target', false );
+   
    
 })
 
@@ -298,7 +359,6 @@ function receivedOrder(){
                     icon: "success",
                     timer: 2000,
                   });
-                  readListOrder();
             }
             
 
@@ -309,6 +369,11 @@ function receivedOrder(){
 $(document).on('click', '.btn-cancel', function(){
     let id = $(this).closest('.order-item').find('.order-id').text();
     $('#id-cancel').text(id);
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').text("Đã hủy");
+    $('.order-id[id=' + id +']').closest('.order-item').find('.order-status').css({"color": "red" , "font-weight":"bold"});
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-cancel').attr('disabled', true);
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-cancel').addClass('btn-cancel-disabled').removeClass('btn-cancel');
+    $('.order-id[id=' + id +']').closest('.order-item').find('.btn-next').attr('data-bs-target', false);
 })
 
 $(document).on('click', '.btn-cancel-order', function(){
@@ -475,7 +540,7 @@ $('#fix-selection').change(function(){
         selectedProductList[indexObj].Quantity = numberQuantity + 1;
         
     } else{
-        let product = ProductList.find(x=>x.Product_ID == id);
+        let product = activeProductList.find(x=>x.Product_ID == id);
         let prSelect = {};
         prSelect['Product_ID'] = id;
         prSelect['Quantity'] = 1;
@@ -486,13 +551,13 @@ $('#fix-selection').change(function(){
     }
     let total_quantity = parseInt($('#total-quantity').text()) + 1;
         $('#total-quantity').text(total_quantity);
-    let pr = ProductList.find(x=>x.Product_ID == id);
+    let pr = activeProductList.find(x=>x.Product_ID == id);
     $(this).val("");
     plusPrice(pr.Product_Price);
 })
 
  function innerSelectedProduct(id){
-    let pr =  ProductList.find(x=> x.Product_ID == id);
+    let pr =  activeProductList.find(x=> x.Product_ID == id);
     let price = pr.Product_Price;
     str = '';
     str += '<tr class="cart-item">';
@@ -501,7 +566,7 @@ $('#fix-selection').change(function(){
     str += '</td>';
     str += '<td>';
     str += ' <select class="form-control select2-show-search selected-product" style="width: 100%"  >';
-    $.each(ProductList, function(k,v){
+    $.each(activeProductList, function(k,v){
         if(v.Product_ID == id){
             str += '<option class="product-option" selected value = "' + v.Product_ID+ '" > ' + v.Product_Name + '</option>';
         } 
@@ -538,9 +603,9 @@ $(document).on('focus','.selected-product', function(){
      oldQuantity = parseInt( $(this).closest('.cart-item').find('.product-quantity').text());
 }).on('change', '.selected-product',  function(){
     let id = $(this).val();
-    let pr =  ProductList.find(x=> x.Product_ID == id);
+    let pr =  activeProductList.find(x=> x.Product_ID == id);
     let findID = $('.selected-product option[value = '+ id + ']');
-    let oldProduct = ProductList.find(x=> x.Product_ID == oldValue);
+    let oldProduct = activeProductList.find(x=> x.Product_ID == oldValue);
     if(!selectedProductList.find(x=>x.Product_ID == id)){ // neu chua duoc chon
         let indexOldValue = selectedProductList.findIndex(x=>x.Product_ID == oldValue);
          selectedProductList.splice(indexOldValue,1 );
@@ -560,7 +625,7 @@ $(document).on('focus','.selected-product', function(){
     } 
     else{ // da duoc chon
         $(this).closest('.cart-item').remove();
-        let prOlder = ProductList.find(x=>x.Product_ID == oldValue);
+        let prOlder = activeProductList.find(x=>x.Product_ID == oldValue);
         minusPrice(oldQuantity * prOlder.Product_Price);
         let quantityAdded = parseInt( $('.selected-product option[value = '+ id + ']').filter(':selected').closest('.cart-item').find('.product-quantity').text());
         let maxQuanlity = prOlder.Product_Quality;
@@ -600,7 +665,7 @@ $(document).on('click', '.btn-minus', function(){
 })
 
 function _plusQuantity(id, quantity){
-    let pr = ProductList.find(x => x.Product_ID == id);
+    let pr = activeProductList.find(x => x.Product_ID == id);
     let maxQuanlity = pr.Product_Quality;
     if(quantity == maxQuanlity){
         _qlt = quantity;
@@ -618,7 +683,7 @@ function _plusQuantity(id, quantity){
 
 }
  function _minusQuantity( id,quantity){
-    let pr = ProductList.find(x=> x.Product_ID == id);
+    let pr = activeProductList.find(x=> x.Product_ID == id);
     if(quantity == 1){
         _qlt = quantity;
         return _qlt;
@@ -637,7 +702,7 @@ function _plusQuantity(id, quantity){
 
 $(document).on('click', '.btn-trash-product', function(){
     let id= $(this).closest('.cart-item').find('.selected-product').val();
-    let pr = ProductList.find(x=>x.Product_ID == id);
+    let pr = activeProductList.find(x=>x.Product_ID == id);
     let price = pr.Product_Price;
     let quantity = $(this).closest('.cart-item').find('.product-quantity').text();
     let minus = price * quantity;
@@ -777,6 +842,33 @@ function addNewCustomer(){
             dataResult = JSON.parse(dataResult);
             
             
+        }
+
+    });
+}
+$('#reportrange').on('apply.daterangepicker', function (e, picker) {
+    let startDate = picker.startDate.format('YYYY-MM-DD HH:mm:ss');
+    let endDate = picker.endDate.format('YYYY-MM-DD HH:mm:ss');
+    searchDateReceipt(startDate, endDate);
+   
+    
+})
+
+function searchDateReceipt(start, end){
+    var data = {
+        "Start_Date":  start,
+        "End_Date": end,
+        "action": "searchDateReceipt"
+    };
+    
+    $.ajax({
+        data: data,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success: function(dataResult){
+            dataResult = JSON.parse(dataResult);
+            appendListOrder(dataResult);
+            $('#order-table').dataTable();
         }
 
     });

@@ -1,4 +1,10 @@
-<?php   session_start(); ?>
+<?php   session_start(); 
+  if(!isset($_SESSION["admin"])){
+    header('Location: login.php'); // Instructs the visitor's browser to redirect
+    exit; // <-- What you want. Prevents further code from being executed, works as a security measure.
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,9 +40,6 @@
       </a>
       <a href="../../views/admin/order.php" class="si si-layers sidebar-category" id="sidebar-fourth">
         <span class="item-sidebar">Đơn hàng</span>
-      </a>
-      <a href="../../views/admin/bill.php" class="si si-notebook sidebar-category" id="sidebar-fifth" >
-        <span class="item-sidebar">Hóa đơn</span>
       </a>
     </div>
     <div id="content">

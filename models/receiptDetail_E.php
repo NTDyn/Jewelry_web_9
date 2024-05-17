@@ -10,8 +10,9 @@
         public String $Product_Image;
         public String $Product_Name ;
         public String $Admin_Name ;
+        public String $Receipt_Address;
 
-        public function ReceiptDetail_E($id_detail, $id_receipt, $id_product ,$quantity, $price , $payment , $note, $product_img, $product_name, $admin){
+        public function ReceiptDetail_E($id_detail, $id_receipt, $id_product ,$quantity, $price , $payment , $note, $product_img, $product_name, $admin, $address){
             $this->Detail_ID = $id_detail;
             $this->Receipt_ID = $id_receipt;
             $this->Product_ID = $id_product;
@@ -22,6 +23,7 @@
             $this->Product_Image = $product_img;
             $this->Product_Name = $product_name;
             $this->Admin_Name = $admin;
+            $this->Receipt_Address = $address;
         }
 
         

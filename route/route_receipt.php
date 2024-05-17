@@ -91,9 +91,17 @@
     }
 
     if(isset($_POST['action'])){
-        if($_POST['action'] == 'getListProduct'){
+        if($_POST['action'] == 'getAllListProduct'){
             $contr = new receipt_C();
-            $result = $contr->getListProduct();
+            $result = $contr->getAllListProduct();
+            echo  ($result);
+        }
+    }
+
+    if(isset($_POST['action'])){
+        if($_POST['action'] == 'getActiveListProduct'){
+            $contr = new receipt_C();
+            $result = $contr->getActiveListProduct();
             echo  ($result);
         }
     }
@@ -143,19 +151,12 @@
     }
 
     if(isset($_POST['action'])){
-        if($_POST['action'] == 'addCustomer'){
-            $customer = new customer_E();
-            $customer->Customer_Name = $_POST['customer-name'];
-            $customer->Customer_Address = $_POST['customer-address'];
-            $customer->Customer_Email = $_POST['customer-email'];
-            $customer->Customer_Username = $_POST['customer-username'];
-            $customer->Customer_Phone =  $_POST['customer-phone'];
-            $customer->Customer_Password = $_POST['customer-password'];
-            $customer->Customer_Status = 1;
-             
+        if($_POST['action'] == 'searchDateReceipt'){
+            $startDate = $_POST['Start_Date'];
+            $endDate = $_POST['End_Date'];
             $contr =  new receipt_C();
-            $result = $contr->addCustomer($customer);
-            echo json_encode($result);
+            $result = $contr->searchDateReceipt($startDate, $endDate);
+            echo $result;
         }
     }
 

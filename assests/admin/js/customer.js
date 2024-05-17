@@ -1,3 +1,4 @@
+
 $(document).ready( function(){
     $('#breadcrumb-second').text('Khách hàng');
     readCustomer();

@@ -108,9 +108,14 @@
             return $errorList;
         }
 
-        function getListProduct(){
+        function getAllListProduct(){
             $model = $this->model("receipt_M");
-            $result = $model->getListProduct();
+            $result = $model->getAllListProduct();
+            echo json_encode($result);
+        }
+        function getActiveListProduct(){
+            $model = $this->model("receipt_M");
+            $result = $model->getActiveListProduct();
             echo json_encode($result);
         }
 
@@ -133,9 +138,10 @@
             return json_encode($result);
         }
 
-        function addCustomer($customer){
+
+        function searchDateReceipt($start, $end){
             $model = $this->model("receipt_M");
-           $result = $model->addCustomer($customer);
+           $result = $model->getListReceipt($start, $end);
             return json_encode($result);
         }
     }

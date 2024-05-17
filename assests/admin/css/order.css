@@ -251,4 +251,13 @@ option[value=""][disabled] {
     border-color: red;
     padding: 2%;
 }
-
+.container-calendar{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+.calendar-picker-area{
+    width: fit-content;
+    display: flex;
+}

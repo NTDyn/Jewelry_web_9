@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link type="text/css" href="../../assests/admin/css/home.css?v=13" rel="stylesheet">
+    <link type="text/css" href="../../assests/admin/css/home.css?v=14" rel="stylesheet">
 </head>
 <body>
     <?php include('header.php') ?>

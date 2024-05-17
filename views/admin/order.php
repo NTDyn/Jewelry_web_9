@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serena Web</title>
-    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=4">
+    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=6">
     <!--Select2 css -->
     <link id="link6" href="../../assests/admin/js/select2/select2.min.css" rel="stylesheet" />
 
@@ -13,10 +13,20 @@
 
     <?php  include 'header.php' ?>;
     <div class="content">
+    
         <div id="table-order-area">
             <div id ="tb-title">
                 <p>Danh sách đơn hàng</p>
             </div>
+            <div class="container-calendar">
+                <div class="calendar-picker-area" >
+                    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <span></span> <i class="fa fa-caret-down"></i>
+                    </div>
+                </div>  
+            </div>
+            
             <table id="order-table">
                 <thead>
                     <th>Mã đơn</th>
@@ -33,8 +43,8 @@
             </table>
         </div>
 
-            
   
+        
     </div>
 
     <!-- The Modal detail order -->
@@ -389,8 +399,15 @@
 
      
     <?php  include 'footer.php' ?>
+    
 </body>
 </html>
 
-<script><?php require ("../../assests/admin/js/order.js") ?></script>
+
 <script src="../../assests/admin/js/chart/chart.js?v=1"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script><?php require '../../assests/admin/js/datetime/moment.js'?></script>
+<script><?php require ("../../assests/admin/js/order.js") ?></script>
+

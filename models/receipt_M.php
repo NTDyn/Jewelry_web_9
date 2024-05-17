@@ -11,9 +11,9 @@
             return new receipt_M();
         }
 
-        public function getListReceipt(){
+        public function getListReceipt($start, $end){
             if($this->connectDB()){
-                $sql = "SELECT * FROM Receipt re, Customer cus WHERE re.Customer_ID = cus.Customer_ID ";
+                $sql = "SELECT * FROM Receipt re, Customer cus WHERE re.Customer_ID = cus.Customer_ID AND re.Receipt_Date BETWEEN  '" . $start . "' AND '" .$end . "'";
                 $result = mysqli_query($this->conn, $sql);
                 $list= array();
                 if(mysqli_num_rows($result) > 0){
@@ -36,10 +36,16 @@
                             $receipt->Receipt_Reason = $row['Receipt_Reason'];
                         }
                            
+                        if($row['Admin_ID'] == null){
+                            $receipt->Admin_ID = 0;
+                        } else {
+                            $receipt->Admin_ID = $row['Admin_ID'];
+                        }
                         $receipt->Receipt_Payment = $row['Receipt_Payment'];
                         $receipt->Receipt_Status = (int) $row['Receipt_Status'];
                         $receipt->Customer_Name = $row['Customer_Name'];
                         $receipt->Customer_Phone = $row['Customer_Phone'];
+                        
                         array_push($list, $receipt) ;
                     }
                 }
@@ -72,7 +78,10 @@
 
         public function getDetailOfReceipt($id_receipt){
             if($this->connectDB()){
-                $sql ="SELECT * FROM receipt_detail de , receipt re, product pr, admin ad WHERE de.Receipt_ID = re.Receipt_ID AND pr.Product_ID = de.Product_ID AND ad.Admin_ID = re.Admin_ID AND re.Receipt_ID =  " . $id_receipt;
+                $sql ="SELECT * FROM receipt_detail de 
+                INNER JOIN receipt re ON de.Receipt_ID = re.Receipt_ID AND de.Receipt_ID = "  . $id_receipt .
+                " INNER JOIN Product pr ON  pr.Product_ID = de.Product_ID
+                LEFT JOIN  admin ad ON  ad.Admin_ID = re.Admin_ID ";
                 $result = mysqli_query($this->conn, $sql);
                 $list =  array();
                 if(mysqli_num_rows($result) > 0){
@@ -86,6 +95,7 @@
                         $detail->Detail_Price = $row['Detail_Price'];
                         $detail->Product_Image = $row['Product_Image'];
                         $detail->Product_Name = $row['Product_Name'];
+                        $detail->Receipt_Address = $row['Receipt_Address'];
                         if($row['Admin_Name'] == null){
                             $detail->Admin_Name = '';
                         } else {
@@ -180,7 +190,7 @@
 
             }
         }
-        public function getListProduct(){
+        public function getActiveListProduct(){
             if($this->connectDB()){
                 $sql = "SELECT * FROM Product WHERE Product_Status = 1";
                 $result = mysqli_query($this->conn , $sql);
@@ -205,6 +215,32 @@
             }
         }
 
+        public function getAllListProduct(){
+            if($this->connectDB()){
+                $sql = "SELECT * FROM Product ";
+                $result = mysqli_query($this->conn , $sql);
+                $list= array();
+                if(mysqli_num_rows($result) > 0){
+                    
+                    while($row = mysqli_fetch_array($result) ){
+                        $pr = new Product_E();
+                        $pr->Product_ID = (int) $row['Product_ID'];
+                        $pr->Product_Name =  $row['Product_Name'];
+                        $pr->Category_ID = (int) $row['Category_ID'];
+                        $pr->Product_Price = (int) $row['Product_Price'];
+                        $pr->Product_Quality = (int) $row['Product_Quality'];
+                        $pr->Product_Describe=  $row['Product_Describe'];
+                        $pr->Product_Image =  $row['Product_Image'];
+                        $pr->Product_Status = (int) $row['Product_Status'];
+                        array_push($list, $pr) ;
+                    }
+                }
+                
+                return $list;
+            }
+        }
+
+        
         public function addReceipt($receipt, $customer){
             if($this->connectDB()){
                 $customer_id = $customer->Customer_ID;
