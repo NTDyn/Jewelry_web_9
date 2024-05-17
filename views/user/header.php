@@ -7,7 +7,7 @@
   <title>Serena Jewelry</title>
   
     <link  type="text/css" href= "../../assests/user/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
-    <link  type="text/css"  href="../../assests/user/css/header.css?v=7"  rel="stylesheet"> 
+    <link  type="text/css"  href="../../assests/user/css/header.css?v=8"  rel="stylesheet"> 
     <link  type="text/css" href="../../assests/user/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/icons.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/user/css/iconfonts/plugin.css" rel="stylesheet">
@@ -15,7 +15,8 @@
 </head>
 <body>
       <div class = "header container">
-            <nav class="navbar navbar-expand-sm">
+        <div class="row">    
+          <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" id="logo-area" href="../../views/user/index.php" >
                         <img src="../../image/logo.png" class="rounded-pill" id="logo" alt="logo-index" >
                     </a>
@@ -112,7 +113,8 @@
                           </form>
                       </div>
                     </div>
-            </nav>
+              </nav>
+            </div>
         </div>
 
   <!-- MODAL SHOPPING CART-->

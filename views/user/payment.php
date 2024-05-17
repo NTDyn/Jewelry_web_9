@@ -152,7 +152,7 @@ function getspbyid($con,$id){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../../assests/user/css/payment.css?v=8" >
+    <link rel="stylesheet" href="../../assests/user/css/payment.css?v=9" >
 
 
 </head>
@@ -218,7 +218,7 @@ function getspbyid($con,$id){
             <div class="row">
                 <div class="col-7">
                     <label>Lời nhắn</label>
-                    <input name="note_shop" placeholder="Lưu ý cho cửa hàng" class="note-shop"/>
+                    <input name="note_shop" placeholder="  Lưu ý cho cửa hàng" class="note-shop"/>
                 </div>
                 <div class="col-5">
                     <div class="row">

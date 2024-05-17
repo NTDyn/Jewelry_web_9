@@ -35,6 +35,15 @@
     border-color: #cbcff6;
     box-shadow: 0px 0px 10px 2px #cbcff6;
 }
+.order-date{
+    display: flex;
+    justify-content: start;
+    padding-bottom: 1%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e1e1e1;
+    margin-bottom: 1%;
+}
 .order-status{
     display: flex;
     justify-content: end;

@@ -39,6 +39,7 @@ $(document).ready(function(){
         dropdownParent: $('#modal-add')
     });
     appendCalendar();
+    $('#order-table').dataTable();
 })
 
 function getAllListProduct(){
@@ -80,26 +81,12 @@ function innerProductList(dataList){
 }
 
 
-function readListOrder(){
-    var _data = {"action": "read"}; 
-    $.ajax({
-        data: _data ,
-        type: "post",
-        url: "../../route/route_receipt.php",
-        success:  function(dataResult){
-            dataResult = JSON.parse(dataResult);
-           appendListOrder(dataResult);
-           $('#order-table').dataTable();
-        },
-        catch: function(dataR){
-            console.log(dataR);
-        }
-    })
-}
+
 
 function appendListOrder(data){
     
     $('#list-order').empty();
+    $('#order-table').DataTable().clear().destroy();
     $.each(data, function(k,v){
         str = "";
         str += "<tr class='order-item'>";
@@ -175,7 +162,8 @@ function appendListOrder(data){
         
        
     })
-
+    $('#order-table').dataTable();
+    
 }
 
 $(document).on('click', '.btn-detail', function(){
@@ -868,7 +856,7 @@ function searchDateReceipt(start, end){
         success: function(dataResult){
             dataResult = JSON.parse(dataResult);
             appendListOrder(dataResult);
-            $('#order-table').dataTable();
+
         }
 
     });

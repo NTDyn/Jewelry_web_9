@@ -39,17 +39,20 @@ function appendHistoryOrder(list){
     $.each(list, function(k,v){
         str = '';
         str += '<div class="order-content-item">';
+        str += '<div class="row">'
+        str += '<div class="col-6 order-date">'+v.Receipt_Date + '</div>'
         if(v.Receipt_Status == 0){
-            str += ' <div class="order-status" ><span class="fa fa-calendar-times-o cancel-icon" ></span>Đã hủy </div>';
+            str += ' <div class="col-6 order-status" ><span class="fa fa-calendar-times-o cancel-icon" ></span>Đã hủy </div>';
         } else if(v.Receipt_Status == 1){
-            str += ' <div class="order-status" ><span class="fa fa-calendar-o wait-icon" ></span>Chờ xác nhận </div>';
+            str += ' <div class="col-6 order-status" ><span class="fa fa-calendar-o wait-icon" ></span>Chờ xác nhận </div>';
         } else if(v.Receipt_Status == 2){
-            str += ' <div class="order-status" ><span class="fa fa-dropbox confirm-icon" ></span>Đang chuẩn bị hàng </div>';
+            str += ' <div class="col-6 order-status" ><span class="fa fa-dropbox confirm-icon" ></span>Đang chuẩn bị hàng </div>';
         }else if(v.Receipt_Status == 3){
-            str += ' <div class="order-status" ><span class="fa fa-truck trans-icon" ></span>Đang giao hàng</div>';
+            str += ' <div class="col-6 order-status" ><span class="fa fa-truck trans-icon" ></span>Đang giao hàng</div>';
         }else if(v.Receipt_Status == 4){
-            str += ' <div class="order-status" ><span class="fa fa-send send-icon" ></span>Giao hàng thành công </div>';
+            str += ' <div class="col-6 order-status" ><span class="fa fa-send send-icon" ></span>Giao hàng thành công </div>';
         }
+        str += '</div>';
         str += '<div style="padding:1%">'
         str += '<div class="row label-table">';
         str += '<div class="col-1"></div>';

@@ -22,6 +22,10 @@
 }
 .order-picture{
     width: 100%;
+    border-radius: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
 }
 .product-area{
     padding: 1%;
@@ -44,10 +48,10 @@
 }
 .item-price , .item-name , .item-quantity , .item-total-price {
     text-align: center;
-    justify-content: center;
+    margin: auto;
 }
 .infor-items{
-    margin-top: 2%;
+    margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -94,4 +98,13 @@
     border-width: 1px;
     border-radius: 5px;
     padding: 6px 10px;
+}
+.btn-change-address{
+    padding: 6px 12px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    box-shadow: 0px 0px 10px 5px#e1e7f5;
+    background-color: white;
 }
