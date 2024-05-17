@@ -1,7 +1,66 @@
 <?php include('header.php');
 include('../user/connect.php');
 include('../admin/product_controller.php');
-$data_product=getListProduct($conn);
+if(isset($_GET['per_page'])&&!isset($_POST['hint'])){
+    $current_page= $_GET['page'];
+    $item_page=(int)$_GET['per_page'];
+    $ofset=(int)($current_page-1)*$item_page;
+   
+   
+    $data_product=getListProduct($conn,$item_page,$ofset);
+    $total_record=(int)getrecord($conn);
+    $total_page=ceil($total_record/$item_page);
+}else if (!isset($_GET['per_page'])&&!isset($_POST['hint'])){
+    $current_page=1;
+    $item_page=8;
+    $ofset=($current_page-1)*$item_page;
+    $total_record=(int)getrecord($conn);
+    $total_page=ceil($total_record/$item_page);
+    $data_product=getListProduct($conn,$item_page,$ofset);
+  
+}
+
+// ---------------------------------------------------------------------------------------------
+if(isset($_GET['hint'])){
+    $search=$_GET['hint'];
+}else{
+    $search="";
+}
+if (isset($_GET['hint'])){
+    $search=$_GET['hint'];
+    if(strlen($search)==0){
+        if(!isset($_GET['per_page'])){
+        $data_product=getListProduct($conn,$item_page,$ofset);
+    }
+    }
+    
+    else{
+        if(isset($_GET['per_page'])){
+            $current_page= $_GET['page'];
+            $item_page=(int)$_GET['per_page'];
+            $ofset=(int)($current_page-1)*$item_page;
+            $data_product=getListProduct($conn,$item_page,$ofset);
+            $total_record=(int)getrecordsearch($conn,$search);
+            $total_page=ceil($total_record/$item_page);
+        $data_product=getListProductSearch($conn,$search,$item_page,$ofset);
+        
+    }else{
+      
+            $current_page=1;
+            $item_page=8;
+            $ofset=($current_page-1)*$item_page;
+            $total_record=(int)getrecordsearch($conn,$search);
+            $total_page=ceil($total_record/$item_page);
+            $data_product=getListProductSearch($conn,$search,$item_page,$ofset);
+    }
+    }
+}
+    
+
+
+
+// ---------------------------------------------------------------------------------------------
+
 
 $sql_loaisp="select * from category where Category_Status=1";
 $result =mysqli_query($conn,$sql_loaisp);
@@ -17,27 +76,31 @@ if(isset($_POST["them_sp"])){
     $mota_sp=$_POST['mota'];
     $loai_sp=$_POST['loaisp'];
     if(isset($_FILES["image"])){
-    $img_sp=$_FILES["image"]["name"];
-    $img_sp_name=$_FILES["image"]["tmp_name"];
-    $uploaded_type=$_FILES["image"]["type"];
-    $uploaded_size=$_FILES["image"]["size"];
-    // echo $uploaded_type;
-    // if($uploaded_type!="jpg"&& $uploaded_type!="png"&& $uploaded_type!="jpeg"){
-    //     echo "<script>swal.fire({
-    //         title: 'Hình Ảnh',
-    //         text: 'chỉ hỗ trợ upload JPEG, JPG, PNG',
-    //         type: 'error',
+   
+    if($soluong_sp<=0||$soluong_sp>10000){
+        echo "<script>swal.fire({
+                    title: 'Cảnh báo',
+                     text: 'Số lượng không hợp lệ',
+                     type: 'error',}).then(function(){
+                        window.location.href='product.php'});</script>";
+                     return;
+    }
+
+    if($uploaded_type!="image/jpg"&& $uploaded_type!="image/png"&& $uploaded_type!="image/jpeg"){
+        echo "<script>swal.fire({
+            title: 'Hình Ảnh',
+            text: 'chỉ hỗ trợ upload JPEG, JPG, PNG',
+            type: 'error',
             
-    //       }).then(function(){
-    //         window.location.href='product.php';
-    //       });
+          }).then(function(){
+            window.location.href='product.php';
+          });
         
          
-    //       </script>";
+          </script>";
           
-    // }
-    
-    // else{
+    }else{
+      
     move_uploaded_file($img_sp_name,'../../assests/image_product/'.$img_sp);
     $sql_add= "insert into product( Product_Name, Category_ID, Product_Price, Product_Status, Product_Quality, Product_Describe, Product_Image) VALUES ('$ten_sp',$loai_sp,$gia_sp,1,$soluong_sp,'$mota_sp',' $target')";
     
@@ -57,19 +120,30 @@ if(isset($_POST["them_sp"])){
           });</script>';
     }
     }
-    // }
+    }
 
 }
 
  ?>
- 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link  type="text/css"  href="../../assests/admin/css/product.css"  rel="stylesheet"> 
+ </head>
+ <body>
+    
+ </body>
+ </html>
 
  <div class="backgroud">
 
-<div class="container">
+<div style="width: 1000px; height: 500px;border: solid #C0C0C0 1px;" class="container">
     <form enctype="multipart/form-data" method="post" >
         <div class="close">
-            <i id="close_button"  class="fa fa-close"></i>
+        <button id="close_button"  class="btn-close"></button>
         </div>
         <h2 class="mt-5 mb-5" id="td">
             Sản Phẩm
@@ -97,10 +171,12 @@ if(isset($_POST["them_sp"])){
                    
             </div>
             
-              <div class="row">
-        <div class="col-sm-12" >
-        <input enctype="multipart/form-data" type="file" name="image" class="form-control" id="image" placeholder="Hình Ảnh"  required>
-        </div>
+              <div class="row">        
+        <div class="row g-0 text-center">
+  <div class="col-sm-6 col-md-8"><input onchange="readURL(this);" enctype="multipart/form-data" type="file" name="image" class="form-control" id="image" placeholder="Hình Ảnh"  required></div>
+  <div class="col-6 col-md-4"><img id="previewImage" style="width:50px ; height:50px;" src="../../assests/image_product/bracelet.jpg" alt=""></div>
+</div>
+
       </div>
       <div class=" col-md6 mb-3">   </div>
                    
@@ -122,7 +198,7 @@ if(isset($_POST["them_sp"])){
        <textarea class="form-control"name="mota" id="motasp" value="" style="height: 80px" ></textarea>
         </div>
       </div>
-      <input type="hidden" name="act" value="<?php echo $_SESSION['act']; ?>">
+    
             <div class="col-lg-12 mt-5">
                 <button name="them_sp" id="submit" class="btn btn-success">Thêm Sản Phẩm</button>
                
@@ -139,7 +215,10 @@ if(isset($_POST["them_sp"])){
 <div class="add_sp">
 <!-- <button type="button" id="btn_them" class="btn btn-outline-success">Thêm</button>
  -->
+ <form action="" method="get">
  <input  type="text" name="hint" id="search" placeholder="Tìm Kiếm"  >
+<!-- <input type="submit" class="fa fa-seak"> -->
+ </form>
 </div>
 <script>
     document.getElementsByClassName("btn-add")[0].addEventListener("click",()=>{
@@ -149,15 +228,17 @@ if(isset($_POST["them_sp"])){
 
     })
  
-      $(document).ready(function(){
-        $("#search").keyup(function(){
-            var hint=$("#search").val();
-           $.post("product_controller.php",{hint:hint}, function(data){
+    //   $(document).ready(function(){
+    //     $("#search").keyup(function(){
+           
+    //         var hint=$("#search").val();
+          
+    //        $.post("product.php",{hint:hint}, function(data){
             
-          $('.danhsach').html(data);
-           })
-        })
-      })
+        //   $('.danhsach').html(data);
+    //        })
+    //     })
+    //   })
    
    
    
@@ -166,7 +247,7 @@ if(isset($_POST["them_sp"])){
 </script>
 <div class="table_sp">
 <table class="table">
-  <thead class="table-danger">
+  <thead style="text-align: center;" class="table-danger">
    <tr>
     <th>STT</th>
     <th>Tên Sản Phẩm</th>
@@ -185,7 +266,7 @@ if(isset($_POST["them_sp"])){
   </thead>
   <tbody class="danhsach">
     <?php 
-    $stt=0;
+    $stt=($current_page-1)*8;
     
    
     for($i=0;$i<count($data_product);$i++){
@@ -231,10 +312,11 @@ if(isset($_POST["them_sp"])){
   </tbody>
 </table>
 </div>
+   
+<?php include("pagination.php") ?>
 <script>
    
-
-
-
 </script>
+
+
 

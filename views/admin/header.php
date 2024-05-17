@@ -1,3 +1,4 @@
+<?php   session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
                   <span class="name-user">
                     <span>
                       <?php 
-                        session_start();
+                      
                         if(isset($_SESSION["user"])){
                           echo $_SESSION["user"];
                         }else{

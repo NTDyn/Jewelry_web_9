@@ -73,11 +73,18 @@ else{
 }
 }
 
-function edit_product(){
-    
-}
 
 $(document).ready(function(){
     $('#breadcrumb-second').text('Sản phẩm');
 })
+function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+         
+        document.getElementById("previewImage").src = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 

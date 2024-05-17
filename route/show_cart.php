@@ -69,6 +69,15 @@ function checkstatussanpham($id,$con){
     function tangsl(id,gia,x){
 
         $.post("../../route/quality_change.php", {id_sp:id}, function(data){
+          if (data=="Số lượng trong kho không đủ"){
+            Swal.fire({
+                    title: "Cảnh báo!",
+                    text:data,
+                    icon: "Error",
+                    timer: 2000,
+                  });
+                  return;
+                }
           var cha= x.parentElement;
           var update_sl=cha.children[1];
           update_sl.innerHTML=data;
