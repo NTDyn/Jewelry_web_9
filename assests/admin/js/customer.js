@@ -3,6 +3,12 @@ $(document).ready( function(){
     readCustomer();
 })
 
+function formatToMoney(_number){
+    let VietNamDong = Intl.NumberFormat('en-VI');
+    let result = VietNamDong.format(_number) ;
+    return result;
+}
+
 $('#modal-add').on('hidden.bs.modal', function (e) {
     $('.error-notify').text('');
     $(this)
@@ -23,7 +29,7 @@ function readCustomer(){
        success:  function(dataResult){
             dataResult = JSON.parse(dataResult);
            appendListCustomer(dataResult);
-           $('#customer-table').dataTable();
+           new DataTable('#customer-table' );
         },
         
         catch: function(dataR){
@@ -43,6 +49,7 @@ function appendListCustomer(data){
         str += "<td>" + v.Customer_Phone + "</td>";
         str += "<td>" + v.Customer_Email + "</td>";
         str += "<td>" + v.Customer_Address + "</td>";
+        str += "<td>" + formatToMoney( v.Customer_TotalMoney) + "</td>";
         if( v.Customer_Status == 1){
             str += "<td class = 'btn-active'>" ;
             str += "<span> Hoạt động </span> ";
@@ -54,6 +61,9 @@ function appendListCustomer(data){
         }
         str += "<td>"
             if(v.Customer_Status == 1){
+                str += '<button class="btn-bill" data-bs-toggle="modal" data-bs-target="#modalBill" >';
+                str += '<span class="fa fa-eye " ></span>';
+                str += '</button>';
                 str += ' <button  class="btn-edit" data-bs-toggle="modal" data-bs-target="#modalEdit" >';
                 str += '<span class="fa fa-pencil-square-o " ></span>';
                 str += '</button>';
@@ -61,6 +71,9 @@ function appendListCustomer(data){
                 str += '<span class=" fa fa-toggle-on"></span>';
                 str += '</button>';
             } else {
+                str += '<button class="btn-bill" data-bs-toggle="modal" data-bs-target="#modalBill" >';
+                str += '<span class="fa fa-eye " ></span>';
+                str += '</button>';
                 str += ' <button class="btn-uneditable" disabled >';
                 str += '<span class="fa fa-pencil-square-o " ></span>';
                 str += '</button>';
@@ -79,6 +92,7 @@ function appendListCustomer(data){
 $("#read-customer-form").submit(function(e) {
     e.preventDefault();
 });
+
 
 // Remove Customer
 $(document).on('click','.btn-remove', function(){
@@ -287,4 +301,79 @@ function errorInnerHTML(valid){
         $('.error-email').text(valid.Message);
     }
 
+}
+
+$(document).on('click', '.btn-bill', function(){
+    let id = parseInt($(this).closest('.customer-item').find('.customer-id').text());
+    getOrderBill(id);
+})
+
+function getOrderBill(id){
+    var data = {"action":"getAllHistoryOrder", "Customer_ID": id};
+    $.ajax({
+        data: data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success:  function(dataResult){
+            console.log(dataResult);
+            dataResult = JSON.parse(dataResult);
+           appendOrderBill(dataResult);
+            
+        }
+    })
+}
+
+function appendOrderBill(list){
+    $('.history-bill').empty();
+    $.each(list, function(k,v){
+        str = '';
+        str += '<div class="bill-item ">';
+        str += '<div class="bill-status">Đang giao</div>';
+        str += '<div class="bill-content" id ="orderHeader-' + v.Receipt_ID + '">';
+       
+        str += '</div>';
+        str += '</div>';
+
+        $('.history-bill').append(str);
+        getDetailBill(v.Receipt_ID);
+    })
+}
+
+
+function getDetailBill(id){
+
+    var _data = {
+        "action": "getDetailOfReceipt",
+        "receipt-id": id
+    }; 
+    $.ajax({
+        data: _data ,
+        type: "post",
+        url: "../../route/route_receipt.php",
+       success:  function(dataResult){
+        console.log(dataResult);
+            dataResult = JSON.parse(dataResult);
+            let str = '';
+            $.each(dataResult, function(k,v){
+
+                str += '<div class="row bill-detail-content">';
+                str += '<div class="col-2 detail-bill-picture">';
+                str += '<img class="detail-bill-img" src="' + v.Product_Image + '">';
+                str += '</div>';
+                str += '<div class="col-5 detail-bill-name">'+ v.Product_Name +'</div>';
+                str += '<div class="col-2 detail-bill-quantity"> ' + v.Detail_Quantity +'</div>';
+                str += '<div class="col-2 detail-bill-price">' + formatToMoney( v.Detail_Price) +' VND</div>';
+                str += '</div>';
+                
+            })
+            $('#orderHeader-'+id+'').append(str);
+           
+        },
+        
+        catch: function(dataR){
+            console.log(dataR);
+        }
+
+    });
+    
 }

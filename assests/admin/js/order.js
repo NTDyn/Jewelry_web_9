@@ -41,13 +41,11 @@ function readListOrder(){
         data: _data ,
         type: "post",
         url: "../../route/route_receipt.php",
-       
-       success:  function(dataResult){
+        success:  function(dataResult){
             dataResult = JSON.parse(dataResult);
            appendListOrder(dataResult);
            $('#order-table').dataTable();
         },
-        
         catch: function(dataR){
             console.log(dataR);
         }
@@ -61,7 +59,8 @@ function appendListOrder(data){
         str = "";
         str += "<tr class='order-item'>";
         str += "<td class='order-id'>" + v.Receipt_ID + "</td>";
-        str += "<td class='customer-id'>" + v.Customer_ID + "</td>";
+        str += "<td class='customer-name' value = '" + v.Customer_ID + "'>" + v.Customer_Name + "</td>";
+        str += "<td class='customer-phone'>" + v.Customer_Phone + "</td>";
         str += "<td class='order-total'>" + formatToMoney(v.Receipt_Total) + " đ </td>";
         str += "<td class='order-date'>" + v.Receipt_Date + "</td>";
 
@@ -127,13 +126,15 @@ function appendListOrder(data){
         str += "</tr>";
 
         $('#list-order').append(str);
+        
+        
        
     })
 
 }
 
 $(document).on('click', '.btn-detail', function(){
-    let customer_id = $(this).closest('.order-item').find('.customer-id').text();
+    let customer_id = $(this).closest('.order-item').find('.customer-name').attr("value");
     getCustomer(customer_id);
     let receipt_id = $(this).closest('.order-item').find('.order-id').text();
     $('#receipt-id').text(receipt_id);
@@ -152,7 +153,6 @@ function getCustomer(id){
         url: "../../route/route_receipt.php",
         success:  function(dataResult){
             dataResult = JSON.parse(dataResult);
-            $('#customer-id').text(dataResult.Customer_ID);
             $('#customer-name').text(dataResult.Customer_Name);
             $('#customer-address').text(dataResult.Customer_Address);
             $('#customer-phone').text(dataResult.Customer_Phone);
@@ -204,6 +204,9 @@ function appendInforDetail(data){
         str += ' </div>';
         $('.product-order-infor').append(str);
         $('#order-note').text(data.Receipt_Note);
+        $('#receipt-payment').text(data.Receipt_Payment);
+        $('#admin-name').text(data.Admin_Name);
+  
         
 }
 
@@ -343,7 +346,7 @@ function formatToMoney(_number){
     return result;
 }
 
-  function existCustomer(){
+ function  existCustomer(){
     let phone = $('#txt-phone').val();
     var data = {"action":"existCustomer", "customer-phone": phone};
     $.ajax({
@@ -354,6 +357,7 @@ function formatToMoney(_number){
             $('.error-notify').text('');
             
             if(dataResult == 'false'){
+                $('#txt-id').val('-1');
                 $('.isDisable').prop('readonly', false);
                 $('#txt-name').val("");
                 $('#txt-address').val("");
@@ -521,12 +525,10 @@ $('#fix-selection').change(function(){
     str += '</td>';
     str += '</tr>';
     $('#tb-product-body').append(str);
-    loadListSelectable();
+
 }
 
-function loadListSelectable(){
-  //  $('.selected-product').find('option')
-}
+
 
 let oldValue;
 let oldQuantity;
@@ -667,8 +669,7 @@ function minusPrice(Price){
 }
 
 
-$('.btn-order').click(function(){
-    
+$('.btn-order').click( function(){
     checkCustomerInfor();
     if(selectedProductList.length == 0){
         Swal.fire("Vui lòng chọn sản phẩm muốn mua!");
@@ -685,23 +686,28 @@ $('.btn-order').click(function(){
         confirmButtonText: "Thêm đơn hàng"
       }).then((result) => {
         if (result.isConfirmed) {
-         addNewOrder();
+            
+            addNewOrder();
          
         }
       });
     }
-
-    
-    
-    
-
 })
 
 function addNewOrder(){
+   
     var data = {
         "Customer_ID":  $('#txt-id').val(),
         "Receipt_Total": parseInt(formatFromMoney($('#total-price').text())),
-        "Receipt_Note": $('#comment').text(), 
+        "Receipt_Note": $('#comment').val(), 
+        "Receipt_Payment": $('input[name="payment"]:checked').val(),
+        "Admin_ID": $('#admin-id').val(),
+        "Customer_Name": $('#txt-name').val(),
+        "Customer_Phone": $('#txt-phone').val(),
+        "Customer_Email": $('#txt-email').val(),
+        "Customer_Address": $('#txt-address').val(),
+        "Customer_Username":$('#txt-phone').val() ,
+        "Customer_Password":$('#txt-phone').val(), 
         "action": "addReceipt"
     };
     
@@ -711,14 +717,11 @@ function addNewOrder(){
         type: "post",
         url: "../../route/route_receipt.php",
         success: function(dataResult){
-            if(dataResult == 'true'){
+            if(dataResult == 'true'){  
                addDetailOrder();
             }
            
         }
-
-        
-        
 
     });
     
@@ -737,14 +740,43 @@ function addDetailOrder(){
         url: "../../route/route_receipt.php",
         success: function(dataResult){
             if(dataResult == 'true'){
+                $('.cart-item').remove();
+                $('#total-quantity').text('0');
+                $('#total-price').text('0 VND');
+                selectedProductList = [];
                 Swal.fire({
                     title: "Thành công!",
                     text: "Thêm đơn hàng thành công!",
                     icon: "success",
                     timer: 2000,
                   });
+
             }
            
+        }
+
+    });
+}
+
+function addNewCustomer(){
+    var data = {
+        "customer-name": $('#txt-name').val(),
+        "customer-phone": $('#txt-phone').val(),
+        "customer-email": $('#txt-email').val(),
+        "customer-address": $('#txt-address').val(),
+        "customer-username":$('#txt-phone').val() ,
+        "customer-password":$('#txt-phone').val(),
+        "action": "addCustomer"
+    };
+    $.ajax({
+        data: data,
+        type: "post",
+        url: "../../route/route_receipt.php",
+        success: function(dataResult){
+            
+            dataResult = JSON.parse(dataResult);
+            
+            
         }
 
     });

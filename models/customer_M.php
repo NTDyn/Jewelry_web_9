@@ -10,7 +10,7 @@
         
         public function getListCustomer(){
             if($this->connectDB()){
-                $sql = "SELECT * FROM Customer ";
+                $sql = "SELECT cus.* , re.Receipt_Total, COUNT(re.Receipt_ID) AS Total_Bill FROM customer cus LEFT JOIN receipt re ON  cus.Customer_ID = re.Customer_ID AND cus.Customer_Status =1 GROUP BY cus.Customer_ID ";
                 $result = mysqli_query($this->conn, $sql);
                 $list= array();
                 if(mysqli_num_rows($result) > 0){
@@ -25,6 +25,13 @@
                         $customer->Customer_Username = $row['Customer_Username'];
                         $customer->Customer_Password = $row['Customer_Password'];
                         $customer->Customer_Status = $row['Customer_Status'];
+                        if($row['Receipt_Total'] == null){
+                            $customer->Customer_TotalMoney = 0;
+                        } else {
+                            $customer->Customer_TotalMoney = $row['Receipt_Total'];
+                        }
+                        
+                        $customer->Customer_TotalBill = $row['Total_Bill'];
                         array_push($list, $customer) ;
                     }
                 }

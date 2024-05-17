@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serena Web</title>
-    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=3">
+    <link rel="stylesheet" href="../../assests/admin/css/order.css?v=4">
     <!--Select2 css -->
     <link id="link6" href="../../assests/admin/js/select2/select2.min.css" rel="stylesheet" />
 
@@ -19,8 +19,9 @@
             </div>
             <table id="order-table">
                 <thead>
-                    <th>Mã đơn hàng</th>
-                    <th>Mã khách hàng</th>
+                    <th>Mã đơn</th>
+                    <th>Tên khách hàng</th>
+                    <th>Liên hệ</th>
                     <th>Tổng tiền</th>
                     <th>Ngày đặt</th>
                     <th>Trạng thái</th>
@@ -69,9 +70,9 @@
                                     </div>
                                 </div>
                                 <div class="row form-line">
-                                    <label class="col-2 form-label" > Mã khách hàng: </label>
+                                    <label class="col-2 form-label" > Thanh toán: </label>
                                     <div class="col-4">
-                                        <span id="customer-id"  > </span>
+                                        <span id="receipt-payment"  > </span>
                                     </div>
                                     <label class="col-2 form-label" >Tên khách hàng: </label>
                                     <div class="col-4">
@@ -87,6 +88,13 @@
                                     <div class="col-4">
                                         <span id= "customer-phone"></span>
                                     </div>
+                                </div>
+                                <div class="row form-line">
+                                    <label class="col-2 form-label" >Nhân viên: </label>
+                                    <div class="col-4">
+                                        <span id = "admin-name"  ></span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             
@@ -287,7 +295,7 @@
                                 <th></th>
                             </thead>
                             <tbody id="tb-product-body">
-                                <tr class="cart-item">
+                                <tr class="cart-fix-item">
                                     <td></td>
                                     <td>
                                         <select class="form-control select2-show-search" style="width: 100%" id="fix-selection">
@@ -303,16 +311,21 @@
                     </div>    
                 
                     <div class="payment-infor-area row" >
+                        <input type="hidden" id="admin-id" value = "<?php 
+                            if(isset($_SESSION["Admin_ID"])){
+                            echo $_SESSION["Admin_ID"];
+                            } 
+                        ?>">
                         <div class="col-6">
                             <div class ="row">
                                 <div class="col-4 txt-label">Phương thức thanh toán</div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                                        <input type="radio" class="form-check-input" id="radio1" name="payment" value="Tiền mặt" checked>
                                         <label class="form-check-label" for="radio1">Tiền mặt</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                                        <input type="radio" class="form-check-input" id="radio2" name="payment" value="Tài khoản ngân hàng">
                                         <label class="form-check-label " for="radio2">Tài khoản ngân hàng</label>
                                     </div>
                                 </div>

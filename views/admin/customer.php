@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
-    <link rel="stylesheet" href="../../assests/admin/css/customer.css?v=10">
+    <link rel="stylesheet" href="../../assests/admin/css/customer.css?v=13">
 </head>
 <body>
     <?php include 'header.php' ?>
@@ -22,6 +22,7 @@
                     <th> Liên hệ</th>
                     <th> Email</th>
                     <th> Địa chỉ </th>
+                    <th> Tổng mua</th>
                     <th> Trạng thái </th>
                     <th> Tính năng</th>
                 </thead>
@@ -250,7 +251,52 @@
                 </div>
             </div>
         </div>
-    <!-- End modal -->
+        <!-- End modal -->
+
+
+        <!--Modal detail history bill -->
+
+        <!-- Button to Open the Modal -->
+        <!-- The Modal -->
+        <div class="modal" id="modalBill">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="history-bill">
+                        <!-- <div class="bill-item ">
+                            <div class="bill-status">Đang giao</div>
+                            <div class="bill-content ">
+                                <div class="row">
+                                    <div class="col-2 detail-bill-picture">
+                                        <img class="detail-bill-img" src="../../image/nhan_bac.png">
+                                    </div>
+                                    <div class="col-5 detail-bill-name">  Nhẫn bạc</div>
+                                    <div class="col-2 detail-bill-quantity"> 1</div>
+                                    <div class="col-2 detail-bill-price">200.000.000</div>
+                                </div>
+                                
+                            </div>
+                           
+                        </div> -->
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+        <!--End Modal -->
 
     <?php include 'footer.php'?>
 </body>

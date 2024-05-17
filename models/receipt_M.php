@@ -13,7 +13,7 @@
 
         public function getListReceipt(){
             if($this->connectDB()){
-                $sql = "SELECT * FROM Receipt";
+                $sql = "SELECT * FROM Receipt re, Customer cus WHERE re.Customer_ID = cus.Customer_ID ";
                 $result = mysqli_query($this->conn, $sql);
                 $list= array();
                 if(mysqli_num_rows($result) > 0){
@@ -24,8 +24,22 @@
                         $receipt->Customer_ID = (int) $row['Customer_ID'];
                         $receipt->Receipt_Date = $row['Receipt_Date'];
                         $receipt->Receipt_Total = (int) $row['Receipt_Total'];
-                        $receipt->Receipt_Note = (int) $row['Receipt_Note'];
+                        if($row['Receipt_Note'] == null){
+                            $receipt->Receipt_Note = '';
+                        } else {
+                            $receipt->Receipt_Note =  $row['Receipt_Note'];
+                        }
+                           
+                        if($row['Receipt_Reason'] == null ){
+                            $receipt->Receipt_Reason = '';
+                        } else {
+                            $receipt->Receipt_Reason = $row['Receipt_Reason'];
+                        }
+                           
+                        $receipt->Receipt_Payment = $row['Receipt_Payment'];
                         $receipt->Receipt_Status = (int) $row['Receipt_Status'];
+                        $receipt->Customer_Name = $row['Customer_Name'];
+                        $receipt->Customer_Phone = $row['Customer_Phone'];
                         array_push($list, $receipt) ;
                     }
                 }
@@ -58,7 +72,7 @@
 
         public function getDetailOfReceipt($id_receipt){
             if($this->connectDB()){
-                $sql ="SELECT * FROM receipt_detail de , receipt re, product pr WHERE de.Receipt_ID = re.Receipt_ID AND pr.Product_ID = de.Product_ID AND re.Receipt_ID =  " . $id_receipt;
+                $sql ="SELECT * FROM receipt_detail de , receipt re, product pr, admin ad WHERE de.Receipt_ID = re.Receipt_ID AND pr.Product_ID = de.Product_ID AND ad.Admin_ID = re.Admin_ID AND re.Receipt_ID =  " . $id_receipt;
                 $result = mysqli_query($this->conn, $sql);
                 $list =  array();
                 if(mysqli_num_rows($result) > 0){
@@ -72,12 +86,18 @@
                         $detail->Detail_Price = $row['Detail_Price'];
                         $detail->Product_Image = $row['Product_Image'];
                         $detail->Product_Name = $row['Product_Name'];
+                        if($row['Admin_Name'] == null){
+                            $detail->Admin_Name = '';
+                        } else {
+                            $detail->Admin_Name = $row['Admin_Name'];
+                        }
+                        
                         if($row['Receipt_Note'] == null){
                             $detail->Receipt_Note ="";
                         } else {
                             $detail->Receipt_Note = $row['Receipt_Note'];
                         }
-                        
+                        $detail->Receipt_Payment = $row['Receipt_Payment'];
                         array_push($list, $detail);
                     }
                 }
@@ -185,9 +205,21 @@
             }
         }
 
-        public function addReceipt($receipt){
+        public function addReceipt($receipt, $customer){
             if($this->connectDB()){
-                $sql = "INSERT INTO Receipt(Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Status) VALUES( " . $receipt->Customer_ID . ", '" . $receipt->Receipt_Date . "' , " . $receipt->Receipt_Total. " , '".$receipt->Receipt_Note ."' , 2)";
+                $customer_id = $customer->Customer_ID;
+                if($customer_id == -1){
+                    $sql1 = "INSERT INTO Customer(Customer_Name, Customer_Address, Customer_Phone, Customer_Email, Customer_Username, Customer_Password, Customer_Status) VALUES ('" . $customer->Customer_Name . "' , '" .$customer->Customer_Address."' , '". $customer->Customer_Phone . "' , '". $customer->Customer_Email . "', '" . $customer->Customer_Username . "' , '" . $customer->Customer_Password ."' , " . $customer->Customer_Status ." )";
+                    mysqli_query($this->conn, $sql1);
+                    $sql2 = "SELECT MAX(Customer_ID) FROM Customer WHERE Customer_Status = 1";
+                    $rs = mysqli_query($this->conn, $sql2);
+                    if($rs){
+                        $row = mysqli_fetch_array($rs);
+                        $customer_id = (int) $row['MAX(Customer_ID)'];
+                    }
+                       
+                }
+                $sql = "INSERT INTO Receipt(Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Payment, Receipt_Status, Admin_ID) VALUES( " . $customer_id . ", '" . $receipt->Receipt_Date . "' , " . $receipt->Receipt_Total. " , '".$receipt->Receipt_Note ."' , '" .$receipt->Receipt_Payment . "' , 2, ".$receipt->Admin_ID . ")";
                
                 if(mysqli_query($this->conn, $sql)){
                     return true;
@@ -248,6 +280,7 @@
             }
         }
 
-        
+
+      
     }
 ?>
