@@ -1,6 +1,13 @@
 <?php
 session_start();
 include ("connect.php");
+
+function getsl($con,$id){
+    $sql="select * from product where Product_ID=$id";
+    $result=mysqli_query($con,$sql);
+    $getsp=mysqli_fetch_assoc($result);
+    return $getsp;
+    }
 // unset ($_SESSION['giohanglist']);
 if(isset($_SESSION["user"])){
     $check=0;
@@ -11,7 +18,11 @@ if(isset($_SESSION["user"])){
        
             $id=$_GET["id_sp"];
             $sl=(int)$_GET["sl_sp"];
-           
+            $product=getsl($conn,$id);
+            if($product["Product_Quality"]==0){
+                echo "sản phẩm hiện đang hết!";
+                return;
+            }
             // echo var_dump( $_SESSION['giohanglist']);
            if(isset($_SESSION["giohanglist"])){
             $arrList=$_SESSION['giohanglist'];
@@ -58,14 +69,14 @@ if(isset($_SESSION["user"])){
                 
                  
                 array_push($arrList,$cart_add);
-                echo var_dump($arrList); 
+                // echo var_dump($arrList); 
              
                 
             }
         
                 
                 $_SESSION['giohanglist']=$arrList;
-                echo var_dump( $_SESSION['giohanglist']);
+                // echo var_dump( $_SESSION['giohanglist']);
           
 
            }

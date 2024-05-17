@@ -5,10 +5,11 @@
     class product_M extends connectDB{
 
         public function getListProduct(){
+           
             if($this->connectDB()){
-                $sql = "SELECT * FROM Product WHERE Product_Status = 1";
+                $sql = "SELECT * FROM Product WHERE Product_Status = 1  ";
                 $result = mysqli_query($this->conn , $sql);
-                $list= array();
+                $list= array(); 
                 if(mysqli_num_rows($result) > 0){
                     
                     while($row = mysqli_fetch_array($result) ){
@@ -28,5 +29,18 @@
                 return $list;
             }
         }
+        
+        public function getslsp(){
+            if($this->connectDB()){
+                $sl=0;
+                $sql="SELECT * from product WHERE Product_Status =1 ";
+                $result=mysqli_query($this->conn,$sql);
+               
+                $sl=$result->num_rows;
+                
+            }
+            return $sl;
+        }
     }
+
 ?>

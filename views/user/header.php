@@ -105,9 +105,9 @@
                                 </ul>
                             </li>    
                           </ul>
-                          <form class="d-flex nav-itemx" id="form-search">
+                          <form method="get" class="d-flex nav-itemx" id="form-search">
                             <input class="form-control me-2 w2-input search-value" type="text" placeholder="Search" name="searchValue" value="">
-                            <button class="si si-magnifier" type="button" id="btn-search" type="submit"></button>
+                            <button name="search_sp" class="si si-magnifier" type="button" id="btn-search" type="submit"></button>
                           </form>
                       </div>
                     </div>
@@ -175,6 +175,8 @@
         </div>
     </div>
   <!--END MODAL CART-->
+
+
   
 
 </body>

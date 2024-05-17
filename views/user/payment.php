@@ -1,29 +1,31 @@
 <?php
+
  include 'header.php';
 include 'connect.php';
 $arr_id_select=[];
+$username=$_SESSION['user'];
+$sql="select * from customer where Customer_UserName='$username'";
+$result=mysqli_query($conn,$sql);
+$getUser_Login=mysqli_fetch_assoc($result);
 if(isset($_POST['btn_muahang'])){
    if(isset($_POST['id_select'])){
-    // echo "<scritp> alert('checkselect')</script>";
+  
     foreach($_POST['id_select'] as $id){
     //  update_status_cart($id);
     array_push($arr_id_select,$id);
     
     }
    }else{
-    echo "<script> 
-    alert('Vui lòng chọn sản phẩm');
-   window.location='product.php';
-    </script>";
+    echo "<script>swal.fire({
+        title: 'Cảnh báo',
+         text: 'Vui lòng chọn sản phẩm để đặt hàng',
+         type: 'error',}).then(function(){
+            window.location.href='product.php'});</script>";
    }
    $_SESSION['listsanphamdangdat']=$arr_id_select;
 
   
-   $username=$_SESSION['user'];
-   $sql="select * from customer where Customer_UserName='$username'";
-   $result=mysqli_query($conn,$sql);
-   $getUser=mysqli_fetch_assoc($result);
- 
+
 }
 
  function getslbyid($idsp){
@@ -38,6 +40,15 @@ if(isset($_POST['btn_muahang'])){
             }
         }
     }
+ }
+ function tinhtongsl(){
+    $listdangdat=$_SESSION['listsanphamdangdat'];
+    $listcart=$_SESSION['giohanglist'];
+    $tong=0;
+    for($i=0;$i<count($listdangdat);$i++){
+        $tong+=getslbyid($listdangdat[$i]);
+    }
+    return $tong;
  }
  function update_status_cart($arr){
     $listcart=$_SESSION['giohanglist'];
@@ -97,12 +108,15 @@ function getspbyid($con,$id){
     $status=1;
     $arr_list_sanpham=$_SESSION['listsanphamdangdat'];
     $tong=tinhtong($conn,$arr_list_sanpham);
+    
+    $pttt=$_POST['optradio'];
+    
     if($note==""){
-        $sql_inser_receipt="insert into receipt (Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Status) values ( $cus_id,'$date_today',$tong,null,$status)";
+        $sql_inser_receipt="insert into receipt (Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Status,Receipt_Reason,Admin_ID,Receipt_Payment) values ( $cus_id,'$date_today',$tong,null,$status,null,null,'$pttt')";
     }
     else
     {
-        $sql_inser_receipt="insert into receipt (Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Status) values ( $cus_id,'$date_today',$tong,$note,$status)";
+        $sql_inser_receipt="insert into receipt (Customer_ID, Receipt_Date, Receipt_Total, Receipt_Note, Receipt_Status,Receipt_Reason,Admin_ID,Receipt_Payment) values ( $cus_id,'$date_today',$tong,'$note',$status,null,null,'$pttt')";
     }
    
     if($add_cart=mysqli_query($conn,$sql_inser_receipt)){
@@ -150,9 +164,9 @@ function getspbyid($con,$id){
                 <p id="txt-address">Địa chỉ nhận hàng</p>
             </div>
             <div class= "row">
-                <div class ="col-3" id="customer-name"> <?php echo $getUser["Customer_Name"] ?> </div>
-                <div class = "col-3" id="customer-phone"><?php echo $getUser['Customer_Phone']?> </div>
-                <div class = "col-5" id="customer-address"> <?php echo $getUser['Customer_Address']?></div>
+                <div class ="col-3" id="customer-name"> <?php echo  $getUser_Login["Customer_Name"] ?> </div>
+                <div class = "col-3" id="customer-phone"><?php echo  $getUser_Login['Customer_Phone']?> </div>
+                <div class = "col-5" id="customer-address"> <?php echo  $getUser_Login['Customer_Address']?></div>
                 <button class = " col-1"> Thay đổi</button>
             </div>
         </div>
@@ -164,7 +178,9 @@ function getspbyid($con,$id){
                 <div class="col-2 th-name"> Số lượng</div>
                 <div class="col-2 th-name"> Thành tiền</div>
             </div>
-            <?php foreach($arr_id_select as $id) {
+            <?php
+            $arr_sanpham=$_SESSION['listsanphamdangdat'];
+             foreach($arr_sanpham as $id) {
             $sql="select * from product where Product_ID=$id";
             $sl=0;
             $sl=getslbyid($id);
@@ -217,11 +233,11 @@ function getspbyid($con,$id){
                         <div class="col-4" style="font-weight: bold">Phương thức thanh toán</div>
                         <div class="col-8">
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Tiền mặt" checked>
                                 <label class="form-check-label" for="radio1">Tiền mặt</label>
                             </div>
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="Tài khoản ngân hàng">
                                 <label class="form-check-label " for="radio2">Tài khoản ngân hàng</label>
                             </div>
                         </div>
@@ -230,11 +246,11 @@ function getspbyid($con,$id){
                 <div class="col-5">
                     <div class=" row ">
                         <span class="col-4 txt-label">Số lượng sản phẩm:</span>
-                        <span class="col-4" style=" font-weight:100 !important; margin-top:2%" > <?php echo( count($arr_id_select))?>  </span>
+                        <span class="col-4" style=" font-weight:100 !important; margin-top:2%" > <?php  echo tinhtongsl()?>  </span>
                     </div>
                     <div  class="row">
                         <span class="col-4 txt-label"> Tổng giá tiền:</span>
-                        <span class="col-4" style="font-weight:100 !important; margin-top:2%"><?php echo tinhtong($conn,$arr_id_select)?> đ</span>    
+                        <span class="col-4" style="font-weight:100 !important; margin-top:2%"><?php echo tinhtong($conn,$arr_sanpham)?> đ</span>    
                     </div>
                 </div>
             </div>

@@ -1,13 +1,16 @@
 
 
 <?php 
+include '../admin/product.php';
 include '../user/connect.php';
 
-
 $id=$_GET['edit_id'];
+
 $sql_product="select * from product where Product_ID=".$id;
     $result=mysqli_query($conn,$sql_product);
     $product=mysqli_fetch_assoc($result);
+    $name=$product["Product_Name"];
+    // echo "<script>alert('$name')</script>";
  $sql_list_cate="select * from category where Category_Status=1";
  $result_cate=mysqli_query($conn,$sql_list_cate);
  $cateList=[];
@@ -28,20 +31,96 @@ $sql_product="select * from product where Product_ID=".$id;
     if(isset($_FILES["image"])){
     $target_dir='../../assests/image_product/';
     $target = $target_dir.basename($_FILES["image"]["name"]);
-   
+    if($soluong_sp<0||$soluong_sp>10000){
+        echo "<script>swal.fire({
+                    title: 'Cảnh báo',
+                     text: 'Số lượng không hợp lệ',
+                     type: 'error',}).then(function(){
+                        window.location.href='product.php'});</script>";
+                     return;
+    }
+
+  
+
     if($target==$target_dir){
         $sql_add_2= "update product set Product_Name= '".$ten_sp."' ,Product_Price=".$gia_sp." , Product_Quality=".$soluong_sp." , Product_Describe= '".$mota_sp."' where Product_ID=".$id;
-        $query_add_2=mysqli_query($conn,$sql_add_2);
+       if( $query_add_2=mysqli_query($conn,$sql_add_2)){
+        echo "<script>
+        
+        swal.fire({
+            title: 'Sản phẩm',
+            text: 'Sửa thông tin thành công',
+            type: 'success',
+            
+          }).then(function(){
+            window.location.href='product.php'});
+          </script>";
+          
+       }else{
+        echo "<script>swal.fire({
+            title: 'Sản phẩm',
+            text: 'Sửa thông tin thất bại',
+            type: 'error',
+            
+          })
+        
+         
+          </script>";
+          
+       }
     }else{
         $img_sp=$_FILES["image"]["name"];
         $img_sp_name=$_FILES["image"]["tmp_name"];
+        $uploaded_type=$_FILES["image"]["type"];
+        $uploaded_size=$_FILES["image"]["size"];
+        if($uploaded_type!="image/jpg"&& $uploaded_type!="image/png"&& $uploaded_type!="image/jpeg"){
+            echo "<script>swal.fire({
+                title: 'Hình Ảnh',
+                text: 'chỉ hỗ trợ upload JPEG, JPG, PNG',
+                type: 'error',
+                
+              }).then(function(){
+                window.location.href='product.php';
+              });
+            
+             
+              </script>";
+              
+        }
+  
         move_uploaded_file($img_sp_name,'../../assests/image_product/'.$img_sp);
         $sql_edit= "update product set Product_Name='".$ten_sp."' ,Product_Price=".$gia_sp." , Product_Quality=".$soluong_sp." , Product_Describe='".$mota_sp."' ,Product_Image='".$target."' where Product_ID=".$id;
-        $query_edit=mysqli_query($conn,$sql_edit);
-    }
+       if( $query_edit=mysqli_query($conn,$sql_edit)){
+        echo "<script>swal.fire({
+            title: 'Sản phẩm',
+            text: 'Sửa thông tin thành công',
+            type: 'success',
+            
+          }).then(function(){
+            window.location.href='product.php';
+          });
+        
+         
+          </script>";
+          
+       }else{
+        echo "<script>swal.fire({
+            title: 'Sản phẩm',
+            text: 'Sửa thông tin thất bại',
+            type: 'error',
+            
+          })
+        
+         
+          </script>";
+          
+       }
+       }
+    
   
-    }
-    header("Location: product.php");
+    
+}
+    // header("Location: product.php");
  }
  
 
@@ -51,22 +130,24 @@ $sql_product="select * from product where Product_ID=".$id;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link  type="text/css" href= "../../assests/admin/css/bootstrap/bootstrap.min.css"  rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/fonts/font-awesome.min.css" rel="stylesheet">
     <link  type="text/css" href="../../assests/admin/css/iconfonts/icons.css" rel="stylesheet">
-    <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet">
-    <link  type="text/css"  href="../../assests/admin/css/product.css"  rel="stylesheet"> 
+    <link  type="text/css" href="../../assests/admin/css/iconfonts/plugin.css" rel="stylesheet"> -->
+    <link  type="text/css"  href="../../assests/admin/css/product2.css"  rel="stylesheet"> 
     <script src="../../assests/admin/js/swal/swalNotification.js"></script>
-    <script><?php require("../../assests/admin/js/jquery.min.js"); ?></script>
+    <script></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <title>Document</title>
 </head>
 <body>
     <?php if($product["Product_Status"]==0) {
  echo  '<script> 
-    Swal.fire("Sản phẩm đã xóa", "Không thể cập nhật!", "error");
+    Swal.fire("Sản phẩm đã xóa", "Không thể cập nhật!", "error").then(function(){
+        window.location.href="product.php";
+      });
 
     
   </script>';
@@ -76,10 +157,10 @@ $sql_product="select * from product where Product_ID=".$id;
    ?>
 <div class="backgroud">
 
-<div class="container">
+<div style="width: 1000px; height: 500px;border: solid #C0C0C0 1px;" class="container_c">
     <form enctype="multipart/form-data" method="post" >
         <div class="close">
-            <i id="close_button"  class="fa fa-close"></i>
+            <i id="close_button_c"  class="fa fa-close"></i>
         </div>
         <h2 class="mt-5 mb-5" id="td">
             Sản Phẩm
@@ -107,10 +188,11 @@ $sql_product="select * from product where Product_ID=".$id;
                    
             </div>
             
-              <div class="row">
-        <div class="col-sm-12" >
-        <input enctype="multipart/form-data" type="file" name="image" class="form-control" id="image" placeholder="Hình Ảnh"  >
-        </div>
+              <div style="margin: 5px;" class="row">
+              <div class="row g-0 text-center">
+              <div class="col-sm-6 col-md-8"><input onchange="readURL(this);" enctype="multipart/form-data" type="file" name="image" class="form-control" id="image" placeholder="Hình Ảnh"  ></div>
+             <div class="col-6 col-md-4"><img id="previewImage" style="width:50px ; height:50px;" src="<?php echo $product['Product_Image']?>" alt=""></div>
+              </div>
       </div>
       <div class=" col-md6 mb-3">   </div>
                    
@@ -135,7 +217,7 @@ $sql_product="select * from product where Product_ID=".$id;
        <textarea class="form-control"name="mota" id="motasp" value="<?php echo $product["Product_Describe"]?>" style="height: 80px" ><?php echo $product["Product_Describe"]?></textarea>
         </div>
       </div>
-      <input type="hidden" name="act" value="<?php echo $_SESSION['act']; ?>">
+     
             <div class="col-lg-12 mt-5">
             
                 <button name="update_sp" id="btn-update" class="btn btn-primary">Update</button>
@@ -146,14 +228,16 @@ $sql_product="select * from product where Product_ID=".$id;
 </body>
 <script>
 
-      document.getElementsByClassName("container")[0].style.display="block";
-      document.getElementById("close_button").addEventListener("click", ()=>{
+document.getElementsByClassName("container_c")[0].style.display="block";
+      document.getElementById("close_button_c").addEventListener("click", ()=>{
+        document.getElementsByClassName("container_c")[0].style.display="none";
         window.location.href = 'product.php';
     });
 </script>
 </html>
 <?php }
-include '../admin/product.php';
+
+
 ?>
 
 

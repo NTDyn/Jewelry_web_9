@@ -1,5 +1,11 @@
 <?php
-
+include "../views/user/connect.php";
+function getsoluongsanpham($con,$id){
+  $sql="select * from prodcut where Product_ID=$id";
+  $result=mysqli_query($con,$sql);
+  $product=mysqli_fetch_assoc($result);
+  return $product;
+}
 session_start();
 if(isset($_POST['id_sp'])){
     $id_sp=$_POST['id_sp'];

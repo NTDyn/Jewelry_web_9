@@ -1,0 +1,86 @@
+*{
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.table_sp tbody img{
+    width: 100px;
+    height: 100px;
+
+}
+.sanpham{
+    position: relative;
+    top: 50px;
+    left: 250px;
+    width:80%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    padding: 20px;
+    transition: ease-in-out 1s;
+}
+.sanpham{
+    display: block;
+}
+
+.container_c{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 1000px;
+    position: fixed;
+    z-index: 10;
+    display: none;
+    height: 450px;
+    background-color: white;
+    border: solid #333 1px;
+}
+.create_sp{
+    display: flex;
+    float: right;
+    margin-bottom: 10px;
+}
+.create_sp button{
+    margin-top: 30px;
+}
+.close{
+    float: right;
+    margin-top: -40px;
+    cursor: pointer;
+   margin-right: 30px;
+}
+.close:hover{
+    color: red;
+}
+.cotaint_page{
+    display: flex;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.container_c h2{
+    text-align: center;
+}
+.table_sp{
+    margin-top:10px;
+    margin-left: 150px;
+}
+.add_sp{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+.edit,.delete{
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+
+}
+
+#search{
+    border:1px ridge #aaa;
+    border-radius: 3px;
+}
+

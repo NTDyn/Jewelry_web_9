@@ -1,7 +1,13 @@
 <?php
 session_start();
 include ("connect.php");
-// unset ($_SESSION['giohanglist']);
+
+function getslsanpham($con,$id){
+$sql="select * from product where Product_ID=$id";
+$result=mysqli_query($con,$sql);
+$getsp=mysqli_fetch_assoc($result);
+return $getsp;
+}
 if(isset($_SESSION["user"])){
     $check=0;
     $check_ton_tai=0;
@@ -9,7 +15,12 @@ if(isset($_SESSION["user"])){
    
     if(isset($_GET['id_sp'])){
             $id=$_GET['id_sp'];
-            // echo var_dump( $_SESSION['giohanglist']);
+            $getspthem=getslsanpham($conn,$id);
+            if($getspthem["Product_Quality"]==0){
+                echo "Sản phẩm hiện đang hết!";
+                return ;
+            }
+             
            if(isset($_SESSION["giohanglist"])){
             $arrList=$_SESSION['giohanglist'];
             for($i=0;$i<count($arrList);$i++){
@@ -17,8 +28,12 @@ if(isset($_SESSION["user"])){
               
                 for($j=0;$j<count($arrList[$i]["product"]);$j++){
                    if($arrList[$i]["product"][$j]["id"]==$_GET["id_sp"]&&$arrList[$i]['product'][$j]["status"]==0){
-                    if($arrList[$i]['product'][$j]['sl']+1>10){
-                        echo "số lượng không hợp lê";
+                    if($getspthem['Product_Quality']-$arrList[$i]["product"][$j]['sl']==0){
+                        echo "số lượng trong kho không đủ";
+                        return;
+                    }
+                    if($arrList[$i]["product"][$j]['sl']==10){
+                        echo "Số lượng sản phẩm trong giỏ hàng vượt mức cho phép";
                         return;
                     }
                    $arrList[$i]['product'][$j]['sl']=$arrList[$i]['product'][$j]['sl']+1;
@@ -33,7 +48,7 @@ if(isset($_SESSION["user"])){
                         "status"=>0
                     ];
                     array_push($arrList[$i]['product'],$sanpham);
-                    // echo var_dump($arrList);
+        
                 }
                 $check_ton_tai=1;
                }
@@ -55,14 +70,14 @@ if(isset($_SESSION["user"])){
                 
                  
                 array_push($arrList,$cart_add);
-                echo var_dump($arrList); 
+               
              
                 
             }
         
                 
                 $_SESSION['giohanglist']=$arrList;
-                echo var_dump( $_SESSION['giohanglist']);
+               
           
 
            }
