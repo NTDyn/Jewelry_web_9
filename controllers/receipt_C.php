@@ -114,9 +114,9 @@
             echo json_encode($result);
         }
 
-        function addReceipt($receipt){
+        function addReceipt($receipt, $customer){
             $model = $this->model("receipt_M");
-            $result = $model->addReceipt($receipt);
+            $result = $model->addReceipt($receipt, $customer);
             return json_encode($result);
         }
         function addReceiptDetail($list){
@@ -130,6 +130,12 @@
         function getAllHistoryOrder($id){
             $model = $this->model("receipt_M");
            $result = $model->getAllHistoryOrder($id);
+            return json_encode($result);
+        }
+
+        function addCustomer($customer){
+            $model = $this->model("receipt_M");
+           $result = $model->addCustomer($customer);
             return json_encode($result);
         }
     }

@@ -56,16 +56,10 @@ function appendHistoryOrder(list){
 
 
     })
-    // item = [];
-    // item = getDetailOrder(2);
-    // console.log(item)
-    // //alert((item));
-    // i = item.find(x=>x.Receipt_ID == 2);
-    // console.log(item[0].Receipt_ID);
+  
 }
 
 function getDetailOrder(id){
-    let result = []; 
     var _data = {
         "action": "getDetailOfReceipt",
         "receipt-id": id
@@ -97,6 +91,5 @@ function getDetailOrder(id){
         }
 
     });
-    return result;
     
 }

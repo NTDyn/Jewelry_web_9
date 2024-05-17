@@ -11,9 +11,11 @@ if(isset($_POST['login'])){
         $result1 = $conn->query($sql1);
         if ($result1->num_rows == 1) {
             $row = $result1->fetch_assoc();
-            $status = $row['Admin_Status'];       
+            $status = $row['Admin_Status']; 
+            $admin_id = $row['Admin_ID'];      
             if ($status == 1) {
                 $_SESSION["user"] = $username;
+                $_SESSION["Admin_ID"] = $admin_id;
                 echo "<script>window.location.href = '../views/admin/home.php';</script>";
             } else if ($status == 0) {
                 
