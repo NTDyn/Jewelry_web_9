@@ -153,7 +153,7 @@ function getspbyid($con,$id){
                 <div class ="col-3" id="customer-name"> <?php echo $getUser["Customer_Name"] ?> </div>
                 <div class = "col-3" id="customer-phone"><?php echo $getUser['Customer_Phone']?> </div>
                 <div class = "col-5" id="customer-address"> <?php echo $getUser['Customer_Address']?></div>
-                <button class = " col-1"> Thay đổi</button>
+                <button class = " col-1 btn-change-address"> Thay đổi</button>
             </div>
         </div>
         
@@ -251,4 +251,5 @@ function getspbyid($con,$id){
 </html>
 <script src="../../assests/user/js/swal/swalNotification.js"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+<script><?php require '../../assests/user/js/payment.js' ?></script>
 

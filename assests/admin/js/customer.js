@@ -328,10 +328,22 @@ function appendOrderBill(list){
     $.each(list, function(k,v){
         str = '';
         str += '<div class="bill-item ">';
-        str += '<div class="bill-status">Đang giao</div>';
+        if(v.Receipt_Status == 0){
+            str += '<div class="bill-status stt-cancel-bill">Đã hủy</div>';
+        } else if(v.Receipt_Status == 1){
+            str += '<div class="bill-status stt-wait-bill">Chờ xác nhận</div>';
+        } else if(v.Receipt_Status == 2){
+            str += '<div class="bill-status stt-confirm-bill">Xác nhận</div>';
+        } else if(v.Receipt_Status == 3){
+            str += '<div class="bill-status stt-sent-bill">Đang giao</div>';
+        } else if(v.Receipt_Status == 4){
+            str += '<div class="bill-status stt-finish-bill"></span>Giao hàng thành công</div>';
+        }
+        
         str += '<div class="bill-content" id ="orderHeader-' + v.Receipt_ID + '">';
-       
         str += '</div>';
+        str += '<div class="bill-total-price">Tổng đơn hàng: <span >' + formatToMoney( v.Receipt_Total) +'</span></div>'
+
         str += '</div>';
 
         $('.history-bill').append(str);

@@ -117,6 +117,8 @@ th {
     border-color: white;
     box-shadow: 0px 0px 10px 10px #e1e1e1;
     padding: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 .bill-status{
     display: flex;
@@ -142,5 +144,38 @@ th {
 .detail-bill-price{
     margin: auto !important;
 }
-
-
+.bill-total-price{
+    color: red;
+    display: flex;
+    justify-content: end;
+}
+.stt-cancel-bill{
+    color:red;
+    font-size: 18px !important;
+    margin-left: 1%  !important;
+    font-weight: bold;
+}
+.stt-wait-bill {
+    color:#a25323;
+    font-size: 18px !important;
+    margin-left: 1%;
+    font-weight: bold;
+}
+.stt-confirm-bill {
+    color:blue;
+    font-size: 18px !important;
+    margin-left: 1%  !important;
+    font-weight: bold;
+}
+.stt-sent-bill {
+    color:blueviolet;
+    font-size: 18px !important;
+    margin-left: 1%  !important;
+    font-weight: bold;
+}
+.stt-finish-bill {
+    color:green;
+    font-size: 18px !important;
+    margin-left: 1%;
+    font-weight: bold;
+}
