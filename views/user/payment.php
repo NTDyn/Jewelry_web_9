@@ -267,4 +267,5 @@ function getspbyid($con,$id){
 </html>
 <script src="../../assests/user/js/swal/swalNotification.js"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+<script><?php require '../../assests/user/js/payment.js' ?></script>
 
