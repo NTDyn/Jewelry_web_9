@@ -1,3 +1,34 @@
+<?php
+    require '../../controllers/connect.php';
+
+    $sql_nhan = "SELECT COUNT(*) as soluong1 FROM product WHERE Category_ID = '2'";
+    $result_nhan = $conn->query($sql_nhan);   
+    if ($result_nhan->num_rows > 0) {
+        $row = $result_nhan->fetch_assoc();
+        $row_nhan = $row['soluong1'];
+    } 
+
+    $sql_daychuyen = "SELECT COUNT(*) as soluong2 FROM product WHERE Category_ID = '1'";
+    $result_daychuyen = $conn->query($sql_daychuyen);   
+    if ($result_daychuyen->num_rows > 0) {
+        $row = $result_daychuyen->fetch_assoc();
+        $row_daychuyen = $row['soluong2'];
+    }
+
+    $sql_vong = "SELECT COUNT(*) as soluong3 FROM product WHERE Category_ID = '3'";
+    $result_vong = $conn->query($sql_vong);   
+    if ($result_vong->num_rows > 0) {
+        $row = $result_vong->fetch_assoc();
+        $row_vong = $row['soluong3'];
+    }
+
+    $sql_tai = "SELECT COUNT(*) as soluong4 FROM product WHERE Category_ID = '4'";
+    $result_tai = $conn->query($sql_tai);   
+    if ($result_tai->num_rows > 0) {
+        $row = $result_tai->fetch_assoc();
+        $row_tai = $row['soluong4'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +58,7 @@
                 </div>
                 <div class="card-body row" >
                     <div class="col-7 total-number">Số lượng </br>
-                        <span class="number-area">150 </span>
+                        <span class="number-area"><?php echo $row_tai ?> </span>
                     </div>
                     <div class="chart-icon-area col-5">
                         <span class="fa fa-bar-chart chart-icon"></span>
@@ -40,7 +71,7 @@
                 </div>
                 <div class="card-body row" >
                     <div class="col-7 total-number">Số lượng </br>
-                        <span class="number-area">150 </span>
+                        <span class="number-area"><?php echo $row_daychuyen ?> </span>
                     </div>
                     <div class="chart-icon-area col-5">
                         <span class="fa fa-bar-chart chart-icon"></span>
@@ -53,7 +84,7 @@
                 </div>
                 <div class="card-body row" >
                     <div class="col-7 total-number">Số lượng </br>
-                        <span class="number-area">150 </span>
+                        <span class="number-area"><?php echo $row_vong ?> </span>
                     </div>
                     <div class="chart-icon-area col-5">
                         <span class="fa fa-bar-chart chart-icon"></span>
@@ -66,7 +97,7 @@
                 </div>
                 <div class="card-body row" >
                     <div class="col-7 total-number">Số lượng</br>
-                        <span class="number-area">150 </span>
+                        <span class="number-area"><?php echo $row_nhan ?> </span>
                     </div>
                     <div class="chart-icon-area col-5">
                         <span class="fa fa-bar-chart chart-icon"></span>
